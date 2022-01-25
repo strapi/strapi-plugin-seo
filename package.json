@@ -1,6 +1,6 @@
 {
   "name": "@strapi/plugin-seo",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Make your content SEO friendly.",
   "strapi": {
     "name": "SEO",
@@ -11,11 +11,11 @@
     "lodash": "^4.17.21"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Maxime Castres"
   },
   "maintainers": [
     {
-      "name": "A Strapi developer"
+      "name": "Maxime Castres"
     }
   ],
   "engines": {
