@@ -1,0 +1,280 @@
+@media all {
+  .facebook-snippet-box {
+    color: rgb(75, 79, 86);
+    font-size: 14px;
+    width: 524px;
+    max-width: 100%;
+  }
+}
+
+@media all {
+  .facebook-snippet-box .facebook-snippet-text {
+    border: 1px solid #dadde1;
+    padding: 10px 12px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: rgb(218, 221, 225);
+    border-right-color: rgb(218, 221, 225);
+    border-bottom-color: rgb(218, 221, 225);
+    border-left-color: rgb(218, 221, 225);
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    background-color: rgb(242, 243, 245);
+  }
+}
+
+@media all {
+  .facebook-snippet-box .notice {
+    padding: 10px 14px;
+    margin: 0 0 10px 0;
+    width: 100%;
+    padding-top: 10px;
+    padding-right: 14px;
+    padding-bottom: 10px;
+    padding-left: 14px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    width: 100%;
+  }
+}
+
+@media all {
+  img {
+    border: 0;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-top-style: initial;
+    border-right-style: initial;
+    border-bottom-style: initial;
+    border-left-style: initial;
+    border-top-color: initial;
+    border-right-color: initial;
+    border-bottom-color: initial;
+    border-left-color: initial;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+  }
+}
+
+@media all {
+  img {
+    border: none;
+    border-top-width: initial;
+    border-right-width: initial;
+    border-bottom-width: initial;
+    border-left-width: initial;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    border-top-color: initial;
+    border-right-color: initial;
+    border-bottom-color: initial;
+    border-left-color: initial;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+  }
+}
+
+@media all {
+  .facebook-snippet-box img {
+    border-bottom: none;
+    display: block;
+    height: 274px;
+    width: 524px;
+    object-fit: cover;
+    background-color: rgb(240, 240, 240);
+    text-align: center;
+    border-bottom-width: initial;
+    border-bottom-style: none;
+    border-bottom-color: initial;
+  }
+}
+
+@media all {
+  .snippet-meta {
+    overflow: hidden;
+    display: flex;
+    max-height: 12px;
+  }
+}
+
+@media all {
+  .facebook-snippet-box .title-desc {
+    overflow: hidden;
+    max-height: 46px;
+  }
+}
+
+@media all {
+  strong {
+    font-weight: 600;
+  }
+}
+
+@media all {
+  .facebook-snippet-box .notice span {
+    font-weight: 700;
+  }
+}
+
+@media all {
+  .snippet-fb-url {
+    color: rgb(96, 103, 112);
+    font-size: 12px;
+    white-space: normal;
+    line-height: 11px;
+    text-transform: uppercase;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+  }
+}
+
+@media all {
+  .fb-sep {
+    padding-left: 5px;
+    padding-right: 5px;
+    color: rgb(96, 103, 112);
+    line-height: 11px;
+    font-size: 12px;
+  }
+}
+
+@media all {
+  .fb-by {
+    color: rgb(96, 103, 112);
+    font-size: 12px;
+    white-space: normal;
+    line-height: 11px;
+    text-transform: uppercase;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+  }
+}
+
+@media all {
+  .snippet-fb-site-name {
+    color: rgb(96, 103, 112);
+    font-size: 12px;
+    white-space: normal;
+    line-height: 11px;
+    text-transform: uppercase;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+  }
+}
+
+@media all {
+  .facebook-snippet-box .snippet-fb-title {
+    margin: 3px 0 0;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 20px;
+    padding-top: 2px;
+    color: rgb(29, 33, 41);
+    font-weight: 700;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+    max-height: 22px;
+  }
+}
+
+@media all {
+  .facebook-snippet-box .snippet-fb-title-custom {
+    margin: 3px 0 0;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 20px;
+    padding-top: 2px;
+    color: rgb(29, 33, 41);
+    font-weight: 700;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+    max-height: 22px;
+  }
+}
+
+@media all {
+  .facebook-snippet-box .snippet-fb-title-default {
+    margin: 3px 0 0;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 20px;
+    padding-top: 2px;
+    color: rgb(29, 33, 41);
+    font-weight: 700;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+    max-height: 22px;
+  }
+}
+
+@media all {
+  .facebook-snippet-box .snippet-fb-description {
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 20px;
+    word-break: break-word;
+    font-family: Helvetica, Arial, sans-serif;
+    max-height: 80px;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    width: 100%;
+  }
+}
+
+@media all {
+  .facebook-snippet-box .snippet-fb-description-custom {
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 20px;
+    word-break: break-word;
+    font-family: Helvetica, Arial, sans-serif;
+    max-height: 80px;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    width: 100%;
+  }
+}
+
+@media all {
+  .facebook-snippet-box .snippet-fb-description-default {
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 20px;
+    word-break: break-word;
+    font-family: Helvetica, Arial, sans-serif;
+    max-height: 80px;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    width: 100%;
+  }
+}
