@@ -51,6 +51,7 @@
   "Title-settings.metaTitle-too-long": "Meta Title is too long",
   "Title-settings.metaTitle-tooltip": "The title tag is one of the first things that users notice in the SERPs. It’s the title of your page that offers a preview of what your content is about.",
   "Title-settings.metaDescription-too-long": "Meta Description is too long",
+  "Title-settings.metaDescription-too-short": "Meta Description is too short",
   "Title-settings.metaDescription-tooltip": "The meta description is of equal importance to the title tag. If the title tag is the title that appears at the top of a search result, the meta description is the snippet that displays underneath.",
   "Title-settings.metaTitle-hint": "/60 characters (recommended maximum limit)",
   "Title-settings.metaDescription-hint": "/160 characters (recommended maximum limit)",

@@ -51,6 +51,7 @@
   "Title-settings.metaTitle-too-long": "La balise meta title est trop long",
   "Title-settings.metaTitle-tooltip": "La balise de titre est l'une des premières choses que les utilisateurs remarquent dans le SERP. C'est le titre de votre page qui offre un aperçu de ce dont parle votre contenu.",
   "Title-settings.metaDescription-too-long": "La balise meta description est trop longue",
+  "Title-settings.metaDescription-too-short": "La balise meta description est trop courte",
   "Title-settings.metaDescription-tooltip": "La méta description est d'une importance égale à la balise de titre. Si la balise de titre est le titre qui apparaît en haut d'un résultat de recherche, la méta description est l'extrait qui s'affiche en dessous.",
   "Title-settings.metaTitle-hint": "/60 caractères (limite maximale recommandée)",
   "Title-settings.metaDescription-hint": "/160 caractères (limite maximale recommandée)",

@@ -21,7 +21,7 @@ const MetaTitleCheck = ({ metaTitle }) => {
   });
 
   useEffect(() => {
-    if (_.isNull(metaTitle)) {
+    if (_.isNull(metaTitle) || _.isEmpty(metaTitle)) {
       setStatus({
         message: formatMessage({
           id: getTrad('SEOChecks.metaTitleCheck.not-found'),

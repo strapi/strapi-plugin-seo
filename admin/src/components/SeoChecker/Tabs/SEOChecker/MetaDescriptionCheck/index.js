@@ -22,7 +22,7 @@ const MetaDescriptionCheck = ({ metaDescription }) => {
   });
 
   useEffect(() => {
-    if (_.isNull(metaDescription)) {
+    if (_.isNull(metaDescription) || _.isEmpty(metaDescription)) {
       setStatus({
         message: formatMessage({
           id: getTrad('SEOChecks.metaDescriptionCheck.not-found'),
@@ -35,6 +35,14 @@ const MetaDescriptionCheck = ({ metaDescription }) => {
         message: formatMessage({
           id: getTrad('Title-settings.metaDescription-too-long'),
           defaultMessage: 'Meta Description is too long',
+        }),
+        color: 'warning',
+      });
+    } else if (metaDescription.length < 50) {
+      setStatus({
+        message: formatMessage({
+          id: getTrad('Title-settings.metaDescription-too-short'),
+          defaultMessage: 'Meta Description is too short',
         }),
         color: 'warning',
       });
