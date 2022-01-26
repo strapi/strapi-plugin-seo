@@ -16,10 +16,10 @@ To install this plugin, you need to add an NPM dependency to your Strapi applica
 
 ```sh
 # Using Yarn
-yarn add strapi-plugin-seo
+yarn add @strapi/plugin-seo
 
 # Or using NPM
-npm install strapi-plugin-seo
+npm install @strapi/plugin-seo
 ```
 
 ## Configuration
