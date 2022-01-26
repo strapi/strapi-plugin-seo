@@ -8,7 +8,6 @@ import { getTrad } from '../../../../../utils';
 import { Box } from '@strapi/design-system/Box';
 import { Stack } from '@strapi/design-system/Stack';
 import { Icon } from '@strapi/design-system/Icon';
-import { Flex } from '@strapi/design-system/Flex';
 import { Typography } from '@strapi/design-system/Typography';
 
 import Dot from '@strapi/icons/Dot';
@@ -96,7 +95,7 @@ const MetaRobotCheck = ({ metaRobots }) => {
                 {tags.find((x) => x.trim() === tag.name)
                   ? `${tag.name} is activated:
           ${tag.message.replace('will', 'will not')}`
-                  : `${tag.name} is desactivated: ${tag.message}`}
+                  : `${tag.name} is disabled: ${tag.message}`}
               </Typography>
             </Stack>
           ))}

@@ -159,7 +159,7 @@ const getAltCheck = (contentType, modifiedData) => {
   const altCount = altTexts.length;
   const intersection =
     altTexts.filter((x) => names.includes(x)).length - altCount;
-  return intersection;
+  return { intersection, altTexts };
 };
 
 const getRichTextCheck = (modifiedData, components, contentType) => {
@@ -169,8 +169,8 @@ const getRichTextCheck = (modifiedData, components, contentType) => {
     modifiedData
   );
 
-  const intersections = getAltCheck(contentType, modifiedData);
-  let emptyAltCount = { intersections, richTextAlts: [] };
+  const { intersections, altTexts } = getAltCheck(contentType, modifiedData);
+  let emptyAltCount = { intersections, richTextAlts: [], altTexts };
   let wordCount = 0;
   let keywords = [];
   const tmp = _.get(modifiedData, 'seo.keywords', null);

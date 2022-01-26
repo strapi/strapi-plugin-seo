@@ -35,7 +35,7 @@ const TitleSettings = ({ modifiedData }) => {
         <TextInput
           label="Meta Title"
           name="metaTitle"
-          hint={`${metaTitle && metaTitle.length}${formatMessage({
+          hint={`${(metaTitle && metaTitle.length) || 0}${formatMessage({
             id: getTrad('Title-settings.metaTitle-hint'),
             defaultMessage: '/60 characters (recommended maximum limit)',
           })}`}
@@ -73,7 +73,9 @@ const TitleSettings = ({ modifiedData }) => {
         <TextInput
           label="Meta Description"
           name="metaDescription"
-          hint={`${metaDescription && metaDescription.length}${formatMessage({
+          hint={`${
+            (metaDescription && metaDescription.length) || 0
+          }${formatMessage({
             id: getTrad('Title-settings.metaDescription-hint'),
             defaultMessage: '/160 characters (recommended maximum limit)',
           })}`}

@@ -14,7 +14,7 @@ import Dot from '@strapi/icons/Dot';
 
 import SEOAccordion from '../SEOAccordion';
 
-const AlternativeTextCheck = ({ intersections, richTextAlts }) => {
+const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts }) => {
   const { formatMessage } = useIntl();
   const [status, setStatus] = useState({
     message: formatMessage({
@@ -37,9 +37,10 @@ const AlternativeTextCheck = ({ intersections, richTextAlts }) => {
         }),
         color: 'warning',
       });
-    } else if (intersections < 0) {
+    } else if (altTexts.includes('')) {
+      const count = altTexts.filter((x) => x === '').length;
       setStatus({
-        message: `${Math.abs(intersections)} ${formatMessage({
+        message: `${count} ${formatMessage({
           id: getTrad('SEOChecks.alternativeTextCheck.intersection-negative'),
           defaultMessage:
             'Some images from a media field are missing an alt attribute.',

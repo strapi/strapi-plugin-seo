@@ -47,6 +47,7 @@ const SEOChecker = ({ modifiedData, components, contentType }) => {
       <AlternativeTextCheck
         intersections={_.get(emptyAltCount, 'intersections', null)}
         richTextAlts={_.get(emptyAltCount, 'richTextAlts', null)}
+        altTexts={_.get(emptyAltCount, 'altTexts', null)}
       />
       <LastUpdatedAtCheck updatedAt={_.get(modifiedData, 'updatedAt', null)} />
     </Box>
