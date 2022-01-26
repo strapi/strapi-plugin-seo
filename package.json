@@ -3,19 +3,28 @@
   "version": "1.0.0",
   "description": "Make your content SEO friendly.",
   "strapi": {
-    "name": "SEO",
+    "name": "seo",
+    "displayName": "SEO",
     "description": "Make your content SEO friendly.",
     "kind": "plugin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/strapi/strapi-plugin-seo.git"
   },
   "dependencies": {
     "lodash": "^4.17.21"
   },
   "author": {
-    "name": "Maxime Castres"
+    "name": "Strapi Solutions SAS",
+    "email": "hi@strapi.io",
+    "url": "https://strapi.io"
   },
   "maintainers": [
     {
-      "name": "Maxime Castres"
+      "name": "Strapi Solutions SAS",
+      "email": "hi@strapi.io",
+      "url": "https://strapi.io"
     }
   ],
   "engines": {
