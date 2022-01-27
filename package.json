@@ -15,6 +15,9 @@
   "dependencies": {
     "lodash": "^4.17.21"
   },
+  "peerDependencies": {
+    "@strapi/strapi": "^4.0.0"
+  },
   "author": {
     "name": "Strapi Solutions SAS",
     "email": "hi@strapi.io",
