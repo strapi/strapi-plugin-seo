@@ -12,6 +12,7 @@ import SEOAccordion from '../SEOAccordion';
 
 const WordCountCheck = ({ wordCount }) => {
   const { formatMessage } = useIntl();
+  console.log(wordCount);
   const [status, setStatus] = useState({
     message: formatMessage({
       id: getTrad('SEOChecks.wordCountCheck.default'),
@@ -53,8 +54,7 @@ const WordCountCheck = ({ wordCount }) => {
           'Your content should be as high quality as possible, with relevant and unique information. You entry requires a minimum of paragraphs, and therefore of words.',
       })}
       component={
-        wordCount &&
-        wordCount !== 0 && (
+        _.isNumber(wordCount) && (
           <Box padding={2}>
             <Typography variant="omega">
               {formatMessage({
