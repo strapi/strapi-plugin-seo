@@ -13,7 +13,8 @@
     "url": "https://github.com/strapi/strapi-plugin-seo.git"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "remove-markdown": "^0.3.0"
   },
   "peerDependencies": {
     "@strapi/strapi": "^4.0.0"
