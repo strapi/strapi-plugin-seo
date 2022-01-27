@@ -53,7 +53,8 @@ const WordCountCheck = ({ wordCount }) => {
           'Your content should be as high quality as possible, with relevant and unique information. You entry requires a minimum of paragraphs, and therefore of words.',
       })}
       component={
-        wordCount && (
+        wordCount &&
+        wordCount !== 0 && (
           <Box padding={2}>
             <Typography variant="omega">
               {formatMessage({

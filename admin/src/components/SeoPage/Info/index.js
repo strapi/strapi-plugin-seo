@@ -4,15 +4,20 @@ import SingleType from '@strapi/icons/SingleType';
 import CollectionType from '@strapi/icons/CollectionType';
 
 import { Box } from '@strapi/design-system/Box';
+import { LinkButton } from '@strapi/design-system/LinkButton';
 import { GridLayout } from '@strapi/design-system/Layout';
 import { Typography } from '@strapi/design-system/Typography';
+import { EmptyStateLayout } from '@strapi/design-system/EmptyStateLayout';
 
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../utils';
 
 import Item from './Item';
 
+import Plus from '@strapi/icons/Plus';
 import ExclamationMarkCircle from '@strapi/icons/ExclamationMarkCircle';
+
+import { Illo } from '../Info/EmptyComponentLayout/illo';
 
 import {
   Tabs,
@@ -21,6 +26,8 @@ import {
   TabPanels,
   TabPanel,
 } from '@strapi/design-system/Tabs';
+
+import _ from 'lodash';
 
 const Info = ({ contentTypes }) => {
   const { formatMessage } = useIntl();
@@ -41,24 +48,74 @@ const Info = ({ contentTypes }) => {
           <TabPanels>
             <TabPanel>
               <Box padding={8} background="neutral0">
-                <GridLayout>
-                  {contentTypes &&
-                    contentTypes.collectionTypes &&
-                    contentTypes.collectionTypes.map((item, index) => (
+                {contentTypes &&
+                contentTypes.collectionTypes &&
+                !_.isEmpty(contentTypes.collectionTypes) ? (
+                  <GridLayout>
+                    {contentTypes.collectionTypes.map((item, index) => (
                       <Item item={item} key={index} />
                     ))}
-                </GridLayout>
+                  </GridLayout>
+                ) : (
+                  <Box padding={8} background="neutral0">
+                    <EmptyStateLayout
+                      icon={<Illo />}
+                      content={formatMessage({
+                        id: getTrad('SEOPage.info.no-collection-types'),
+                        defaultMessage:
+                          "You don't have any collection-types yet...",
+                      })}
+                      action={
+                        <LinkButton
+                          to="/plugins/content-type-builder"
+                          variant="secondary"
+                          startIcon={<Plus />}
+                        >
+                          {formatMessage({
+                            id: getTrad('SEOPage.info.create-collection-type'),
+                            defaultMessage: 'Create your first collection-type',
+                          })}
+                        </LinkButton>
+                      }
+                    />
+                  </Box>
+                )}
               </Box>
             </TabPanel>
             <TabPanel>
               <Box padding={8} background="neutral0">
-                <GridLayout>
-                  {contentTypes &&
-                    contentTypes.singleTypes &&
-                    contentTypes.singleTypes.map((item, index) => (
+                {contentTypes &&
+                contentTypes.singleTypes &&
+                !_.isEmpty(contentTypes.singleTypes) ? (
+                  <GridLayout>
+                    {contentTypes.singleTypes.map((item, index) => (
                       <Item item={item} key={index} />
                     ))}
-                </GridLayout>
+                  </GridLayout>
+                ) : (
+                  <Box padding={8} background="neutral0">
+                    <EmptyStateLayout
+                      icon={<Illo />}
+                      content={formatMessage({
+                        id: getTrad('SEOPage.info.no-single-types'),
+                        defaultMessage:
+                          "You don't have any single-types yet...",
+                      })}
+                      action={
+                        <LinkButton
+                          to="/plugins/content-type-builder"
+                          variant="secondary"
+                          startIcon={<Plus />}
+                        >
+                          {formatMessage({
+                            id: getTrad('SEOPage.info.create-single-type'),
+                            defaultMessage: 'Create your first single-type',
+                          })}
+                        </LinkButton>
+                      }
+                    />
+                  </Box>
+                )}
               </Box>
             </TabPanel>
           </TabPanels>
