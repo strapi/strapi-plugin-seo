@@ -1,11 +1,11 @@
 {
   "name": "@strapi/plugin-seo",
   "version": "1.5.0",
-  "description": "Make your content SEO friendly.",
+  "description": "Make your Strapi content SEO friendly.",
   "strapi": {
     "name": "seo",
     "displayName": "SEO",
-    "description": "Make your content SEO friendly.",
+    "description": "Make your Strapi content SEO friendly.",
     "kind": "plugin"
   },
   "repository": {

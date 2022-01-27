@@ -12,7 +12,6 @@ import SEOAccordion from '../SEOAccordion';
 
 const WordCountCheck = ({ wordCount }) => {
   const { formatMessage } = useIntl();
-  console.log(wordCount);
   const [status, setStatus] = useState({
     message: formatMessage({
       id: getTrad('SEOChecks.wordCountCheck.default'),
