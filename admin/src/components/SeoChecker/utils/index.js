@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
-const removeMd = require('remove-markdown');
+const showdown = require('showdown');
+const converter = new showdown.Converter();
 let keywordsDensity = {};
 
 // Function that get every 1st level richtext fields
@@ -94,7 +95,14 @@ const getEmptyAltCount = (richtext, field) => {
 const increaseCounter = (base, field) => {
   const richtext = _.get(base, field, '');
   const emptyAlts = getEmptyAltCount(richtext, field);
-  const words = removeMd(richtext).split(' ');
+  const html = converter.makeHtml(richtext);
+  const wordsNotCleaned = html
+    .replace(/<\/?[^>]+(>|$)/g, '')
+    .replace('\n', ' ')
+    .split(' ');
+  const words = wordsNotCleaned.filter((x) => {
+    return x !== '' && x !== '\n';
+  });
   return richtext
     ? { words, length: words.length, emptyAlts }
     : { words: [], length: 0, emptyAlts };

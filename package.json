@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "remove-markdown": "^0.3.0"
+    "showdown": "^1.9.1"
   },
   "peerDependencies": {
     "@strapi/strapi": "^4.0.0"
