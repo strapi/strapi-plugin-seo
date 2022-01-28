@@ -16,6 +16,9 @@
     "lodash": "^4.17.21",
     "showdown": "^1.9.1"
   },
+  "resolutions": {
+    "yargs": "^17.2.1"
+  },
   "peerDependencies": {
     "@strapi/strapi": "^4.0.0"
   },
