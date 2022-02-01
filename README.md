@@ -36,6 +36,16 @@ module.exports = ({ env }) => ({
 });
 ```
 
+Then, you'll need to build your admin panel:
+
+```sh
+# Using Yarn
+yarn build
+
+# Or using NPM
+npm run build
+```
+
 ## SEO settings page
 
 You'll be able from the SEO settings page to import a `shared.seo` & `shared.meta-social` components from any GitHub repository By default, our [components GitHub repository](https://github.com/strapi/components) is being used.
