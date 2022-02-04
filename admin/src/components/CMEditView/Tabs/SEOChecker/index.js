@@ -4,20 +4,20 @@ import { getRichTextCheck } from '../../utils';
 
 import { Box } from '@strapi/design-system/Box';
 
-import KeywordDensityCheck from './KeywordDensityCheck';
-import WordCountCheck from './WordCountCheck';
-import MetaSocialCheck from './MetaSocialCheck';
-import MetaTitleCheck from './MetaTitleCheck';
-import MetaDescriptionCheck from './MetaDescriptionCheck';
-import CanonicalUrlCheck from './CanonicalUrlCheck';
-import StructuredDataCheck from './StructuredDataCheck';
-import LastUpdatedAtCheck from './LastUpdatedAtCheck';
 import MetaRobotCheck from './MetaRobotCheck';
+import WordCountCheck from './WordCountCheck';
+import MetaTitleCheck from './MetaTitleCheck';
+import MetaSocialCheck from './MetaSocialCheck';
+import CanonicalUrlCheck from './CanonicalUrlCheck';
+import LastUpdatedAtCheck from './LastUpdatedAtCheck';
+import KeywordDensityCheck from './KeywordDensityCheck';
+import StructuredDataCheck from './StructuredDataCheck';
+import MetaDescriptionCheck from './MetaDescriptionCheck';
 import AlternativeTextCheck from './AlternativeTextCheck';
 
 import _ from 'lodash';
 
-const SEOChecker = ({ modifiedData, components, contentType }) => {
+const SEOChecker = ({ modifiedData, components, contentType, checks }) => {
   const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
     modifiedData,
     components,
@@ -26,7 +26,7 @@ const SEOChecker = ({ modifiedData, components, contentType }) => {
 
   return (
     <Box padding={4}>
-      <MetaTitleCheck metaTitle={_.get(modifiedData, 'seo.metaTitle', null)} />
+      <MetaTitleCheck metaTitle={_.get(modifiedData, 'seo.metaTitle', null)} checks={checks} />
       <MetaDescriptionCheck
         metaDescription={_.get(modifiedData, 'seo.metaDescription', null)}
       />

@@ -17,7 +17,7 @@ import SEOChecker from './SEOChecker';
 import TitleSettings from './TitleSettings';
 import SocialNetworks from './SocialNetworks';
 
-const SeoTabs = ({ modifiedData, components, contentType }) => {
+const SeoTabs = ({ modifiedData, components, contentType, checks }) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -59,6 +59,7 @@ const SeoTabs = ({ modifiedData, components, contentType }) => {
               modifiedData={modifiedData}
               components={components}
               contentType={contentType}
+              checks={checks}
             />
           </Box>
         </TabPanel>

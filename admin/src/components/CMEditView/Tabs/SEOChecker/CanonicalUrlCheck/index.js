@@ -11,7 +11,6 @@ import { Typography } from '@strapi/design-system/Typography';
 import SEOAccordion from '../SEOAccordion';
 
 const CanonicalUrlCheck = ({ canonicalUrl }) => {
-  console.log(canonicalUrl);
   const { formatMessage } = useIntl();
 
   const [status, setStatus] = useState({

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import _ from 'lodash';
 
@@ -7,28 +7,37 @@ import { getTrad } from '../../../../../utils';
 
 import SEOAccordion from '../SEOAccordion';
 
+import { SeoCheckerContext } from '../../../RightLinksCompo/Summary';
+
 const StructuredDataCheck = ({ structuredData }) => {
   const { formatMessage } = useIntl();
-  const [status, setStatus] = useState({
+  const dispatch = useContext(SeoCheckerContext);
+
+  let status = {
     message: formatMessage({
       id: getTrad('SEOChecks.structuredDataCheck.default'),
       defaultMessage:
         'A Structured Data json has been found! However we can validate the accuracy of its content.',
     }),
     color: 'success',
-  });
+  };
 
   useEffect(() => {
     if (_.isEmpty(structuredData)) {
-      setStatus({
+      status = {
         message: formatMessage({
           id: getTrad('SEOChecks.structuredDataCheck.not-found'),
           defaultMessage: 'No Structured Data json has been found.',
         }),
         color: 'warning',
-      });
+      };
       return;
     }
+    if (!_.isEqual(status, checks.structuredData))
+      dispatch({
+        type: 'UPDATE_STRUCTURED_DATA',
+        value: status,
+      });
   }, []);
 
   return (

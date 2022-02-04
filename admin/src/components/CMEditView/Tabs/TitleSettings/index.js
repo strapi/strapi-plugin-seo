@@ -23,7 +23,7 @@ const TitleSettings = ({ modifiedData }) => {
 
   const [checked, setChecked] = useState(false);
   const { onChange } = useCMEditViewDataManager();
-  const { metaTitle, metaDescription } = modifiedData.seo;
+  const { metaTitle = '', metaDescription = '' } = modifiedData.seo;
 
   const handleChange = (value, name) => {
     onChange({ target: { value, name } });
