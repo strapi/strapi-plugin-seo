@@ -44,8 +44,8 @@ const MetaTitleCheck = ({ metaTitle, checks }) => {
     }
     if (!_.isEqual(status, checks.metaTitle))
       dispatch({
-        type: 'UPDATE_METATITLE',
-        value: status,
+        type: 'UPDATE_PONCTUAL',
+        value: { ...status, entity: 'metaTitle' },
       });
   }, []);
 
@@ -63,7 +63,7 @@ const MetaTitleCheck = ({ metaTitle, checks }) => {
           metaTitle && (
             <Box padding={2}>
               <Typography variant="omega">
-                {metaTitle} - ({metaTitle.length} / 60)
+                {metaTitle} ({metaTitle.length}/60)
               </Typography>
             </Box>
           )

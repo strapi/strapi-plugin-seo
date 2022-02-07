@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import _ from 'lodash';
 
@@ -11,52 +11,64 @@ import { getTrad } from '../../../../../utils';
 
 import SEOAccordion from '../SEOAccordion';
 
-const KeywordDensityCheck = ({ keywordsDensity }) => {
+import { SeoCheckerContext } from '../../../RightLinksCompo/Summary';
+
+const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
   const { formatMessage } = useIntl();
-  const [status, setStatus] = useState({
+  const dispatch = useContext(SeoCheckerContext);
+
+  let status = {
     message: formatMessage({
       id: getTrad('SEOChecks.keywordsDensityCheck.default'),
       defaultMessage: 'Every keywords are used more than 2 times.',
     }),
     color: 'success',
-  });
+  };
 
   useEffect(() => {
     if (_.isEmpty(keywordsDensity)) {
-      setStatus({
+      status = {
         message: formatMessage({
           id: getTrad('SEOChecks.keywordsDensityCheck.no-keywords'),
           defaultMessage: 'No keywords were found in your SEO component.',
         }),
         color: 'danger',
+      };
+    } else {
+      Object.keys(keywordsDensity).map((keyword) => {
+        if (_.get(keywordsDensity[keyword], 'count', 0) === 0) {
+          status = {
+            message: formatMessage({
+              id: getTrad('SEOChecks.keywordsDensityCheck.one-not-used'),
+              defaultMessage: 'One keyword is not being used in your content.',
+            }),
+            color: 'danger',
+          };
+        } else if (_.get(keywordsDensity[keyword], 'count', 0) <= 1) {
+          status = {
+            message: formatMessage({
+              id: getTrad('SEOChecks.keywordsDensityCheck.one-used-once'),
+              defaultMessage: 'One keyword is only used once in your content.',
+            }),
+            color: 'warning',
+          };
+        }
       });
-      return;
     }
-    Object.keys(keywordsDensity).map((keyword) => {
-      if (_.get(keywordsDensity[keyword], 'count', 0) === 0) {
-        setStatus({
-          message: formatMessage({
-            id: getTrad('SEOChecks.keywordsDensityCheck.one-not-used'),
-            defaultMessage: 'One keyword is not being used in your content.',
-          }),
-          color: 'danger',
-        });
-      } else if (_.get(keywordsDensity[keyword], 'count', 0) <= 1) {
-        setStatus({
-          message: formatMessage({
-            id: getTrad('SEOChecks.keywordsDensityCheck.one-used-once'),
-            defaultMessage: 'One keyword is only used once in your content.',
-          }),
-          color: 'warning',
-        });
-      }
-    });
+
+    if (!_.isEqual(status, checks.keywordsDensity))
+      dispatch({
+        type: 'UPDATE_PONCTUAL',
+        value: { ...status, entity: 'keywordsDensity' },
+      });
   }, []);
+
+  console.log(checks);
 
   return (
     <SEOAccordion
       title="Keyword Density"
-      status={status}
+      status={checks.keywordsDensity}
       label={formatMessage({
         id: getTrad('SEOChecks.keywordsDensityCheck.label'),
         defaultMessage:

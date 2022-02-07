@@ -1,10 +1,8 @@
 import _ from 'lodash';
 
 import { getRichTextCheck } from '../utils';
-import { useIntl } from 'react-intl';
 
 const getMetaTitleCheckPreview = (modifiedData) => {
-  const { formatMessage } = useIntl();
   const metaTitle = _.get(modifiedData, 'seo.metaTitle');
 
   let status = {
@@ -251,7 +249,7 @@ const getAllChecks = (modifiedData, components, contentType) => {
 
   let result = {
     wordCount: getWordCountPreview(wordCount),
-    metaRobot: metaRobotPreview(modifiedData),
+    metaRobots: metaRobotPreview(modifiedData),
     metaSocial: metaSocialPreview(modifiedData),
     canonicalUrl: canonicalUrlPreview(modifiedData),
     metaTitle: getMetaTitleCheckPreview(modifiedData),
@@ -259,7 +257,7 @@ const getAllChecks = (modifiedData, components, contentType) => {
     structuredData: structuredDataPreview(modifiedData),
     metaDescription: getMetaDescriptionPreview(modifiedData),
     alternativeText: getAlternativeTextPreview(emptyAltCount),
-    keywordDensity: getKeywordDensityPreview(keywordsDensity),
+    keywordsDensity: getKeywordDensityPreview(keywordsDensity),
   };
   return result;
 };

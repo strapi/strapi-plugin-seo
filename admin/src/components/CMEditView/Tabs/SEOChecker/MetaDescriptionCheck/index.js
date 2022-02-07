@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import _ from 'lodash';
 
@@ -10,49 +10,57 @@ import { Typography } from '@strapi/design-system/Typography';
 
 import SEOAccordion from '../SEOAccordion';
 
-const MetaDescriptionCheck = ({ metaDescription }) => {
-  const { formatMessage } = useIntl();
+import { SeoCheckerContext } from '../../../RightLinksCompo/Summary';
 
-  const [status, setStatus] = useState({
+const MetaDescriptionCheck = ({ metaDescription, checks }) => {
+  const { formatMessage } = useIntl();
+  const dispatch = useContext(SeoCheckerContext);
+
+  let status = {
     message: formatMessage({
       id: getTrad('SEOChecks.metaDescriptionCheck.default'),
       defaultMessage: 'A Meta Description has been found!',
     }),
     color: 'success',
-  });
+  };
 
   useEffect(() => {
     if (_.isNull(metaDescription) || _.isEmpty(metaDescription)) {
-      setStatus({
+      status = {
         message: formatMessage({
           id: getTrad('SEOChecks.metaDescriptionCheck.not-found'),
           defaultMessage: 'No Meta Description has been found.',
         }),
         color: 'danger',
-      });
+      };
     } else if (metaDescription.length > 160) {
-      setStatus({
+      status = {
         message: formatMessage({
           id: getTrad('Title-settings.metaDescription-too-long'),
           defaultMessage: 'Meta Description is too long',
         }),
         color: 'warning',
-      });
+      };
     } else if (metaDescription.length < 50) {
-      setStatus({
+      status = {
         message: formatMessage({
           id: getTrad('Title-settings.metaDescription-too-short'),
           defaultMessage: 'Meta Description is too short',
         }),
         color: 'warning',
-      });
+      };
     }
+    if (!_.isEqual(status, checks.metaDescription))
+      dispatch({
+        type: 'UPDATE_PONCTUAL',
+        value: { ...status, entity: 'metaDescription' },
+      });
   }, []);
 
   return (
     <SEOAccordion
       title="Meta description"
-      status={status}
+      status={checks.metaDescription}
       label={formatMessage({
         id: getTrad('Title-settings.metaDescription-tooltip'),
         defaultMessage:
@@ -62,7 +70,7 @@ const MetaDescriptionCheck = ({ metaDescription }) => {
         metaDescription && (
           <Box padding={2}>
             <Typography variant="omega">
-              {metaDescription} - ({metaDescription.length} / 160)
+              {metaDescription} ({metaDescription.length}/160)
             </Typography>
           </Box>
         )

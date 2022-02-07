@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import _ from 'lodash';
 
@@ -9,7 +9,7 @@ import SEOAccordion from '../SEOAccordion';
 
 import { SeoCheckerContext } from '../../../RightLinksCompo/Summary';
 
-const StructuredDataCheck = ({ structuredData }) => {
+const StructuredDataCheck = ({ structuredData, checks }) => {
   const { formatMessage } = useIntl();
   const dispatch = useContext(SeoCheckerContext);
 
@@ -31,19 +31,18 @@ const StructuredDataCheck = ({ structuredData }) => {
         }),
         color: 'warning',
       };
-      return;
     }
     if (!_.isEqual(status, checks.structuredData))
       dispatch({
-        type: 'UPDATE_STRUCTURED_DATA',
-        value: status,
+        type: 'UPDATE_PONCTUAL',
+        value: { ...status, entity: 'structuredData' },
       });
   }, []);
 
   return (
     <SEOAccordion
       title="JSON Structured Data"
-      status={status}
+      status={checks.structuredData}
       label={formatMessage({
         id: getTrad('SEOChecks.structuredDataCheck.label'),
         defaultMessage:

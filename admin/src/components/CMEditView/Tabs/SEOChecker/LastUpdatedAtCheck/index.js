@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import _ from 'lodash';
 
@@ -10,41 +10,50 @@ import { getTrad } from '../../../../../utils';
 
 import SEOAccordion from '../SEOAccordion';
 
-const LastUpdatedAtCheck = ({ updatedAt }) => {
+import { SeoCheckerContext } from '../../../RightLinksCompo/Summary';
+
+const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
   const { formatMessage } = useIntl();
-  const [status, setStatus] = useState({
+  const dispatch = useContext(SeoCheckerContext);
+
+  let status = {
     message: formatMessage({
       id: getTrad('SSEOChecks.lastUpdatedAtCheck.default'),
       defaultMessage:
         'This content was modified over a year ago! Search engines love fresh content.',
     }),
     color: 'danger',
-  });
+  };
 
   useEffect(() => {
     if (_.isNull(updatedAt)) {
-      setStatus({
+      status = {
         message: formatMessage({
           id: getTrad('SEOChecks.lastUpdatedAtCheck.save-content'),
           defaultMessage: 'You must save this entry first.',
         }),
         color: 'warning',
-      });
+      };
     } else {
       const oneYearAgo = Date.parse(
         new Date(new Date().setFullYear(new Date().getFullYear() - 1))
       );
       if (Date.parse(updatedAt) >= oneYearAgo) {
-        setStatus({
+        status = {
           message: formatMessage({
             id: getTrad('SEOChecks.lastUpdatedAtCheck.success'),
             defaultMessage:
               'Awesome! This content was last modified in less than an year ago!',
           }),
           color: 'success',
-        });
+        };
       }
     }
+    if (!_.isEqual(status, checks.lastUpdatedAt))
+      dispatch({
+        type: 'UPDATE_PONCTUAL',
+        value: { ...status, entity: 'lastUpdatedAt' },
+      });
   }, []);
 
   return (
@@ -55,7 +64,7 @@ const LastUpdatedAtCheck = ({ updatedAt }) => {
         defaultMessage:
           'Search engines love fresh content. This will check if your entry was last modified in less than an year ago.',
       })}
-      status={status}
+      status={checks.lastUpdatedAt}
       component={
         updatedAt && (
           <Box padding={2}>

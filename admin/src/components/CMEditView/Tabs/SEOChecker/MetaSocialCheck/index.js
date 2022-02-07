@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import _ from 'lodash';
 
@@ -11,56 +11,66 @@ import { Flex } from '@strapi/design-system/Flex';
 
 import SEOAccordion from '../SEOAccordion';
 
-const MetaSocialCheck = ({ metaSocial }) => {
+import { SeoCheckerContext } from '../../../RightLinksCompo/Summary';
+
+const MetaSocialCheck = ({ metaSocial, checks }) => {
   const { formatMessage } = useIntl();
-  const [status, setStatus] = useState({
+  const dispatch = useContext(SeoCheckerContext);
+
+  let status = {
     message: '',
     color: '',
-  });
+  };
 
   useEffect(() => {
     if (_.isNull(metaSocial)) {
-      setStatus({
+      status = {
         message: formatMessage({
           id: getTrad('SEOChecks.metaSocialCheck.not-found'),
           defaultMessage: 'No Meta Social tags have been found.',
         }),
         color: 'danger',
-      });
-      return;
-    }
-    const count = metaSocial.filter((meta) => !_.isNull(meta.id)).length;
-    if (count === 0) {
-      setStatus({
-        message: formatMessage({
-          id: getTrad('SEOChecks.metaSocialCheck.not-found'),
-          defaultMessage: 'No Meta Social tags have been found.',
-        }),
-        color: 'danger',
-      });
-    } else if (count == 1) {
-      setStatus({
-        message: formatMessage({
-          id: getTrad('SEOChecks.metaSocialCheck.one'),
-          defaultMessage: 'Only one Meta Social tag is being used.',
-        }),
-        color: 'warning',
-      });
+      };
     } else {
-      setStatus({
-        message: `${count} ${formatMessage({
-          id: getTrad('SEOChecks.metaSocialCheck.configured'),
-          defaultMessage: ' Meta Social tags are configured',
-        })}`,
-        color: 'success',
-      });
+      const count = metaSocial.filter((meta) => !_.isNull(meta.id)).length;
+      if (count === 0) {
+        status = {
+          message: formatMessage({
+            id: getTrad('SEOChecks.metaSocialCheck.not-found'),
+            defaultMessage: 'No Meta Social tags have been found.',
+          }),
+          color: 'danger',
+        };
+      } else if (count == 1) {
+        status = {
+          message: formatMessage({
+            id: getTrad('SEOChecks.metaSocialCheck.one'),
+            defaultMessage: 'Only one Meta Social tag is being used.',
+          }),
+          color: 'warning',
+        };
+      } else {
+        status = {
+          message: `${count} ${formatMessage({
+            id: getTrad('SEOChecks.metaSocialCheck.configured'),
+            defaultMessage: ' Meta Social tags are configured',
+          })}`,
+          color: 'success',
+        };
+      }
     }
+
+    if (!_.isEqual(status, checks.metaSocial))
+      dispatch({
+        type: 'UPDATE_PONCTUAL',
+        value: { ...status, entity: 'metaSocial' },
+      });
   }, []);
 
   return (
     <SEOAccordion
       title="Meta Social Tags"
-      status={status}
+      status={checks.metaSocial}
       label={formatMessage({
         id: getTrad('SEOChecks.metaSocialCheck.label'),
         defaultMessage:

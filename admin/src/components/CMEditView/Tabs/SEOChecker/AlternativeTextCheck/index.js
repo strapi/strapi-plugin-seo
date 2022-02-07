@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import _ from 'lodash';
 
@@ -14,55 +14,70 @@ import Dot from '@strapi/icons/Dot';
 
 import SEOAccordion from '../SEOAccordion';
 
-const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts }) => {
+import { SeoCheckerContext } from '../../../RightLinksCompo/Summary';
+
+const AlternativeTextCheck = ({
+  intersections,
+  richTextAlts,
+  altTexts,
+  checks,
+}) => {
   const { formatMessage } = useIntl();
-  const [status, setStatus] = useState({
+  const dispatch = useContext(SeoCheckerContext);
+
+  let status = {
     message: formatMessage({
       id: getTrad('SEOChecks.alternativeTextCheck.default'),
       defaultMessage: 'All your images contain an alt attribute! Congrats!',
     }),
     color: 'success',
-  });
+  };
 
   useEffect(() => {
     const missingRichTextAlt = richTextAlts.filter(
       (x) => x.occurences != 0
     ).length;
+
     if (intersections === 0) {
-      setStatus({
+      status = {
         message: formatMessage({
           id: getTrad('SEOChecks.alternativeTextCheck.intersection-zero'),
           defaultMessage:
             'The name and the alternative text of your images are all the same. Strapi automatically generate the alt attribute from the name by default if the field was empty during the media upload. Having alt attribute clearly describing images is a very good practice.',
         }),
         color: 'warning',
-      });
+      };
     } else if (altTexts.includes('')) {
       const count = altTexts.filter((x) => x === '').length;
-      setStatus({
+      status = {
         message: `${count} ${formatMessage({
           id: getTrad('SEOChecks.alternativeTextCheck.intersection-negative'),
           defaultMessage:
             'Some images from a media field are missing an alt attribute.',
         })}`,
         color: 'danger',
-      });
+      };
     } else if (missingRichTextAlt >= 1) {
-      setStatus({
+      status = {
         message: formatMessage({
           id: getTrad('SEOChecks.alternativeTextCheck.richtext-missing-one'),
           defaultMessage:
             'At least one image in any 1st level richtext editor is missing an alt attribute.',
         }),
         color: 'danger',
-      });
+      };
     }
+    if (!_.isEqual(status, checks.alternativeText))
+      dispatch({
+        type: 'UPDATE_PONCTUAL',
+        value: { ...status, entity: 'alternativeText' },
+      });
   }, []);
 
   return (
     <SEOAccordion
       title="Alt"
-      status={status}
+      status={checks.alternativeText}
       label={formatMessage({
         id: getTrad('SEOChecks.alternativeTextCheck.label'),
         defaultMessage:

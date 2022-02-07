@@ -34,82 +34,10 @@ const initialState = {
 };
 function reducer(state, action) {
   switch (action.type) {
-    case 'UPDATE_METATITLE':
+    case 'UPDATE_PONCTUAL':
       return {
         ...state,
-        metaTitle: {
-          color: action.value.color,
-          message: action.value.message,
-        },
-      };
-    case 'UPDATE_METADESCRIPTION':
-      return {
-        ...state,
-        metaDescription: {
-          color: action.value.color,
-          message: action.value.message,
-        },
-      };
-    case 'UPDATE_METASOCIAL':
-      return {
-        ...state,
-        metaSocial: {
-          color: action.value.color,
-          message: action.value.message,
-        },
-      };
-    case 'UPDATE_METAROBOT':
-      return {
-        ...state,
-        metaRobot: {
-          color: action.value.color,
-          message: action.value.message,
-        },
-      };
-    case 'UPDATE_CANONICAL':
-      return {
-        ...state,
-        canonicalUrl: {
-          color: action.value.color,
-          message: action.value.message,
-        },
-      };
-    case 'UPDATE_WORDCOUNT':
-      return {
-        ...state,
-        wordCount: {
-          color: action.value.color,
-          message: action.value.message,
-        },
-      };
-    case 'UPDATE_LAST_UPDATED_AT':
-      return {
-        ...state,
-        lastUpdatedAt: {
-          color: action.value.color,
-          message: action.value.message,
-        },
-      };
-    case 'UPDATE_STRUCTURED_DATA':
-      return {
-        ...state,
-        structuredData: {
-          color: action.value.color,
-          message: action.value.message,
-        },
-      };
-    case 'UPDATE_ALTERNATIVE_TEXT':
-      return {
-        ...state,
-        alternativeText: {
-          color: action.value.color,
-          message: action.value.message,
-        },
-      };
-    case 'UPDATE_KEYWORD_DENSITY':
-      return {
-        ...state,
-        keywordDensity: {
+        [action.value.entity]: {
           color: action.value.color,
           message: action.value.message,
         },

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import _ from 'lodash';
 
@@ -13,6 +13,8 @@ import { Typography } from '@strapi/design-system/Typography';
 import Dot from '@strapi/icons/Dot';
 
 import SEOAccordion from '../SEOAccordion';
+
+import { SeoCheckerContext } from '../../../RightLinksCompo/Summary';
 
 const robotTags = [
   { name: 'noindex', message: 'Search engines will index this page.' },
@@ -36,36 +38,42 @@ const robotTags = [
   },
 ];
 
-const MetaRobotCheck = ({ metaRobots }) => {
+const MetaRobotCheck = ({ metaRobots, checks }) => {
   const { formatMessage } = useIntl();
-  const [status, setStatus] = useState({
+  const dispatch = useContext(SeoCheckerContext);
+
+  let status = {
     message: formatMessage({
       id: getTrad('SEOChecks.metaRobotsCheck.default'),
       defaultMessage: 'Robot meta tags have been found!',
     }),
     color: 'success',
-  });
+  };
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
     if (_.isNull(metaRobots) || _.isEmpty(metaRobots)) {
-      setStatus({
+      status = {
         message: formatMessage({
           id: getTrad('SEOChecks.metaRobotsCheck.not-found'),
           defaultMessage: 'No Robot meta tags have been found.',
         }),
         color: 'success',
-      });
-      return;
+      };
     } else {
       setTags(metaRobots.split(','));
     }
+    if (!_.isEqual(status, checks.metaRobots))
+      dispatch({
+        type: 'UPDATE_PONCTUAL',
+        value: { ...status, entity: 'metaRobots' },
+      });
   }, []);
 
   return (
     <SEOAccordion
       title="Meta Robots"
-      status={status}
+      status={checks.metaRobots}
       label={formatMessage({
         id: getTrad('SEOChecks.metaRobotsCheck.label'),
         defaultMessage:
@@ -74,7 +82,13 @@ const MetaRobotCheck = ({ metaRobots }) => {
       component={
         <Box padding={2}>
           {robotTags.map((tag, index) => (
-            <Stack size={2} key={index} horizontal background="neutral0" padding={3}>
+            <Stack
+              size={2}
+              key={index}
+              horizontal
+              background="neutral0"
+              padding={3}
+            >
               <Icon
                 aria-hidden={true}
                 colors={(theme) => ({

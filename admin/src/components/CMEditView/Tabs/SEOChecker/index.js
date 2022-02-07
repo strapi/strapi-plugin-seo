@@ -26,30 +26,42 @@ const SEOChecker = ({ modifiedData, components, contentType, checks }) => {
 
   return (
     <Box padding={4}>
-      <MetaTitleCheck metaTitle={_.get(modifiedData, 'seo.metaTitle', null)} checks={checks} />
+      <MetaTitleCheck
+        metaTitle={_.get(modifiedData, 'seo.metaTitle', null)}
+        checks={checks}
+      />
       <MetaDescriptionCheck
         metaDescription={_.get(modifiedData, 'seo.metaDescription', null)}
+        checks={checks}
       />
-      <WordCountCheck wordCount={wordCount} />
-      <KeywordDensityCheck keywordsDensity={keywordsDensity} />
+      <WordCountCheck wordCount={wordCount} checks={checks} />
+      <KeywordDensityCheck keywordsDensity={keywordsDensity} checks={checks} />
       <MetaSocialCheck
         metaSocial={_.get(modifiedData, 'seo.metaSocial', null)}
+        checks={checks}
       />
       <CanonicalUrlCheck
         canonicalUrl={_.get(modifiedData, 'seo.canonicalURL', null)}
+        checks={checks}
       />
       <StructuredDataCheck
         structuredData={_.get(modifiedData, 'seo.structuredData', null)}
+        checks={checks}
       />
       <MetaRobotCheck
         metaRobots={_.get(modifiedData, 'seo.metaRobots', null)}
+        checks={checks}
       />
       <AlternativeTextCheck
         intersections={_.get(emptyAltCount, 'intersections', null)}
         richTextAlts={_.get(emptyAltCount, 'richTextAlts', null)}
         altTexts={_.get(emptyAltCount, 'altTexts', null)}
+        checks={checks}
       />
-      <LastUpdatedAtCheck updatedAt={_.get(modifiedData, 'updatedAt', null)} />
+      <LastUpdatedAtCheck
+        updatedAt={_.get(modifiedData, 'updatedAt', null)}
+        checks={checks}
+      />
     </Box>
   );
 };

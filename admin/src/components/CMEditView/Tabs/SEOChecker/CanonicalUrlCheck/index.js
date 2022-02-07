@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import _ from 'lodash';
 
@@ -10,37 +10,44 @@ import { Typography } from '@strapi/design-system/Typography';
 
 import SEOAccordion from '../SEOAccordion';
 
-const CanonicalUrlCheck = ({ canonicalUrl }) => {
-  const { formatMessage } = useIntl();
+import { SeoCheckerContext } from '../../../RightLinksCompo/Summary';
 
-  const [status, setStatus] = useState({
+const CanonicalUrlCheck = ({ canonicalUrl, checks }) => {
+  const { formatMessage } = useIntl();
+  const dispatch = useContext(SeoCheckerContext);
+
+  let status = {
     message: formatMessage({
       id: getTrad('SEOChecks.canonicalUrlCheck.found'),
       defaultMessage: 'A canonical URL has been found.',
     }),
     color: 'success',
-  });
+  };
 
   useEffect(() => {
     if (_.isNull(canonicalUrl)) {
-      setStatus({
+      status = {
         message: formatMessage({
           id: getTrad('SEOChecks.canonicalUrlCheck.default'),
           defaultMessage: 'No Canonical URL has been found.',
         }),
         color: 'warning',
-      });
+      };
     }
+    if (!_.isEqual(status, checks.canonicalUrl))
+      dispatch({
+        type: 'UPDATE_PONCTUAL',
+        value: { ...status, entity: 'canonicalUrl' },
+      });
   }, []);
 
   return (
     <SEOAccordion
       title="Canonical URL"
-      status={status}
+      status={checks.canonicalUrl}
       label={formatMessage({
         id: getTrad('SEOChecks.canonicalUrlCheck.label'),
-        defaultMessage:
-          'This will check if you have a canonical URL.',
+        defaultMessage: 'This will check if you have a canonical URL.',
       })}
       component={
         canonicalUrl && (
