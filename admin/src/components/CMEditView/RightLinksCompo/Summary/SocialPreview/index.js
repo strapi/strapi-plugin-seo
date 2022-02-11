@@ -87,9 +87,13 @@ const SocialPreview = ({ modifiedData, setIsVisible }) => {
                       );
                     else {
                       return (
-                        <Box padding={4} paddingTop={8} key={index}>
-                          <Alert title="Notice">
-                            Complete you social component to see the preview
+                        <Box paddingTop={4} key={index}>
+                          <Alert closeLabel="Close alert" title="Notice">
+                            {formatMessage({
+                              id: getTrad('Social-preview.alert'),
+                              defaultMessage:
+                                'Complete you social component to see the preview',
+                            })}
                           </Alert>
                         </Box>
                       );

@@ -48,6 +48,8 @@ const SeoChecks = ({
     contentType
   );
 
+  const seo = _.get(modifiedData, 'seo', null);
+
   return (
     <ModalLayout
       onClose={() => setIsVisible((prev) => !prev)}
@@ -71,7 +73,7 @@ const SeoChecks = ({
           </Box>
         </Box>
 
-        {_.get(modifiedData, 'seo', null) ? (
+        {seo ? (
           <Box padding={4}>
             <MetaTitleCheck
               metaTitle={_.get(modifiedData, 'seo.metaTitle', null)}
@@ -114,13 +116,15 @@ const SeoChecks = ({
             />
           </Box>
         ) : (
-          <EmptyStateLayout
-            icon={<Illo />}
-            content={formatMessage({
-              id: getTrad('Modal.seo-component-empy'),
-              defaultMessage: 'Your SEO component is empty...',
-            })}
-          />
+          <Box paddingTop={4}>
+            <EmptyStateLayout
+              icon={<Illo />}
+              content={formatMessage({
+                id: getTrad('Modal.seo-component-empy'),
+                defaultMessage: 'Your SEO component is empty...',
+              })}
+            />
+          </Box>
         )}
       </ModalBody>
       <ModalFooter

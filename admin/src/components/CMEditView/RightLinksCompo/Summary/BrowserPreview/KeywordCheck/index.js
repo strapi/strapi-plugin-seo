@@ -26,9 +26,9 @@ const KeywordCheck = ({ item, keywords, label }) => {
         })}
         as={Dot}
       />
-      <Typography>{`You use ${
-        matches.length
-      } keywords in your ${label} (${matches.join(', ')})`}</Typography>
+      <Typography>{`You use ${matches.length} keyword${
+        matches.length > 1 ? 's' : ''
+      } in your ${label} (${matches.join(', ').trim()})`}</Typography>
     </Stack>
   );
 };

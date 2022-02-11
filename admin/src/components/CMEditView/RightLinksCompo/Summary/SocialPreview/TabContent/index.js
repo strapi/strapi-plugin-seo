@@ -14,7 +14,7 @@ import KeywordCheck from '../../BrowserPreview/KeywordCheck';
 const TabContent = ({ item, keywords }) => {
   return (
     <TabPanel>
-      <Stack size={2} padding={4}>
+      <Stack size={2}>
         <Box paddingTop={6} paddingBottom={6}>
           {item.image && (
             <Flex alignItems="center" justifyContent="center">
