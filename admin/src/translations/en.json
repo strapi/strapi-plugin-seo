@@ -66,5 +66,12 @@
   "Social-network.metaDescription-hint": "/65 characters (recommended maximum limit)",
   "Social-network.accordion.description": "See how your content will look like posted on",
   "Social-network.no-tags": "You don't have any meta social tags yet.",
-  "Modal.cancel": "Cancel"
+  "Modal.cancel": "Cancel",
+  "Button.see-details": "SEE DETAILS",
+  "Button.social-preview": "Social Preview",
+  "Button.browser-preview": "Browser Preview",
+  "Button.seo-analyze": "SEO Analyze",
+  "Good": "Good",
+  "Improvements": "Improvements",
+  "Bad": "Bad"
 }

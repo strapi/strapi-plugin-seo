@@ -198,7 +198,7 @@ const metaSocialPreview = (modifiedData) => {
     color: '',
   };
 
-  if (_.isNull(metaSocial)) {
+  if (_.isNull(metaSocial) || metaSocial === undefined) {
     status = {
       message: '',
       color: 'danger',

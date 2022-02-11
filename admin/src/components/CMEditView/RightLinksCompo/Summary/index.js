@@ -1,60 +1,43 @@
 import React, { useEffect, useState, useReducer, createContext } from 'react';
 
-import _ from 'lodash';
 import { useCMEditViewDataManager } from '@strapi/helper-plugin';
-
-import {
-  ModalLayout,
-  ModalBody,
-  ModalHeader,
-  ModalFooter,
-} from '@strapi/design-system/ModalLayout';
 
 import { Box } from '@strapi/design-system/Box';
 import { Button } from '@strapi/design-system/Button';
 import { Divider } from '@strapi/design-system/Divider';
 import { Typography } from '@strapi/design-system/Typography';
-import { EmptyStateLayout } from '@strapi/design-system/EmptyStateLayout';
+import { TextButton } from '@strapi/design-system/TextButton';
 
-import SeoTabs from '../../Tabs';
+import SeoChecks from './SeoChecks';
+import SocialPreview from './SocialPreview';
 import PreviewChecks from './PreviewChecks';
+import BrowserPreview from './BrowserPreview';
+
+import Eye from '@strapi/icons/Eye';
+import ArrowRight from '@strapi/icons/ArrowRight';
+
+import { getAllChecks } from '../../utils/checks';
 
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../../utils';
 
-import Search from '@strapi/icons/Search';
-import { Illo } from '../../../SeoPage/Info/EmptyComponentLayout/illo';
+import reducer from './reducer';
 
-import { getAllChecks } from '../../utils/checks';
+import _ from 'lodash';
 
 const initialState = {
-  metaTile: { message: '', color: '' },
-  metaDescription: { message: '', color: '' },
   preview: true,
 };
-function reducer(state, action) {
-  switch (action.type) {
-    case 'UPDATE_PONCTUAL':
-      return {
-        ...state,
-        [action.value.entity]: {
-          color: action.value.color,
-          message: action.value.message,
-        },
-      };
-    case 'UPDATE_FOR_PREVIEW':
-      return action.value;
-    default:
-      throw new Error();
-  }
-}
 
 export const SeoCheckerContext = createContext(null);
 
 const Summary = () => {
   const { formatMessage } = useIntl();
+
   const [isLoading, setIsLoading] = useState(true);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isBrowserPreviewVisible, setIsBrowserPreviewVisible] = useState(false);
+  const [isSocialPreviewVisible, setIsSocialPreviewVisible] = useState(false);
+  const [isSeoChecksVisible, setIsSeoChecksVisible] = useState(false);
   const [localChecks, setLocalChecks] = useState({});
   const [checks, dispatch] = useReducer(reducer, initialState);
   const { allLayoutData, modifiedData } = useCMEditViewDataManager();
@@ -88,63 +71,68 @@ const Summary = () => {
         <Box paddingTop={2} paddingBottom={6}>
           <Divider />
         </Box>
-        <Button
-          fullWidth
-          variant="secondary"
-          startIcon={<Search />}
-          onClick={() => setIsVisible((prev) => !prev)}
-        >
-          Preview
-        </Button>
-        {isVisible && (
-          <ModalLayout
-            onClose={() => setIsVisible((prev) => !prev)}
-            labelledBy="title"
+        <Box paddingTop={1}>
+          <Button
+            fullWidth
+            variant="secondary"
+            startIcon={<Eye />}
+            onClick={() => setIsBrowserPreviewVisible((prev) => !prev)}
           >
-            <ModalHeader>
-              <Typography
-                fontWeight="bold"
-                textColor="neutral800"
-                as="h2"
-                id="title"
-              >
-                SEO Plugin
-              </Typography>
-            </ModalHeader>
-            <ModalBody>
-              {_.get(modifiedData, 'seo', null) ? (
-                <SeoTabs
-                  modifiedData={modifiedData}
-                  components={components}
-                  contentType={contentType}
-                  checks={checks}
-                />
-              ) : (
-                <EmptyStateLayout
-                  icon={<Illo />}
-                  content={formatMessage({
-                    id: getTrad('Modal.seo-component-empy'),
-                    defaultMessage: 'Your SEO component is empty...',
-                  })}
-                />
-              )}
-            </ModalBody>
-            <ModalFooter
-              startActions={
-                <Button
-                  onClick={() => setIsVisible((prev) => !prev)}
-                  variant="tertiary"
-                >
-                  {formatMessage({
-                    id: getTrad('Modal.cancel'),
-                    defaultMessage: 'Cancel',
-                  })}
-                </Button>
-              }
-            />
-          </ModalLayout>
-        )}
+            {formatMessage({
+              id: getTrad('Button.browser-preview'),
+              defaultMessage: 'Browser Preview',
+            })}
+          </Button>
+        </Box>
+
+        <Box paddingTop={2}>
+          <Button
+            fullWidth
+            variant="secondary"
+            startIcon={<Eye />}
+            onClick={() => setIsSocialPreviewVisible((prev) => !prev)}
+          >
+            {formatMessage({
+              id: getTrad('Button.social-preview'),
+              defaultMessage: 'Social Preview',
+            })}
+          </Button>
+        </Box>
+
         {!isLoading && <PreviewChecks checks={checks} />}
+        <Box paddingTop={4}>
+          <TextButton
+            startIcon={<ArrowRight />}
+            onClick={() => setIsSeoChecksVisible((prev) => !prev)}
+          >
+            {formatMessage({
+              id: getTrad('Button.see-details'),
+              defaultMessage: 'SEE DETAILS',
+            })}
+          </TextButton>
+        </Box>
+
+        {isBrowserPreviewVisible && (
+          <BrowserPreview
+            modifiedData={modifiedData}
+            setIsVisible={setIsBrowserPreviewVisible}
+          />
+        )}
+        {isSocialPreviewVisible && (
+          <SocialPreview
+            modifiedData={modifiedData}
+            setIsVisible={setIsSocialPreviewVisible}
+          />
+        )}
+        {isSeoChecksVisible && (
+          <SeoChecks
+            modifiedData={modifiedData}
+            components={components}
+            contentType={contentType}
+            checks={checks}
+            setIsVisible={setIsSeoChecksVisible}
+          />
+        )}
       </Box>
     </SeoCheckerContext.Provider>
   );

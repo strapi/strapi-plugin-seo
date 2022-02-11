@@ -66,5 +66,12 @@
   "Social-network.metaDescription-hint": "/65 caractères (limite maximale recommandée)",
   "Social-network.accordion.description": "Voyez à quoi ressemblera votre contenu posté sur",
   "Social-network.no-tags": "Vous n'avez pas encore de balises meta sociales.",
-  "Modal.cancel": "Annulez"
+  "Modal.cancel": "Annulez",
+  "Button.see-details": "PLUS DE DETAILS",
+  "Button.social-preview": "Aperçu Social",
+  "Button.browser-preview": "Aperçu Navigateurs",
+  "Button.seo-analyze": "Analyse SEO",
+  "Good": "Bien",
+  "Improvements": "Améliorations",
+  "Bad": "Problèmes"
 }
