@@ -3,6 +3,9 @@
 const _ = require('lodash');
 const fetch = require('node-fetch');
 
+const seoContent = require('../components/seo.json');
+const metaSocialContent = require('../components/meta-social.json');
+
 module.exports = ({ strapi }) => ({
   getSeoComponent() {
     const seoComponent = strapi.components['shared.seo'];
@@ -39,39 +42,10 @@ module.exports = ({ strapi }) => ({
 
     return { collectionTypes, singleTypes } || null;
   },
-  async getContentFromGithub(url) {
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-
-      if (res.status === 403)
-        throw new Error(
-          'GitHub: API rate limit exceeded, please wait for few minutes before trying to fetch your component again.'
-        );
-      const content = _.get(data, 'content', null);
-      if (content) {
-        const decodedContent = Buffer.from(content, 'base64').toString('ascii');
-        return JSON.parse(decodedContent);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    return null;
-  },
-  async createSeoComponent(body) {
-    const { source } = body;
+  async createSeoComponent() {
     const seoComponent = await this.getSeoComponent();
 
     if (!seoComponent) {
-      const repository = source.replace('https://github.com/', '');
-      const metaSocialContentUrl = `https://api.github.com/repos/${repository}/contents/shared/meta-social.json?ref=main`;
-      const seoContentUrl = `https://api.github.com/repos/${repository}/contents/shared/seo.json?ref=main`;
-
-      const seoContent = await this.getContentFromGithub(seoContentUrl);
-      const metaSocialContent = await this.getContentFromGithub(
-        metaSocialContentUrl
-      );
-
       if (metaSocialContent && seoContent) {
         try {
           const res = await strapi

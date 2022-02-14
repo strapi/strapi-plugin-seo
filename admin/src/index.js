@@ -4,7 +4,7 @@ import pluginId from './pluginId';
 import Initializer from './components/Initializer';
 import PluginIcon from './components/PluginIcon';
 
-import SeoChecker from './components/SeoChecker/Modal';
+import SeoChecker from './components/CMEditView/RightLinksCompo';
 
 const name = pluginPkg.strapi.name;
 

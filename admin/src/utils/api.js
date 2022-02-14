@@ -19,13 +19,12 @@ const fetchContentTypes = async () => {
   }
 };
 
-const createSeoComponent = async (source) => {
+const createSeoComponent = async () => {
   try {
     const data = await request(
       `/${pluginId}/component`,
       {
         method: 'POST',
-        body: { source },
       },
       true
     );
