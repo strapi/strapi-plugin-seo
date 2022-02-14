@@ -6,11 +6,13 @@
 
 import React, { memo, useEffect, useState, useRef } from 'react';
 
-import { Stack } from '@strapi/design-system/Stack';
-import { Alert } from '@strapi/design-system/Alert';
-import { Typography } from '@strapi/design-system/Typography';
+import { Box } from '@strapi/design-system/Box';
 
-import { LoadingIndicatorPage } from '@strapi/helper-plugin';
+import {
+  LoadingIndicatorPage,
+  ContentBox,
+  useAutoReloadOverlayBlocker,
+} from '@strapi/helper-plugin';
 
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../utils';
@@ -21,7 +23,8 @@ import Info from '../../components/SeoPage/Info';
 import Header from '../../components/SeoPage/Header';
 
 import { createSeoComponent } from '../../utils/api';
-import { useAutoReloadOverlayBlocker } from '@strapi/helper-plugin';
+
+import InformationSquare from '@strapi/icons/InformationSquare';
 
 const HomePage = () => {
   const { formatMessage } = useIntl();
@@ -62,25 +65,22 @@ const HomePage = () => {
   return (
     <>
       <Header seoComponent={seoComponent.current} />
-      <Stack
-        left="50%"
-        marginLeft="-250px"
-        position="fixed"
-        size={2}
-        top={`${46 / 16}rem`}
-        width={`${500 / 10}rem`}
-        zIndex={10}
-      >
-        <Alert closeLabel="Close alert" title="Notice">
-          <Typography variant="omega">
-            {formatMessage({
-              id: getTrad('SEOPage.info.information'),
-              defaultMessage:
-                "When adding your SEO component, make sure to name it 'seo' and to include it in the root of your Content-Type.",
-            })}
-          </Typography>
-        </Alert>
-      </Stack>
+
+      <Box paddingLeft={8} paddingRigth={8}>
+        <ContentBox
+          title={formatMessage({
+            id: 'Information',
+            defaultMessage: 'Information',
+          })}
+          subtitle={formatMessage({
+            id: getTrad('SEOPage.info.information'),
+            defaultMessage:
+              "When adding your SEO component, make sure to name it 'seo' and to include it in the root of your Content-Type.",
+          })}
+          icon={<InformationSquare />}
+          iconBackground="primary100"
+        />
+      </Box>
 
       <Info contentTypes={contentTypes.current} />
     </>
