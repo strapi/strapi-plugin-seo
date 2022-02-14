@@ -116,7 +116,7 @@ const SeoChecks = ({
             />
           </Box>
         ) : (
-          <Box paddingTop={4}>
+          <Box paddingLeft={4}>
             <EmptyStateLayout
               icon={<Illo />}
               content={formatMessage({

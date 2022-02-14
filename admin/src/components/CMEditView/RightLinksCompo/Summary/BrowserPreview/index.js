@@ -115,7 +115,7 @@ const BrowserPreview = ({ modifiedData, setIsVisible }) => {
             )}
           </Stack>
         ) : (
-          <Box padding={4}>
+          <Box paddingLeft={4}>
             <EmptyStateLayout
               icon={<Illo />}
               content={formatMessage({

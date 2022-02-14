@@ -6,7 +6,7 @@
   "SEOPage.empty-component-layout.regexp-error": "Please provide a valid GitHub repository URL",
   "SEOPage.empty-component-layout.no-component": "You don't have any SEO component yet",
   "SEOPage.empty-component-layout.input.tooltip": "The strapi/components GitHub repository contains the default SEO component",
-  "SEOPage.info.information": "Make sure to name you component 'seo' and to add it in the root of your Content-Type.",
+  "SEOPage.info.information": "Make sure to use the imported shared.seo component, name it 'seo' and to add it in the root of your Content-Type.",
   "SEOPage.info.no-collection-types": "You don't have any collection-types yet...",
   "SEOPage.info.no-single-types": "You don't have any single-types yet...",
   "SEOPage.info.create-collection-type": "Create your first collection-type",

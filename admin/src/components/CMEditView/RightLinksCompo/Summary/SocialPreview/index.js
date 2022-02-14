@@ -103,7 +103,7 @@ const SocialPreview = ({ modifiedData, setIsVisible }) => {
             </TabGroup>
           </Box>
         ) : (
-          <Box padding={4}>
+          <Box paddingLeft={4}>
             <EmptyStateLayout
               icon={<Illo />}
               content={formatMessage({
