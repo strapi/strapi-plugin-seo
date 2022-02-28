@@ -85,27 +85,32 @@ const getRichTextFields = (contentType, components, modifiedData) => {
 };
 
 const getEmptyAltCount = (richtext, field) => {
-  const occurences = richtext
-    .split('\n')
-    .filter((x) => x.includes('![](')).length;
+  if (richtext) {
+    const occurences = richtext
+      .split('\n')
+      .filter((x) => x.includes('![](')).length;
 
-  return { field, occurences };
+    return { field, occurences };
+  }
+  return { field, occurences: 0 };
 };
 
 const increaseCounter = (base, field) => {
   const richtext = _.get(base, field, '');
   const emptyAlts = getEmptyAltCount(richtext, field);
-  const html = converter.makeHtml(richtext);
-  const wordsNotCleaned = html
-    .replace(/<\/?[^>]+(>|$)/g, '')
-    .replace('\n', ' ')
-    .split(' ');
-  const words = wordsNotCleaned.filter((x) => {
-    return x !== '' && x !== '\n';
-  });
-  return richtext
-    ? { words, length: words.length, emptyAlts }
-    : { words: [], length: 0, emptyAlts };
+  if (richtext) {
+    const html = converter.makeHtml(richtext);
+    const wordsNotCleaned = html
+      .replace(/<\/?[^>]+(>|$)/g, '')
+      .replace('\n', ' ')
+      .split(' ');
+    const words = wordsNotCleaned.filter((x) => {
+      return x !== '' && x !== '\n';
+    });
+    return { words, length: words.length, emptyAlts };
+  } else {
+    return { words: [], length: 0, emptyAlts };
+  }
 };
 
 const buildKeywordDensityObject = (keywords, words) => {
