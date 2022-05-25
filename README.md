@@ -4,9 +4,8 @@ The official plugin to make your Strapi content SEO friendly
 
 ## Features
 
-- Possibility to import the default Strapi `shared.seo` & `shared.meta-social` components from our components [GitHub repository](https://github.com/strapi/components) in one click.
-- Easily see which Content-Types does have the SEO component.
-- Manage the meta title & meta description and preview your content in the SERP
+- Easily see which Content-Types does have the SEO component or not.
+- Manage the important tags for your SEO (metatitle, metadescription) and preview your content in the SERP
 - Manage your meta social tags (Facebook & Twitter) and preview your post.
 - Strong SEO analysis for your content.
 
@@ -21,6 +20,25 @@ yarn add @strapi/plugin-seo
 # Or using NPM
 npm install @strapi/plugin-seo
 ```
+
+## How it works
+
+When clicking on the plugin homepage for the first time, the plugin will automatically look if a `shared.seo` component exists in your project. If not, the plugin will automatically create it with a sub `shared.meta-social` component.
+
+If a `shared.seo` component already exists in your project. You might want to rename it or delete it otherwise, the plugin will not create the necessary component in order to work.
+
+#### Homepage
+
+From there you can get an overview of which content-types contains the SEO component or not. You can quickly add the SEO component to a selected content-type.
+
+**Note**: By doing this, you will be redirected to the Content-Types builder on the specific content-type. You'll need to create a new component at the **root** of this content-type called `seo` using the existing component the plugin created for you: `shared.seo`.
+
+#### Content Manager
+
+From any content manager view for a content-type that contains the SEO component, you'll be able to see a right-side card dedicated for the SEO plugin. From there you can see a quick SEO analysis and action for you to perform (opening preview, opening complete analysis details modal).
+
+**Note**: You'll need to fill your SEO component with data to be able to see the SERP preview, Social post preview and complete analysis.
+
 
 ## Configuration
 
