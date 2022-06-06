@@ -39,7 +39,10 @@ const SocialPreview = ({ modifiedData, setIsVisible }) => {
     >
       <ModalHeader>
         <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
-          SEO Plugin
+          {formatMessage({
+            id: getTrad('plugin.name'),
+            defaultMessage: 'SEO Plugin',
+          })}
         </Typography>
       </ModalHeader>
       <ModalBody>

@@ -1,4 +1,5 @@
 {
+  "plugin.name": "SEO Plugin",
   "SEOPage.header.button.edit-component": "Editer le composant SEO",
   "SEOPage.header.title": "SEO",
   "SEOPage.header.subtitle": "Optimisez votre contenu pour le référencement",
