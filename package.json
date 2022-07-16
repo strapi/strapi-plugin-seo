@@ -21,7 +21,7 @@
     "yargs": "^17.2.1"
   },
   "peerDependencies": {
-    "@strapi/strapi": "^4.0.0"
+    "@strapi/strapi": "^4.0.0 || 4.3.0-beta.2"
   },
   "author": {
     "name": "Strapi Solutions SAS",
