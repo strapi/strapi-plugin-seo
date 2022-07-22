@@ -10,7 +10,7 @@ import Dot from '@strapi/icons/Dot';
 
 const KeywordCheck = ({ item, keywords, label }) => {
   const _keywords = keywords.split(',');
-  const matches = _keywords.filter((x) => item.includes(x.trim()));
+  const matches = _keywords.filter((x) => item.toLowerCase().includes(x.toLowerCase().trim()));
 
   return (
     <Stack size={1} horizontal background="neutral0">
