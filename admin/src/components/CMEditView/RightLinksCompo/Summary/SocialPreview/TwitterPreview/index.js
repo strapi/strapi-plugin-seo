@@ -1,8 +1,11 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
+import { getTrad } from '../../../../../../utils';
 
 import './preview.css';
 
 const TwitterPreview = ({ title, description, image }) => {
+  const { formatMessage } = useIntl();
   return (
     <div className="box-right snipcss-lxedG snip-div">
       <div className="twitter-snippet-preview snip-div">
@@ -32,7 +35,10 @@ const TwitterPreview = ({ title, description, image }) => {
             </div>
             <div className="snippet-meta snip-div">
               <div className="snippet-twitter-url snip-div">
-                url-of-your-website
+                {formatMessage({
+                  id: getTrad('SEOSocialPreview.website-url'),
+                  defaultMessage: 'url-do-seu-site.com.br'
+                })}
               </div>
             </div>
           </div>

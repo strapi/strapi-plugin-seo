@@ -41,7 +41,7 @@ const StructuredDataCheck = ({ structuredData, checks }) => {
 
   return (
     <SEOAccordion
-      title="JSON Structured Data"
+      title={formatMessage({id: getTrad('SEOModal.summary-title.structured-data'), defaultMessage: 'JSON Structured Data'})}
       status={checks.structuredData}
       label={formatMessage({
         id: getTrad('SEOChecks.structuredDataCheck.label'),

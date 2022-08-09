@@ -43,7 +43,7 @@ const CanonicalUrlCheck = ({ canonicalUrl, checks }) => {
 
   return (
     <SEOAccordion
-      title="Canonical URL"
+    title={formatMessage({id: getTrad('SEOModal.summary-title.canonical-url'), defaultMessage: 'Canonical URL'})}
       status={checks.canonicalUrl}
       label={formatMessage({
         id: getTrad('SEOChecks.canonicalUrlCheck.label'),

@@ -1,8 +1,11 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
+import { getTrad } from '../../../../../../utils';
 
 import './preview.css';
 
 const FacebookPreview = ({ title, description, image }) => {
+  const { formatMessage } = useIntl();
   return (
     <div className="box-right snipcss-9tU8S snip-div">
       <div className="facebook-snippet-preview snip-div">
@@ -21,7 +24,10 @@ const FacebookPreview = ({ title, description, image }) => {
           <div className="facebook-snippet-text snip-div">
             <div className="snippet-meta snip-div">
               <div className="snippet-fb-url snip-div">
-                url-of-your-website.io
+                {formatMessage({
+                  id: getTrad('SEOSocialPreview.website-url'),
+                  defaultMessage: 'url-of-your-website.io'
+                })}
               </div>
             </div>
             <div className="title-desc snip-div">

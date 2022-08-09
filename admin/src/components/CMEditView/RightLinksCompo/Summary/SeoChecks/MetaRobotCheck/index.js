@@ -72,7 +72,7 @@ const MetaRobotCheck = ({ metaRobots, checks }) => {
 
   return (
     <SEOAccordion
-      title="Meta Robots"
+    title={formatMessage({id: getTrad('SEOModal.summary-title.meta-robots'), defaultMessage: 'Meta Robots'})}
       status={checks.metaRobots}
       label={formatMessage({
         id: getTrad('SEOChecks.metaRobotsCheck.label'),
