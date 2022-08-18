@@ -103,6 +103,7 @@ const increaseCounter = (base, field) => {
     const wordsNotCleaned = html
       .replace(/<\/?[^>]+(>|$)/g, '')
       .replace('\n', ' ')
+      .toLowerCase()
       .split(' ');
     const words = wordsNotCleaned.filter((x) => {
       return x !== '' && x !== '\n';
@@ -187,7 +188,7 @@ const getRichTextCheck = (modifiedData, components, contentType) => {
   let wordCount = 0;
   let keywords = [];
   const tmp = _.get(modifiedData, 'seo.keywords', null);
-  if (tmp) keywords = tmp.split(',');
+  if (tmp) keywords = tmp.toLowerCase().split(',');
   keywordsDensity = {};
 
   // Iterate on every richtext fields we have
