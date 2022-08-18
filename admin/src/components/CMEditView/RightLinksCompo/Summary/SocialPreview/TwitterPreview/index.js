@@ -37,7 +37,7 @@ const TwitterPreview = ({ title, description, image }) => {
               <div className="snippet-twitter-url snip-div">
                 {formatMessage({
                   id: getTrad('SEOSocialPreview.website-url'),
-                  defaultMessage: 'url-do-seu-site.com.br'
+                  defaultMessage: 'url-of-your-website'
                 })}
               </div>
             </div>
