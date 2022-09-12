@@ -1,4 +1,5 @@
 {
+  "plugin.name": "SEO Plugin",
   "SEOPage.header.button.edit-component": "Edit SEO component",
   "SEOPage.header.title": "SEO",
   "SEOPage.header.subtitle": "Optimize your content to be SEO friendly",
@@ -75,5 +76,6 @@
   "Improvements": "Improvements",
   "Bad": "Bad",
   "Social-preview.alert": "Complete you social component to see the preview",
-  "Information": "Information"
+  "Information": "Information",
+  "SEO Summary": "SEO Summary"
 }

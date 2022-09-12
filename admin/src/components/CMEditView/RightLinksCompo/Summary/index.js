@@ -66,7 +66,10 @@ const Summary = () => {
     <SeoCheckerContext.Provider value={dispatch}>
       <Box>
         <Typography variant="sigma" textColor="neutral600" id="seo">
-          SEO Plugin
+          {formatMessage({
+            id: getTrad('plugin.name'),
+            defaultMessage: 'SEO Plugin',
+          })}
         </Typography>
         <Box paddingTop={2} paddingBottom={6}>
           <Divider />
