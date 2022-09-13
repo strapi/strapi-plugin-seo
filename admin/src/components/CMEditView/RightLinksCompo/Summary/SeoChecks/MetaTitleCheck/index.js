@@ -52,7 +52,7 @@ const MetaTitleCheck = ({ metaTitle, checks }) => {
   return (
     <>
       <SEOAccordion
-        title="Meta title"
+        title={formatMessage({id: getTrad('SEOModal.summary-title.meta-title'), defaultMessage: 'Meta title'})}
         status={checks.metaTitle}
         label={formatMessage({
           id: getTrad('Title-settings.metaTitle-tooltip'),

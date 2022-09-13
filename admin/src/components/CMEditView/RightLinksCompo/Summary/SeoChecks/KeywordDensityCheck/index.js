@@ -67,7 +67,7 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
 
   return (
     <SEOAccordion
-      title="Keyword Density"
+    title={formatMessage({id: getTrad('SEOModal.summary-title.word-densisty'), defaultMessage: 'Keyword Density'})}
       status={checks.keywordsDensity}
       label={formatMessage({
         id: getTrad('SEOChecks.keywordsDensityCheck.label'),
@@ -82,7 +82,7 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
               {Object.keys(keywordsDensity).map((keyword) => (
                 <Box padding={1} key={keyword}>
                   <Badge>
-                    {`${keyword}: 
+                    {`${keyword}:
                       ${_.get(
                         keywordsDensity[keyword],
                         'count',

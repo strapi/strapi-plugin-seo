@@ -59,7 +59,7 @@ const MetaDescriptionCheck = ({ metaDescription, checks }) => {
 
   return (
     <SEOAccordion
-      title="Meta description"
+    title={formatMessage({id: getTrad('SEOModal.summary-title.meta-description'), defaultMessage: 'Meta description'})}
       status={checks.metaDescription}
       label={formatMessage({
         id: getTrad('Title-settings.metaDescription-tooltip'),

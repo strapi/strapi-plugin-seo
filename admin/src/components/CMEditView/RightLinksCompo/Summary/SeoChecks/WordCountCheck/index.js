@@ -54,7 +54,7 @@ const WordCountCheck = ({ wordCount, checks }) => {
 
   return (
     <SEOAccordion
-      title="Word Counter"
+      title={formatMessage({id: getTrad('SEOModal.summary-title.word-counter'), defaultMessage: 'Word Counter'})}
       status={checks.wordCount}
       label={formatMessage({
         id: getTrad('SEOChecks.wordCountCheck.label'),

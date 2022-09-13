@@ -33,10 +33,20 @@ const Info = ({ contentTypes }) => {
         <TabGroup label="label" id="tabs">
           <Tabs>
             <Tab>
-              <Typography variant="omega"> Collection Types</Typography>
+              <Typography variant="omega">
+                {formatMessage({
+                  id: getTrad('SEOPage.tab.collection-type-title'),
+                  defaultMessage: 'Collection Types',
+                })}
+              </Typography>
             </Tab>
             <Tab>
-              <Typography variant="omega"> Single Types</Typography>
+              <Typography variant="omega">
+                {formatMessage({
+                  id: getTrad('SEOPage.tab.single-type-title'),
+                  defaultMessage: 'Single Types',
+                })}
+              </Typography>
             </Tab>
           </Tabs>
           <TabPanels>
@@ -49,7 +59,12 @@ const Info = ({ contentTypes }) => {
                 <Thead>
                   <Tr>
                     <Th>
-                      <Typography variant="sigma">Name</Typography>
+                      <Typography variant="sigma">
+                        {formatMessage({
+                          id: getTrad('SEOPage.tab-panel.column-name'),
+                          defaultMessage: 'Name',
+                        })}
+                      </Typography>
                     </Th>
                   </Tr>
                 </Thead>
@@ -127,7 +142,12 @@ const Info = ({ contentTypes }) => {
                 <Thead>
                   <Tr>
                     <Th>
-                      <Typography variant="sigma">Name</Typography>
+                      <Typography variant="sigma">
+                        {formatMessage({
+                          id: getTrad('SEOPage.tab-panel.column-name'),
+                          defaultMessage: 'Name',
+                        })}
+                      </Typography>
                     </Th>
                   </Tr>
                 </Thead>

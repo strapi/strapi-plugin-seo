@@ -58,7 +58,7 @@ const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
 
   return (
     <SEOAccordion
-      title="Last updated at"
+    title={formatMessage({id: getTrad('SEOModal.summary-title.last-updated-at'), defaultMessage: 'Last updated at'})}
       label={formatMessage({
         id: getTrad('SEOChecks.lastUpdatedAtCheck.label'),
         defaultMessage:

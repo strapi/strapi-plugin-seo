@@ -69,7 +69,7 @@ const MetaSocialCheck = ({ metaSocial, checks }) => {
 
   return (
     <SEOAccordion
-      title="Meta Social Tags"
+      title={formatMessage({id: getTrad('SEOModal.summary-title.meta-social'), defaultMessage: 'Meta Social Tags'})}
       status={checks.metaSocial}
       label={formatMessage({
         id: getTrad('SEOChecks.metaSocialCheck.label'),

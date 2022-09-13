@@ -76,7 +76,7 @@ const AlternativeTextCheck = ({
 
   return (
     <SEOAccordion
-      title="Alt"
+      title={formatMessage({id: getTrad('SEOModal.summary-title.alt-attributes'), defaultMessage: 'Alt'})}
       status={checks.alternativeText}
       label={formatMessage({
         id: getTrad('SEOChecks.alternativeTextCheck.label'),

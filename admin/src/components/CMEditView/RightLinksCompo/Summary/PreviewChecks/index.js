@@ -26,7 +26,10 @@ const SeoChecker = ({ checks }) => {
   return (
     <Box paddingTop={4}>
       <Typography variant="omega" fontWeight="semiBold">
-        SEO Summary
+        {formatMessage({
+          id: getTrad('SEORightLinks.summary-title'),
+          defaultMessage: 'SEO Summary'
+        })}
       </Typography>
 
       <Box paddingTop={4}>
