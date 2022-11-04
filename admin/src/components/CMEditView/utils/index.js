@@ -118,9 +118,8 @@ const buildKeywordDensityObject = (keywords, words) => {
   keywords.map((keyword) => {
     if (!_.isEmpty(keyword)) {
       const trimmedKeyword = keyword.trim();
-      const count = words.filter((word) =>
-        word.includes(trimmedKeyword)
-      ).length;
+      const exp = new RegExp(trimmedKeyword, 'g');
+      const count = (words.join(' ').match(exp) || []).length;
       if (keywordsDensity[trimmedKeyword] === undefined) {
         keywordsDensity[trimmedKeyword] = { count };
       } else {
