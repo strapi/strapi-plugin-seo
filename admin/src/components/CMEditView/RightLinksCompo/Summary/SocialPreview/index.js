@@ -23,7 +23,7 @@ import { EmptyStateLayout } from '@strapi/design-system/EmptyStateLayout';
 
 import TabContent from './TabContent';
 
-import { Illo } from '../../../../SeoPage/Info/EmptyComponentLayout/illo';
+import { Illo } from '../../../../HomePage/Main/EmptyComponentLayout/illo';
 
 const SocialPreview = ({ modifiedData, setIsVisible }) => {
   const { formatMessage } = useIntl();
@@ -117,19 +117,7 @@ const SocialPreview = ({ modifiedData, setIsVisible }) => {
           </Box>
         )}
       </ModalBody>
-      <ModalFooter
-        startActions={
-          <Button
-            onClick={() => setIsVisible((prev) => !prev)}
-            variant="tertiary"
-          >
-            {formatMessage({
-              id: getTrad('Modal.cancel'),
-              defaultMessage: 'Cancel',
-            })}
-          </Button>
-        }
-      />
+      <ModalFooter />
     </ModalLayout>
   );
 };

@@ -4,6 +4,7 @@ import { Box } from '@strapi/design-system/Box';
 import { Flex } from '@strapi/design-system/Flex';
 import { Stack } from '@strapi/design-system/Stack';
 import { TabPanel } from '@strapi/design-system/Tabs';
+import { Divider } from '@strapi/design-system/Divider';
 
 import FacebookPreview from '../FacebookPreview';
 import TwitterPreview from '../TwitterPreview';
@@ -14,7 +15,7 @@ import KeywordCheck from '../../BrowserPreview/KeywordCheck';
 const TabContent = ({ item, keywords }) => {
   return (
     <TabPanel>
-      <Stack size={2}>
+      <Stack spacing={2}>
         <Box paddingTop={6} paddingBottom={6}>
           {item.image && (
             <Flex alignItems="center" justifyContent="center">
@@ -33,6 +34,9 @@ const TabContent = ({ item, keywords }) => {
               )}
             </Flex>
           )}
+          <Box paddingTop={8}>
+            <Divider />
+          </Box>
         </Box>
 
         <MetaChecks item={item.title} max={60} label="title" />

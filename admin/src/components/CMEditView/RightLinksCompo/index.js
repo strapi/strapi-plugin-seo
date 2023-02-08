@@ -14,8 +14,6 @@ const SeoChecker = () => {
   if (modifiedData.hasOwnProperty('seo')) {
     return (
       <Box
-        as="aside"
-        aria-labelledby="additional-informations"
         background="neutral0"
         borderColor="neutral150"
         hasRadius

@@ -20,7 +20,7 @@ import SerpMobile from './SerpMobile';
 import MetaChecks from './MetaChecks';
 import KeywordCheck from './KeywordCheck';
 
-import { Illo } from '../../../../SeoPage/Info/EmptyComponentLayout/illo';
+import { Illo } from '../../../../HomePage/Main/EmptyComponentLayout/illo';
 
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../../../utils';
@@ -63,7 +63,7 @@ const BrowserPreview = ({ modifiedData, setIsVisible }) => {
         </Box>
 
         {seo ? (
-          <Stack size={2} padding={4}>
+          <Stack spacing={2} padding={4}>
             <Box paddingBottom={6}>
               <Box paddingBottom={4}>
                 <Switch
@@ -84,6 +84,10 @@ const BrowserPreview = ({ modifiedData, setIsVisible }) => {
               ) : (
                 <Serp metaTitle={metaTitle} metaDescription={metaDescription} />
               )}
+            </Box>
+
+            <Box paddingBottom={6}>
+              <Divider />
             </Box>
 
             {metaTitle && (
@@ -129,19 +133,7 @@ const BrowserPreview = ({ modifiedData, setIsVisible }) => {
           </Box>
         )}
       </ModalBody>
-      <ModalFooter
-        startActions={
-          <Button
-            onClick={() => setIsVisible((prev) => !prev)}
-            variant="tertiary"
-          >
-            {formatMessage({
-              id: getTrad('Modal.cancel'),
-              defaultMessage: 'Cancel',
-            })}
-          </Button>
-        }
-      />
+      <ModalFooter />
     </ModalLayout>
   );
 };

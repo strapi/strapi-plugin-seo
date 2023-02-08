@@ -1,7 +1,6 @@
 'use strict';
 
 const _ = require('lodash');
-const fetch = require('node-fetch');
 
 const seoContent = require('../components/seo.json');
 const metaSocialContent = require('../components/meta-social.json');

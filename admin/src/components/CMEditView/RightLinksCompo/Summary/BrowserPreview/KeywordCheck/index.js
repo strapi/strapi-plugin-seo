@@ -3,6 +3,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import { Icon } from '@strapi/design-system/Icon';
+import { Divider } from '@strapi/design-system';
 import { Stack } from '@strapi/design-system/Stack';
 import { Typography } from '@strapi/design-system/Typography';
 
@@ -13,7 +14,7 @@ const KeywordCheck = ({ item, keywords, label }) => {
   const matches = _keywords.filter((x) => item.toLowerCase().includes(x.toLowerCase().trim()));
 
   return (
-    <Stack size={1} horizontal background="neutral0">
+    <Stack spacing={1} horizontal>
       <Icon
         aria-hidden={true}
         colors={(theme) => ({

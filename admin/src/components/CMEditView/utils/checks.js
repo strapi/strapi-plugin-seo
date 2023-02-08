@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+const settingsAPI = require('../../../api/settings').default;
+
 import { getRichTextCheck } from '../utils';
 
 const getMetaTitleCheckPreview = (modifiedData) => {
@@ -240,7 +242,9 @@ const structuredDataPreview = (modifiedData) => {
   return status;
 };
 
-const getAllChecks = (modifiedData, components, contentType) => {
+const getAllChecks = async (layout, modifiedData, components, contentType) => {
+  const defaultSettings = await settingsAPI.get();
+
   const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
     modifiedData,
     components,
@@ -248,17 +252,38 @@ const getAllChecks = (modifiedData, components, contentType) => {
   );
 
   let result = {
-    wordCount: getWordCountPreview(wordCount),
-    metaRobots: metaRobotPreview(modifiedData),
-    metaSocial: metaSocialPreview(modifiedData),
-    canonicalUrl: canonicalUrlPreview(modifiedData),
-    metaTitle: getMetaTitleCheckPreview(modifiedData),
-    lastUpdatedAt: lastUpdatedAtPreview(modifiedData),
-    structuredData: structuredDataPreview(modifiedData),
-    metaDescription: getMetaDescriptionPreview(modifiedData),
-    alternativeText: getAlternativeTextPreview(emptyAltCount),
-    keywordsDensity: getKeywordDensityPreview(keywordsDensity),
+    ...(defaultSettings[layout?.uid].seoChecks.metaTitle && {
+      metaTitle: getMetaTitleCheckPreview(modifiedData),
+    }),
+    ...(defaultSettings[layout?.uid].seoChecks.wordCount && {
+      wordCount: getWordCountPreview(wordCount),
+    }),
+    ...(defaultSettings[layout?.uid].seoChecks.metaRobots && {
+      metaRobots: metaRobotPreview(modifiedData),
+    }),
+    ...(defaultSettings[layout?.uid].seoChecks.metaSocial && {
+      metaSocial: metaSocialPreview(modifiedData),
+    }),
+    ...(defaultSettings[layout?.uid].seoChecks.canonicalUrl && {
+      canonicalUrl: canonicalUrlPreview(modifiedData),
+    }),
+    ...(defaultSettings[layout?.uid].seoChecks.lastUpdatedAt && {
+      lastUpdatedAt: lastUpdatedAtPreview(modifiedData),
+    }),
+    ...(defaultSettings[layout?.uid].seoChecks.structuredData && {
+      structuredData: structuredDataPreview(modifiedData),
+    }),
+    ...(defaultSettings[layout?.uid].seoChecks.metaDescription && {
+      metaDescription: getMetaDescriptionPreview(modifiedData),
+    }),
+    ...(defaultSettings[layout?.uid].seoChecks.alternativeText && {
+      alternativeText: getAlternativeTextPreview(emptyAltCount),
+    }),
+    ...(defaultSettings[layout?.uid].seoChecks.keywordDensity && {
+      keywordsDensity: getKeywordDensityPreview(keywordsDensity),
+    }),
   };
+
   return result;
 };
 

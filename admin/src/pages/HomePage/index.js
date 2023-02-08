@@ -19,8 +19,8 @@ import { getTrad } from '../../utils';
 
 import { fetchSeoComponent, fetchContentTypes } from '../../utils/api';
 
-import Info from '../../components/SeoPage/Info';
-import Header from '../../components/SeoPage/Header';
+import Info from '../../components/HomePage/Main';
+import Header from '../../components/HomePage/Header';
 
 import { createSeoComponent } from '../../utils/api';
 
@@ -66,14 +66,14 @@ const HomePage = () => {
     <>
       <Header seoComponent={seoComponent.current} />
 
-      <Box paddingLeft={8} paddingRigth={8}>
+      <Box paddingLeft={8} paddingRight={8}>
         <ContentBox
           title={formatMessage({
             id: 'Information',
             defaultMessage: 'Information',
           })}
           subtitle={formatMessage({
-            id: getTrad('SEOPage.info.information'),
+            id: getTrad('HomePage.info.information'),
             defaultMessage:
               "When adding your SEO component, make sure to name it 'seo' and to include it in the root of your Content-Type.",
           })}
