@@ -1,102 +1,35 @@
 import _ from 'lodash';
 
+import getRichTextFields from './getRichTextFields';
+import getRegularImageAltTexts from './getRegularImageAltTexts';
+
 const showdown = require('showdown');
 const converter = new showdown.Converter();
+
 let keywordsDensity = {};
-
-// Function that get every 1st level richtext fields
-const getRichTextFields = (contentType, components, modifiedData) => {
-  let richTextFields = [];
-
-  // Get every Dynamic Zones from the actual content-type
-  let dynamicZones = [];
-  Object.values(modifiedData).map((field, index) => {
-    if (_.isArray(field)) {
-      const isComponent = field.find((subFields) =>
-        Object.keys(subFields).includes('__component')
-      );
-
-      if (isComponent) dynamicZones.push(Object.keys(modifiedData)[index]);
-    }
-  });
-
-  // Get every 1st level richtext fields
-  Object.keys(contentType.attributes).map((field) => {
-    if (contentType.attributes[field].type === 'richtext') {
-      richTextFields.push({ name: field, field: null });
-    }
-  });
-
-  // Get every 1st level richtext fields in the CT component
-  Object.keys(components).map((name) => {
-    Object.keys(components[name].attributes).map((field) => {
-      if (components[name].attributes[field].type === 'richtext') {
-        richTextFields.push({ name, field });
-      }
-    });
-  });
-
-  // Replace every component names by the parent DZ name if exists
-  // Necessary when having DZ => Component => richtext
-  richTextFields.map((item, index) => {
-    const exploded = item.name.split('.');
-    const last = _.last(exploded);
-    const tmp = _.get(modifiedData, last, null);
-    if (!tmp) {
-      Object.keys(components).map((name) => {
-        if (components[name].isComponent) {
-          Object.keys(components[name].attributes).map((field) => {
-            if (
-              components[name].attributes[field].component &&
-              components[name].attributes[field].component === item.name
-            ) {
-              const associatedDZ = dynamicZones.find(
-                (dz) => dz === name.split('.')[0]
-              );
-              const newObject = { name, field: item.field, inDz: associatedDZ };
-              richTextFields[index] = newObject;
-            }
-          });
-        }
-      });
-    }
-  });
-
-  // Remove components that are not in the CT
-  dynamicZones.map((dz) => {
-    const item = _.get(modifiedData, dz, []);
-    richTextFields.map((field, index) => {
-      const compoIsInModifiedData = item.find(
-        (x) => x.__component === field.name
-      );
-
-      // If component is in the DZ but doesn't have an associated DZ, we add it to the object
-      if (!_.isEmpty(compoIsInModifiedData) && !field.inDz) {
-        richTextFields[index] = { ...field, inDz: dz };
-      }
-
-      // If the component is not included in the DZ, we remove the object
-      if (_.isEmpty(compoIsInModifiedData) && field.inDz) {
-        _.pull(richTextFields, field);
-      }
-    });
-  });
-  return richTextFields;
-};
 
 const getEmptyAltCount = (richtext, field) => {
   if (richtext) {
-    const occurences = richtext
-      .split('\n')
-      .filter((x) => x.includes('![](')).length;
+    let htmlOccurences = 0;
+    const splittedRichtext = richtext.split('\n');
+    const occurences = splittedRichtext.filter((x) =>
+      x.includes('![](')
+    ).length;
 
-    return { field, occurences };
+    const images = richtext.match(/<img[^>]*\/?>/g);
+    if (images) {
+      htmlOccurences += images.filter(
+        (image) => !image.includes('alt=')
+      ).length;
+    }
+    return { field, occurences: occurences + htmlOccurences };
   }
   return { field, occurences: 0 };
 };
 
 const increaseCounter = (base, field) => {
   const richtext = _.get(base, field, '');
+  // Get empty HTML and Markdown empty alternativeText
   const emptyAlts = getEmptyAltCount(richtext, field);
   if (richtext) {
     const html = converter.makeHtml(richtext);
@@ -129,52 +62,6 @@ const buildKeywordDensityObject = (keywords, words) => {
   });
 };
 
-const recursiveSearch = (
-  obj,
-  searchKey,
-  blackList,
-  results = [],
-  imageNames = []
-) => {
-  const altTexts = results;
-  const names = imageNames;
-  Object.keys(obj).forEach((key) => {
-    const value = obj[key];
-    if (key === searchKey && typeof value !== 'object') {
-      altTexts.push(value);
-      names.push(obj['name']);
-    } else if (
-      typeof value === 'object' &&
-      !blackList.includes(key) &&
-      !_.isNull(value)
-    ) {
-      recursiveSearch(value, searchKey, blackList, altTexts, names);
-    }
-  });
-  return { altTexts, names };
-};
-
-const getAltCheck = (contentType, modifiedData) => {
-  let relations = ['localizations'];
-
-  // Get every 1st level richtext fields
-  Object.keys(contentType.attributes).map((field) => {
-    if (contentType.attributes[field].type === 'relation') {
-      relations.push(field);
-    }
-  });
-
-  const { altTexts, names } = recursiveSearch(
-    modifiedData,
-    'alternativeText',
-    relations
-  );
-  const altCount = altTexts.length;
-  const intersection =
-    altTexts.filter((x) => names.includes(x)).length - altCount;
-  return { intersection, altTexts };
-};
-
 const getRichTextCheck = (modifiedData, components, contentType) => {
   const richTextFields = getRichTextFields(
     contentType,
@@ -182,10 +69,17 @@ const getRichTextCheck = (modifiedData, components, contentType) => {
     modifiedData
   );
 
-  const { intersections, altTexts } = getAltCheck(contentType, modifiedData);
+  const { intersections, altTexts } = getRegularImageAltTexts(
+    contentType,
+    modifiedData
+  );
+
   let emptyAltCount = { intersections, richTextAlts: [], altTexts };
+
   let wordCount = 0;
   let keywords = [];
+
+  // Keywords
   const tmp = _.get(modifiedData, 'seo.keywords', null);
   if (tmp) keywords = tmp.toLowerCase().split(',');
   keywordsDensity = {};
@@ -268,7 +162,11 @@ const getRichTextCheck = (modifiedData, components, contentType) => {
     }
   });
 
-  return { wordCount, keywordsDensity, emptyAltCount };
+  return {
+    wordCount,
+    keywordsDensity,
+    emptyAltCount: emptyAltCount,
+  };
 };
 
 export { getRichTextCheck };

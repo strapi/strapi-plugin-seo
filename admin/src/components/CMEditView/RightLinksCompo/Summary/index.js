@@ -8,7 +8,7 @@ import { Divider } from '@strapi/design-system/Divider';
 import { Typography } from '@strapi/design-system/Typography';
 import { TextButton } from '@strapi/design-system/TextButton';
 
-import SeoChecks from './SeoChecks';
+import SeoChecks from '../SeoChecks';
 import SocialPreview from './SocialPreview';
 import PreviewChecks from './PreviewChecks';
 import BrowserPreview from './BrowserPreview';
@@ -22,8 +22,6 @@ import { useIntl } from 'react-intl';
 import { getTrad } from '../../../../utils';
 
 import reducer from './reducer';
-
-import _ from 'lodash';
 
 const initialState = {
   preview: true,
@@ -40,14 +38,19 @@ const Summary = () => {
   const [isSeoChecksVisible, setIsSeoChecksVisible] = useState(false);
   const [localChecks, setLocalChecks] = useState({});
   const [checks, dispatch] = useReducer(reducer, initialState);
-  const { allLayoutData, modifiedData } = useCMEditViewDataManager();
+  const { allLayoutData, layout, modifiedData } = useCMEditViewDataManager();
 
   const { contentType, components } = allLayoutData;
 
-  useEffect(() => {
-    if (!_.isEqual(localChecks, checks)) {
-      if (_.has(checks, 'preview')) {
-        const status = getAllChecks(modifiedData, components, contentType);
+  useEffect(async () => {
+    if (!(JSON.stringify(localChecks) === JSON.stringify(checks))) {
+      if (checks?.preview) {
+        const status = await getAllChecks(
+          layout,
+          modifiedData,
+          components,
+          contentType
+        );
         dispatch({
           type: 'UPDATE_FOR_PREVIEW',
           value: status,

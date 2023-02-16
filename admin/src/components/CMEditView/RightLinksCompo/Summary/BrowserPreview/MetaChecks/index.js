@@ -10,7 +10,7 @@ import Dot from '@strapi/icons/Dot';
 
 const MetaChecks = ({ item, max, label, minLimit = false }) => {
   return (
-    <Stack size={1} horizontal background="neutral0">
+    <Stack spacing={1} horizontal>
       <Icon
         aria-hidden={true}
         colors={(theme) => ({
