@@ -9,7 +9,6 @@ import {
 
 import { Box } from '@strapi/design-system/Box';
 import { Button } from '@strapi/design-system/Button';
-import { Divider } from '@strapi/design-system/Divider';
 import { Typography } from '@strapi/design-system/Typography';
 import { EmptyStateLayout } from '@strapi/design-system/EmptyStateLayout';
 
@@ -71,9 +70,7 @@ const SeoChecks = ({
               defaultMessage: 'SEO Analyze',
             })}
           </Typography>
-          <Box paddingTop={4}>
-            <Divider />
-          </Box>
+         
         </Box>
 
         {seo ? (
