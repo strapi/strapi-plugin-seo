@@ -7,7 +7,6 @@ module.exports = {
       path: '/component',
       handler: 'seo.findSeoComponent',
       config: {
-        auth: false, // To Remove
         policies: [],
       },
     },
@@ -16,7 +15,6 @@ module.exports = {
       path: '/component',
       handler: 'seo.createSeoComponent',
       config: {
-        auth: false, // To Remove
         policies: [],
       },
     },
@@ -25,7 +23,6 @@ module.exports = {
       path: '/content-types',
       handler: 'seo.findContentTypes',
       config: {
-        auth: false, // To Remove
         policies: [],
       },
     },

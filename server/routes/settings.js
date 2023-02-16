@@ -6,7 +6,7 @@ module.exports = {
       method: 'GET',
       path: '/settings',
       handler: 'settings.getSettings',
-      config: { auth: false, policies: [] },
+      config: { policies: [] },
     },
     {
       method: 'POST',
