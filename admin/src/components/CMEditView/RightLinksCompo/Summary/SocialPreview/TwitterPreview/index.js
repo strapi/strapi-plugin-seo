@@ -1,6 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../../../../utils';
+import { prefixFileUrlWithBackendUrl } from '@strapi/helper-plugin';
 
 import './preview.css';
 
@@ -12,7 +13,7 @@ const TwitterPreview = ({ title, description, image }) => {
         <div className="twitter-snippet-box snip-div">
           <div className="snippet-twitter-img-custom snip-div">
             <img
-              src={image.url}
+              src={prefixFileUrlWithBackendUrl(image.url)}
               width="600"
               height="314"
               alt=""
