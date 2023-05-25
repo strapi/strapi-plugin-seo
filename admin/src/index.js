@@ -4,6 +4,8 @@ import pluginId from './pluginId';
 import Initializer from './components/Initializer';
 import PluginIcon from './components/PluginIcon';
 
+import pluginPermissions from './permissions';
+
 import SeoChecker from './components/CMEditView/RightLinksCompo';
 
 const name = pluginPkg.strapi.name;
@@ -13,6 +15,7 @@ export default {
     app.addMenuLink({
       to: `/plugins/${pluginId}`,
       icon: PluginIcon,
+      permissions: pluginPermissions.main,
       intlLabel: {
         id: `${pluginId}.plugin.name`,
         defaultMessage: 'SEO',

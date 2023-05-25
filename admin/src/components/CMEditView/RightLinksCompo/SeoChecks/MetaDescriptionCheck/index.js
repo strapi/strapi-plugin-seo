@@ -75,7 +75,7 @@ const MetaDescriptionCheck = ({ metaDescription, checks }) => {
       })}
       component={
         metaDescription && (
-          <Box padding={4}>
+          <Box padding={4} background="neutral100" marginTop={4}>
             <Typography variant="omega" fontWeight="semiBold">
               {metaDescription}
             </Typography>
