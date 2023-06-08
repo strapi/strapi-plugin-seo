@@ -42,27 +42,32 @@ const Summary = () => {
 
   const { contentType, components } = allLayoutData;
 
-  useEffect(async () => {
-    if (!(JSON.stringify(localChecks) === JSON.stringify(checks))) {
-      if (checks?.preview) {
-        const status = await getAllChecks(
-          layout,
-          modifiedData,
-          components,
-          contentType
-        );
-        dispatch({
-          type: 'UPDATE_FOR_PREVIEW',
-          value: status,
-        });
-      } else
-        dispatch({
-          type: 'UPDATE_FOR_PREVIEW',
-          value: checks,
-        });
-      setLocalChecks(checks);
-    }
-    setIsLoading(false);
+  useEffect(() => {
+    const fetchChecks = async () => {
+      if (!(JSON.stringify(localChecks) === JSON.stringify(checks))) {
+        if (checks?.preview) {
+          const status = await getAllChecks(
+            layout,
+            modifiedData,
+            components,
+            contentType
+          );
+          dispatch({
+            type: 'UPDATE_FOR_PREVIEW',
+            value: status,
+          });
+        } else
+          dispatch({
+            type: 'UPDATE_FOR_PREVIEW',
+            value: checks,
+          });
+        setLocalChecks(checks);
+      }
+    };
+
+    fetchChecks().then(() => {
+      setIsLoading(false);
+    });
   }, [checks]);
 
   return (

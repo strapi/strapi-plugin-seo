@@ -39,22 +39,27 @@ const HomePage = () => {
   const contentTypes = useRef({});
 
   // Fetching the SEO component & Content-Types
-  useEffect(async () => {
-    seoComponent.current = await fetchSeoComponent();
-    contentTypes.current = await fetchContentTypes();
+  useEffect(() => {
+    const fetchData = async () => {
+      seoComponent.current = await fetchSeoComponent();
+      contentTypes.current = await fetchContentTypes();
 
-    if (!seoComponent.current) {
-      try {
-        lockAppWithAutoreload();
-        await createSeoComponent();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        unlockAppWithAutoreload();
-        setShouldEffect(true);
+      if (!seoComponent.current) {
+        try {
+          lockAppWithAutoreload();
+          await createSeoComponent();
+        } catch (error) {
+          console.log(error);
+        } finally {
+          unlockAppWithAutoreload();
+          setShouldEffect(true);
+        }
       }
     }
-    setIsLoading(false);
+
+    fetchData().then(() => {
+      setIsLoading(false);
+    });
   }, [shouldEffect]);
 
   // Displaying the LoadingIndicatorPage while it fetches the data
