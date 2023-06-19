@@ -76,7 +76,7 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
         keywordsDensity &&
         !_.isEmpty(keywordsDensity) && (
           <Box padding={2}>
-            <Flex>
+            <Flex wrap="wrap">
               {Object.keys(keywordsDensity).map((keyword) => (
                 <Box padding={2} key={keyword}>
                   <Badge>
