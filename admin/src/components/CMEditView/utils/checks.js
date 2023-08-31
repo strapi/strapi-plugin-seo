@@ -252,34 +252,34 @@ const getAllChecks = async (layout, modifiedData, components, contentType) => {
   );
 
   let result = {
-    ...(defaultSettings[layout?.uid].seoChecks.metaTitle && {
+    ...(defaultSettings[layout?.uid]?.seoChecks?.metaTitle && {
       metaTitle: getMetaTitleCheckPreview(modifiedData),
     }),
-    ...(defaultSettings[layout?.uid].seoChecks.wordCount && {
+    ...(defaultSettings[layout?.uid]?.seoChecks?.wordCount && {
       wordCount: getWordCountPreview(wordCount),
     }),
-    ...(defaultSettings[layout?.uid].seoChecks.metaRobots && {
+    ...(defaultSettings[layout?.uid]?.seoChecks?.metaRobots && {
       metaRobots: metaRobotPreview(modifiedData),
     }),
-    ...(defaultSettings[layout?.uid].seoChecks.metaSocial && {
+    ...(defaultSettings[layout?.uid]?.seoChecks?.metaSocial && {
       metaSocial: metaSocialPreview(modifiedData),
     }),
-    ...(defaultSettings[layout?.uid].seoChecks.canonicalUrl && {
+    ...(defaultSettings[layout?.uid]?.seoChecks?.canonicalUrl && {
       canonicalUrl: canonicalUrlPreview(modifiedData),
     }),
-    ...(defaultSettings[layout?.uid].seoChecks.lastUpdatedAt && {
+    ...(defaultSettings[layout?.uid]?.seoChecks?.lastUpdatedAt && {
       lastUpdatedAt: lastUpdatedAtPreview(modifiedData),
     }),
-    ...(defaultSettings[layout?.uid].seoChecks.structuredData && {
+    ...(defaultSettings[layout?.uid]?.seoChecks?.structuredData && {
       structuredData: structuredDataPreview(modifiedData),
     }),
-    ...(defaultSettings[layout?.uid].seoChecks.metaDescription && {
+    ...(defaultSettings[layout?.uid]?.seoChecks?.metaDescription && {
       metaDescription: getMetaDescriptionPreview(modifiedData),
     }),
-    ...(defaultSettings[layout?.uid].seoChecks.alternativeText && {
+    ...(defaultSettings[layout?.uid]?.seoChecks?.alternativeText && {
       alternativeText: getAlternativeTextPreview(emptyAltCount),
     }),
-    ...(defaultSettings[layout?.uid].seoChecks.keywordDensity && {
+    ...(defaultSettings[layout?.uid]?.seoChecks?.keywordDensity && {
       keywordsDensity: getKeywordDensityPreview(keywordsDensity),
     }),
   };

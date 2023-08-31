@@ -15,8 +15,14 @@ import { IconButton } from '@strapi/design-system/IconButton';
 import Dot from '@strapi/icons/Dot';
 import Information from '@strapi/icons/Information';
 
+import styled from 'styled-components';
+
 const SEOAccordion = ({ title, status, component, label }) => {
   const [expanded, setExpanded] = useState(false);
+
+  const CustomAccordionToggle = styled(AccordionToggle)`
+    z-index: auto;
+  `;
 
   return (
     <AccordionGroup>
@@ -26,7 +32,7 @@ const SEOAccordion = ({ title, status, component, label }) => {
         id="acc-1"
         size="S"
       >
-        <AccordionToggle
+        <CustomAccordionToggle
           title={title}
           togglePosition="left"
           startIcon={

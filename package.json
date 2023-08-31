@@ -16,7 +16,8 @@
     "date-fns": "^2.29.3",
     "eslint-plugin-react-hooks": "^4.3.0",
     "lodash": "^4.17.21",
-    "showdown": "^1.9.1"
+    "showdown": "^1.9.1",
+    "styled-components": "^6.0.7"
   },
   "resolutions": {
     "yargs": "^17.2.1"

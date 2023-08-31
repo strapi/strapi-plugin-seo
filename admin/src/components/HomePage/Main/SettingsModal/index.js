@@ -20,11 +20,13 @@ import { getTrad } from '../../../../utils';
 import Equalizer from '@strapi/icons/Equalizer';
 import InformationSquare from '@strapi/icons/InformationSquare';
 
-import { ContentBox } from '@strapi/helper-plugin';
+import { ContentBox, useNotification } from '@strapi/helper-plugin';
 
 const settingsAPI = require('../../../../api/settings').default;
 
 const SettingsModal = ({ item }) => {
+  const toggleNotification = useNotification();
+
   const [metaTitle, setMetaTitle] = useState(true);
   const [metaDescription, setMetaDescription] = useState(true);
   const [metaRobots, setMetaRobots] = useState(true);
@@ -90,6 +92,17 @@ const SettingsModal = ({ item }) => {
       setDefaultSettings(newSettings);
       setIsVisible((prev) => !prev);
     });
+
+    // NEED LOCALE
+    toggleNotification({
+      type: 'success',
+      message: {
+        id: 'notification.success.settings',
+        defaultMessage: `Settings saved for ${
+          defaultSettings[item?.uid]?.collectionName
+        } content-type.`,
+      },
+    });
   };
 
   return (
@@ -139,7 +152,12 @@ const SettingsModal = ({ item }) => {
               />
             </Box>
             <GridLayout>
-              <Box padding={4} hasRadius background="neutral0">
+              <Box
+                padding={4}
+                hasRadius
+                background="neutral0"
+                shadow="tableShadow"
+              >
                 <Stack horizontal spacing={4} padding={3}>
                   <Switch
                     label="Switch"
