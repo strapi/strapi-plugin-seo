@@ -12,24 +12,24 @@ import TwitterPreview from '../TwitterPreview';
 import MetaChecks from '../../BrowserPreview/MetaChecks';
 import KeywordCheck from '../../BrowserPreview/KeywordCheck';
 
-const TabContent = ({ item, keywords }) => {
+const TabContent = ({ item, keywords, defaultMetaImage }) => {
   return (
     <TabPanel>
       <Stack spacing={2}>
         <Box paddingTop={6} paddingBottom={6}>
-          {item.image && (
+          {item && (
             <Flex alignItems="center" justifyContent="center">
               {item.socialNetwork === 'Facebook' ? (
                 <FacebookPreview
                   title={item.title}
                   description={item.description}
-                  image={item.image}
+                  image={item.image || defaultMetaImage}
                 />
               ) : (
                 <TwitterPreview
                   title={item.title}
                   description={item.description}
-                  image={item.image}
+                  image={item.image || defaultMetaImage}
                 />
               )}
             </Flex>

@@ -78,14 +78,14 @@ const SocialPreview = ({ modifiedData, setIsVisible }) => {
                     if (
                       item.socialNetwork &&
                       item.title &&
-                      item.description &&
-                      item.image
+                      item.description
                     )
                       return (
                         <TabContent
                           key={index}
                           item={item}
                           keywords={keywords}
+                          defaultMetaImage={seo?.metaImage}
                         />
                       );
                     else {

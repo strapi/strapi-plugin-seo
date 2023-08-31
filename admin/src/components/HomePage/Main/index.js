@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Box } from '@strapi/design-system/Box';
 import { Flex } from '@strapi/design-system/Flex';
-import { Button } from '@strapi/design-system/Button';
-import { LinkButton } from '@strapi/design-system/LinkButton';
+import { LinkButton } from '@strapi/design-system/v2';
 import { Typography } from '@strapi/design-system/Typography';
 import { EmptyStateLayout } from '@strapi/design-system/EmptyStateLayout';
 import { Table, Thead, Tbody, Tr, Td, Th } from '@strapi/design-system/Table';
-
 
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../utils';
 
 import Plus from '@strapi/icons/Plus';
-import Check from '@strapi/icons/Check';
 
 import { Illo } from './EmptyComponentLayout/illo';
 
-import SettingsModal from './SettingsModal'
+import SettingsModal from './SettingsModal';
 
 import {
   Tabs,
@@ -30,7 +27,6 @@ import {
 import _ from 'lodash';
 
 const Main = ({ contentTypes }) => {
-
   const { formatMessage } = useIntl();
   return (
     <>
@@ -50,6 +46,14 @@ const Main = ({ contentTypes }) => {
                 {formatMessage({
                   id: getTrad('SEOPage.tab.single-type-title'),
                   defaultMessage: 'Single Types',
+                })}
+              </Typography>
+            </Tab>
+            <Tab>
+              <Typography variant="omega">
+                {formatMessage({
+                  id: getTrad('SEOPage.tab.plugin-title'),
+                  defaultMessage: 'Plugins',
                 })}
               </Typography>
             </Tab>
@@ -92,7 +96,7 @@ const Main = ({ contentTypes }) => {
                               <LinkButton
                                 startIcon={<Plus />}
                                 variant="secondary"
-                                to={`/plugins/content-type-builder/content-types/${item.uid}`}
+                                href={`/plugins/content-type-builder/content-types/${item.uid}`}
                               >
                                 {formatMessage({
                                   id: getTrad('SEOPage.info.add'),
@@ -170,7 +174,7 @@ const Main = ({ contentTypes }) => {
                               <LinkButton
                                 startIcon={<Plus />}
                                 variant="secondary"
-                                to={`/plugins/content-type-builder/content-types/${item.uid}`}
+                                href={`/plugins/content-type-builder/content-types/${item.uid}`}
                               >
                                 {formatMessage({
                                   id: getTrad('SEOPage.info.add'),
@@ -203,6 +207,70 @@ const Main = ({ contentTypes }) => {
                             })}
                           </LinkButton>
                         }
+                      />
+                    </Box>
+                  )}
+                </Tbody>
+              </Table>
+
+              {/* END TABLE */}
+            </TabPanel>
+            <TabPanel>
+              {/* TABLE */}
+              <Table colCount={2} rowCount={contentTypes.plugins.length}>
+                <Thead>
+                  <Tr>
+                    <Th>
+                      <Typography variant="sigma">
+                        {formatMessage({
+                          id: getTrad('SEOPage.tab-panel.column-name'),
+                          defaultMessage: 'Name',
+                        })}
+                      </Typography>
+                    </Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {contentTypes &&
+                  contentTypes.plugins &&
+                  !_.isEmpty(contentTypes.plugins) ? (
+                    contentTypes.plugins.map((item) => (
+                      <Tr key={item.uid}>
+                        <Td>
+                          <Typography textColor="neutral800">
+                            {item.globalId}
+                          </Typography>
+                        </Td>
+                        <Td>
+                          <Flex justifyContent="right" alignItems="right">
+                            {item.seo ? (
+                              <SettingsModal item={item} />
+                            ) : (
+                              <LinkButton
+                                startIcon={<Plus />}
+                                variant="secondary"
+                                href={`/plugins/content-type-builder/content-types/${item.uid}`}
+                              >
+                                {formatMessage({
+                                  id: getTrad('SEOPage.info.add'),
+                                  defaultMessage: 'Add component',
+                                })}
+                              </LinkButton>
+                            )}
+                          </Flex>
+                        </Td>
+                      </Tr>
+                    ))
+                  ) : (
+                    <Box padding={8} background="neutral0">
+                     {/* NEED LOCALE */}
+                      <EmptyStateLayout
+                        icon={<Illo />}
+                        content={formatMessage({
+                          id: getTrad('SEOPage.info.no-plugin-content-type'),
+                          defaultMessage:
+                            "You don't have any plugin content-type yet...",
+                        })}
                       />
                     </Box>
                   )}

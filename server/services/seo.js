@@ -15,8 +15,12 @@ module.exports = ({ strapi }) => ({
   getContentTypes() {
     const contentTypes = strapi.contentTypes;
     const keys = Object.keys(contentTypes);
+
+    const blackListedPlugins = ['upload', 'i18n', 'users-permissions'];
+
     let collectionTypes = [];
     let singleTypes = [];
+    let plugins = [];
 
     keys.forEach((name) => {
       const hasSharedSeoComponent = _.get(
@@ -25,21 +29,36 @@ module.exports = ({ strapi }) => ({
         null
       );
 
-      if (name.includes('api::')) {
+      // Includes every api:: and content-manager-visible plugin content-types
+      if (
+        name.includes('api::') ||
+        (contentTypes[name].__schema__.pluginOptions &&
+          contentTypes[name].__schema__.pluginOptions['content-manager']
+            ?.visible === true)
+      ) {
         const object = {
           seo: hasSharedSeoComponent ? true : false,
-          uid: contentTypes[name].uid,
-          kind: contentTypes[name].kind,
-          globalId: contentTypes[name].globalId,
-          attributes: contentTypes[name].attributes,
+          uid: contentTypes[name]?.uid,
+          kind: contentTypes[name]?.kind,
+          globalId: contentTypes[name]?.globalId,
+          attributes: contentTypes[name]?.attributes,
         };
-        contentTypes[name].kind === 'collectionType'
-          ? collectionTypes.push(object)
-          : singleTypes.push(object);
+
+        if (name.includes('api::')) {
+          contentTypes[name]?.kind === 'collectionType'
+            ? collectionTypes.push(object)
+            : singleTypes.push(object);
+        } else {
+          blackListedPlugins.includes(
+            name.replace('plugin::', '').split('.')[0]
+          )
+            ? null
+            : plugins.push(object);
+        }
       }
     });
 
-    return { collectionTypes, singleTypes } || null;
+    return { collectionTypes, singleTypes, plugins } || null;
   },
   async createSeoComponent() {
     const seoComponent = await this.getSeoComponent();
