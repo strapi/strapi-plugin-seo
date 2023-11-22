@@ -18,7 +18,7 @@ const Header = (seoComponent) => {
           seoComponent ? null : (
             <LinkButton
               variant="tertiary"
-              to="/plugins/content-type-builder/component-categories/shared/shared.seo"
+              to="/admin/plugins/content-type-builder/component-categories/shared/shared.seo"
               startIcon={<Pencil />}
             >
               {formatMessage({
