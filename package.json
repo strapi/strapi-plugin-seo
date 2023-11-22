@@ -37,9 +37,5 @@
       "url": "https://strapi.io"
     }
   ],
-  "engines": {
-    "node": ">=18.x.x <=20.x.x",
-    "npm": ">=6.0.0"
-  },
   "license": "MIT"
 }
