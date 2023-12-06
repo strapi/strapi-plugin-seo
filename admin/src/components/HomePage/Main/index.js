@@ -96,7 +96,7 @@ const Main = ({ contentTypes }) => {
                               <LinkButton
                                 startIcon={<Plus />}
                                 variant="secondary"
-                                href={`/plugins/content-type-builder/content-types/${item.uid}`}
+                                href={`/admin/plugins/content-type-builder/content-types/${item.uid}`}
                               >
                                 {formatMessage({
                                   id: getTrad('SEOPage.info.add'),
