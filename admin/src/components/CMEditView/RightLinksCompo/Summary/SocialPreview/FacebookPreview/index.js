@@ -1,6 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../../../../utils';
+import { prefixFileUrlWithBackendUrl } from '@strapi/helper-plugin';
 
 import './preview.css';
 
@@ -12,7 +13,7 @@ const FacebookPreview = ({ title, description, image }) => {
         <div className="facebook-snippet-box snip-div">
           <div className="snippet-fb-img-custom snip-div">
             <img
-              src={image.url}
+              src={prefixFileUrlWithBackendUrl(image.url)}
               width="524"
               height="274"
               alt=""
