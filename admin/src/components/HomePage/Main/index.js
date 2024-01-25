@@ -96,7 +96,7 @@ const Main = ({ contentTypes }) => {
                               <LinkButton
                                 startIcon={<Plus />}
                                 variant="secondary"
-                                href={`/plugins/content-type-builder/content-types/${item.uid}`}
+                                href={`/admin/plugins/content-type-builder/content-types/${item.uid}`}
                               >
                                 {formatMessage({
                                   id: getTrad('SEOPage.info.add'),
@@ -119,7 +119,7 @@ const Main = ({ contentTypes }) => {
                         })}
                         action={
                           <LinkButton
-                            to="/plugins/content-type-builder"
+                            to="/admin/plugins/content-type-builder"
                             variant="secondary"
                             startIcon={<Plus />}
                           >
