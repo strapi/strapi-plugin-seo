@@ -33,6 +33,7 @@ import { getTrad } from '../../../../utils';
 import _ from 'lodash';
 
 const SeoChecks = ({
+  layout,
   modifiedData,
   components,
   contentType,
@@ -47,7 +48,8 @@ const SeoChecks = ({
     contentType
   );
 
-  const seo = _.get(modifiedData, 'seo', null);
+  const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === "component" && attr.component === 'shared.seo')[0];
+  const seo = _.get(modifiedData, seoPropName, null);
 
   return (
     <ModalLayout
