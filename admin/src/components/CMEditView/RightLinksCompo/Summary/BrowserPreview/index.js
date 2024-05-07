@@ -27,11 +27,12 @@ import { getTrad } from '../../../../../utils';
 
 import _ from 'lodash';
 
-const BrowserPreview = ({ modifiedData, setIsVisible }) => {
+const BrowserPreview = ({ layout, modifiedData, setIsVisible }) => {
   const { formatMessage } = useIntl();
   const [checked, setChecked] = useState(false);
 
-  const seo = _.get(modifiedData, 'seo', null);
+  const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === "component" && attr.component === 'shared.seo')[0];
+  const seo = _.get(modifiedData, seoPropName, null);
   const metaTitle = _.get(seo, 'metaTitle', null);
   const metaDescription = _.get(seo, 'metaDescription', null);
   const keywords = _.get(seo, 'keywords', null);
