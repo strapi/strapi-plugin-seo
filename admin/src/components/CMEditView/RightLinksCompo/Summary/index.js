@@ -139,6 +139,7 @@ const Summary = () => {
         )}
         {isSeoChecksVisible && (
           <SeoChecks
+            layout={layout}
             modifiedData={modifiedData}
             components={components}
             contentType={contentType}
