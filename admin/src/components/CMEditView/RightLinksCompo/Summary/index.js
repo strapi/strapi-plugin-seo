@@ -131,6 +131,7 @@ const Summary = () => {
         )}
         {isSocialPreviewVisible && (
           <SocialPreview
+            layout={layout}
             modifiedData={modifiedData}
             setIsVisible={setIsSocialPreviewVisible}
           />
