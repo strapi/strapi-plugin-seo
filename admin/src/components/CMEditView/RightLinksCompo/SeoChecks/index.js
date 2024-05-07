@@ -79,7 +79,7 @@ const SeoChecks = ({
           <Box padding={4}>
             {checks?.metaTitle && (
               <MetaTitleCheck
-                metaTitle={_.get(modifiedData, 'seo.metaTitle', null)}
+                metaTitle={_.get(seo, 'metaTitle', null)}
                 checks={checks}
               />
             )}
@@ -104,25 +104,25 @@ const SeoChecks = ({
             )}
             {checks?.metaSocial && (
               <MetaSocialCheck
-                metaSocial={_.get(modifiedData, 'seo.metaSocial', null)}
+                metaSocial={_.get(seo, 'metaSocial', null)}
                 checks={checks}
               />
             )}
             {checks?.canonicalUrl && (
               <CanonicalUrlCheck
-                canonicalUrl={_.get(modifiedData, 'seo.canonicalURL', null)}
+                canonicalUrl={_.get(seo, 'canonicalURL', null)}
                 checks={checks}
               />
             )}
             {checks?.structuredData && (
               <StructuredDataCheck
-                structuredData={_.get(modifiedData, 'seo.structuredData', null)}
+                structuredData={_.get(seo, 'structuredData', null)}
                 checks={checks}
               />
             )}
             {checks?.metaRobots && (
               <MetaRobotCheck
-                metaRobots={_.get(modifiedData, 'seo.metaRobots', null)}
+                metaRobots={_.get(seo, 'metaRobots', null)}
                 checks={checks}
               />
             )}
