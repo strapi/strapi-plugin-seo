@@ -87,8 +87,8 @@ const SeoChecks = ({
             {checks?.metaDescription && (
               <MetaDescriptionCheck
                 metaDescription={_.get(
-                  modifiedData,
-                  'seo.metaDescription',
+                  seo,
+                  'metaDescription',
                   null
                 )}
                 checks={checks}
