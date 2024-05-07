@@ -245,14 +245,15 @@ const structuredDataPreview = (seo) => {
 const getAllChecks = async (layout, modifiedData, components, contentType) => {
   const defaultSettings = await settingsAPI.get();
 
+  const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === "component" && attr.component === 'shared.seo')[0];
+  const seo = _.get(modifiedData, seoPropName, null);
+
   const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
+    seo,
     modifiedData,
     components,
     contentType
   );
-
-  const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === "component" && attr.component === 'shared.seo')[0];
-  const seo = _.get(modifiedData, seoPropName, null);
 
   let result = {
     ...(defaultSettings[layout?.uid]?.seoChecks?.metaTitle && {

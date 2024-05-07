@@ -42,14 +42,15 @@ const SeoChecks = ({
 }) => {
   const { formatMessage } = useIntl();
 
+  const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === "component" && attr.component === 'shared.seo')[0];
+  const seo = _.get(modifiedData, seoPropName, null);
+
   const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
+    seo,
     modifiedData,
     components,
     contentType
   );
-
-  const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === "component" && attr.component === 'shared.seo')[0];
-  const seo = _.get(modifiedData, seoPropName, null);
 
   return (
     <ModalLayout

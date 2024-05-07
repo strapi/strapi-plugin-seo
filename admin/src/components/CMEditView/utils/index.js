@@ -65,7 +65,7 @@ const buildKeywordDensityObject = (keywords, words) => {
   });
 };
 
-const getRichTextCheck = (modifiedData, components, contentType) => {
+const getRichTextCheck = (seo, modifiedData, components, contentType) => {
   const richTextFields = getRichTextFields(
     contentType,
     components,
