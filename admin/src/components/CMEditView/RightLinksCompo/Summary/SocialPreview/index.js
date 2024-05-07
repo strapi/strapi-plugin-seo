@@ -25,7 +25,7 @@ import TabContent from './TabContent';
 
 import { Illo } from '../../../../HomePage/Main/EmptyComponentLayout/illo';
 
-const SocialPreview = ({ modifiedData, layout, setIsVisible }) => {
+const SocialPreview = ({ layout, modifiedData, setIsVisible }) => {
   const { formatMessage } = useIntl();
 
   const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === "component" && attr.component === 'shared.seo')[0];
