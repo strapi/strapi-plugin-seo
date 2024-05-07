@@ -70,6 +70,8 @@ You'll be able from the SEO settings page to import a `shared.seo` & `shared.met
 
 **Notice**: If you decide to import your own components, make sure that they belong to a `shared` category that their names is the same (`seo`, `meta-social`).
 
+**Notice2**: When adding your SEO component, make sure to include it in the root of your Content-Type.
+
 ## EditView SEO button
 
 Once you create your SEO component in the edit view inside the Content Manager, the SEO button will appear on the the [right-links injection zone](https://docs.strapi.io/developer-docs/latest/developer-resources/plugin-api-reference/admin-panel.html#injection-zones-api). You'll be able to:
