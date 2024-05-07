@@ -125,6 +125,7 @@ const Summary = () => {
 
         {isBrowserPreviewVisible && (
           <BrowserPreview
+            layout={layout}
             modifiedData={modifiedData}
             setIsVisible={setIsBrowserPreviewVisible}
           />
