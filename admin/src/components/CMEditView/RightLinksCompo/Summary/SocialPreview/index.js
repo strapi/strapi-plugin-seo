@@ -25,10 +25,11 @@ import TabContent from './TabContent';
 
 import { Illo } from '../../../../HomePage/Main/EmptyComponentLayout/illo';
 
-const SocialPreview = ({ modifiedData, setIsVisible }) => {
+const SocialPreview = ({ modifiedData, layout, setIsVisible }) => {
   const { formatMessage } = useIntl();
 
-  const seo = _.get(modifiedData, 'seo', null);
+  const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === "component" && attr.component === 'shared.seo')[0];
+  const seo = _.get(modifiedData, seoPropName, null);
   const metaSocial = _.get(seo, 'metaSocial', []);
   const keywords = _.get(seo, 'keywords', null);
 
