@@ -33,7 +33,7 @@ const MetaTitleCheck = ({ metaTitle, checks }) => {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.metaTitleCheck.not-found'),
-          defaultMessage: 'No Meta Description has been found.',
+          defaultMessage: 'No Meta Title has been found.',
         }),
         color: 'danger',
       };
