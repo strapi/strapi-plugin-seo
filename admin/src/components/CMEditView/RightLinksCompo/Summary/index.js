@@ -125,18 +125,21 @@ const Summary = () => {
 
         {isBrowserPreviewVisible && (
           <BrowserPreview
+            layout={layout}
             modifiedData={modifiedData}
             setIsVisible={setIsBrowserPreviewVisible}
           />
         )}
         {isSocialPreviewVisible && (
           <SocialPreview
+            layout={layout}
             modifiedData={modifiedData}
             setIsVisible={setIsSocialPreviewVisible}
           />
         )}
         {isSeoChecksVisible && (
           <SeoChecks
+            layout={layout}
             modifiedData={modifiedData}
             components={components}
             contentType={contentType}

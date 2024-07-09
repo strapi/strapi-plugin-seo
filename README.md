@@ -69,7 +69,8 @@ npm run build
 You'll be able from the SEO settings page to import a `shared.seo` & `shared.meta-social` components from any GitHub repository By default, our [components GitHub repository](https://github.com/strapi/components) is being used.
 
 **Notice**: If you decide to import your own components, make sure that they belong to a `shared` category that their names is the same (`seo`, `meta-social`).
-**Notice2**: When adding your SEO component, make sure to name it 'seo' and to include it in the root of your Content-Type.
+
+**Notice2**: When adding your SEO component, make sure to include it in the root of your Content-Type.
 
 ## EditView SEO button
 

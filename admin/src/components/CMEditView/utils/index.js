@@ -65,7 +65,7 @@ const buildKeywordDensityObject = (keywords, words) => {
   });
 };
 
-const getRichTextCheck = (modifiedData, components, contentType) => {
+const getRichTextCheck = (seo, modifiedData, components, contentType) => {
   const richTextFields = getRichTextFields(
     contentType,
     components,
@@ -83,7 +83,7 @@ const getRichTextCheck = (modifiedData, components, contentType) => {
   let keywords = [];
 
   // Keywords
-  const tmp = _.get(modifiedData, 'seo.keywords', null);
+  const tmp = _.get(seo, 'keywords', null);
   if (tmp) keywords = tmp.toLowerCase().split(',');
   keywordsDensity = {};
 

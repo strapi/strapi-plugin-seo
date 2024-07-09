@@ -33,6 +33,7 @@ import { getTrad } from '../../../../utils';
 import _ from 'lodash';
 
 const SeoChecks = ({
+  layout,
   modifiedData,
   components,
   contentType,
@@ -41,13 +42,15 @@ const SeoChecks = ({
 }) => {
   const { formatMessage } = useIntl();
 
+  const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === "component" && attr.component === 'shared.seo')[0];
+  const seo = _.get(modifiedData, seoPropName, null);
+
   const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
+    seo,
     modifiedData,
     components,
     contentType
   );
-
-  const seo = _.get(modifiedData, 'seo', null);
 
   return (
     <ModalLayout
@@ -77,15 +80,15 @@ const SeoChecks = ({
           <Box padding={4}>
             {checks?.metaTitle && (
               <MetaTitleCheck
-                metaTitle={_.get(modifiedData, 'seo.metaTitle', null)}
+                metaTitle={_.get(seo, 'metaTitle', null)}
                 checks={checks}
               />
             )}
             {checks?.metaDescription && (
               <MetaDescriptionCheck
                 metaDescription={_.get(
-                  modifiedData,
-                  'seo.metaDescription',
+                  seo,
+                  'metaDescription',
                   null
                 )}
                 checks={checks}
@@ -102,25 +105,25 @@ const SeoChecks = ({
             )}
             {checks?.metaSocial && (
               <MetaSocialCheck
-                metaSocial={_.get(modifiedData, 'seo.metaSocial', null)}
+                metaSocial={_.get(seo, 'metaSocial', null)}
                 checks={checks}
               />
             )}
             {checks?.canonicalUrl && (
               <CanonicalUrlCheck
-                canonicalUrl={_.get(modifiedData, 'seo.canonicalURL', null)}
+                canonicalUrl={_.get(seo, 'canonicalURL', null)}
                 checks={checks}
               />
             )}
             {checks?.structuredData && (
               <StructuredDataCheck
-                structuredData={_.get(modifiedData, 'seo.structuredData', null)}
+                structuredData={_.get(seo, 'structuredData', null)}
                 checks={checks}
               />
             )}
             {checks?.metaRobots && (
               <MetaRobotCheck
-                metaRobots={_.get(modifiedData, 'seo.metaRobots', null)}
+                metaRobots={_.get(seo, 'metaRobots', null)}
                 checks={checks}
               />
             )}
