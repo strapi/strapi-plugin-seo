@@ -1,7 +1,7 @@
-import seo from './seo';
-import settings from './settings';
+import { seoService } from './seo';
+import { settingsService } from './settings';
 
 export default {
-  seo,
-  settings,
+  seo: seoService,
+  settings: settingsService,
 };

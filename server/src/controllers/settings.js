@@ -1,4 +1,4 @@
-const settingsController = ({ strapi }) => {
+export const settingsController = ({ strapi }) => {
   const settingsService = strapi.plugins['seo'].services.settings;
 
   const getSettings = async (ctx) => {
@@ -22,5 +22,3 @@ const settingsController = ({ strapi }) => {
     setSettings,
   };
 };
-
-export default settingsController;

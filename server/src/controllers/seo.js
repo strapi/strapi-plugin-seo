@@ -1,4 +1,4 @@
-const seoController = {
+export const seoController = {
   findSeoComponent(ctx) {
     ctx.body = strapi.plugin('seo').service('seo').getSeoComponent();
   },
@@ -17,5 +17,3 @@ const seoController = {
     }
   },
 };
-
-export default seoController;

@@ -1,4 +1,4 @@
-const settingsService = ({ strapi }) => {
+export const settingsService = ({ strapi }) => {
   const getPluginStore = () => {
     return strapi.store({
       environment: '',
@@ -38,12 +38,14 @@ const settingsService = ({ strapi }) => {
     await pluginStore.set({ key: 'settings', value });
     return pluginStore.get({ key: 'settings' });
   };
+
   const createConfigFromData = async (settings) => {
     const value = settings;
     const pluginStore = getPluginStore();
     await pluginStore.set({ key: 'settings', value });
     return pluginStore.get({ key: 'settings' });
   };
+
   const getSettings = async () => {
     const pluginStore = getPluginStore();
 
@@ -61,5 +63,3 @@ const settingsService = ({ strapi }) => {
     setSettings,
   };
 };
-
-export default settingsService;

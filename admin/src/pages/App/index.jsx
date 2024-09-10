@@ -11,7 +11,7 @@ import { Page } from '@strapi/strapi/admin';
 
 import { HomePage } from '../HomePage';
 import pluginId from '../../pluginId';
-import pluginPermissions from '../../permissions';
+import { pluginPermissions } from '../../permissions';
 
 export const App = () => {
   return (

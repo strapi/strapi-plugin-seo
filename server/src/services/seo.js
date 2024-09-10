@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import seoContent from '../components/seo.json';
 import metaSocialContent from '../components/meta-social.json';
 
-const seoService = ({ strapi }) => ({
+export const seoService = ({ strapi }) => ({
   getSeoComponent() {
     const seoComponent = strapi.components['shared.seo'];
     return seoComponent
@@ -86,5 +86,3 @@ const seoService = ({ strapi }) => ({
     }
   },
 });
-
-export default seoService;

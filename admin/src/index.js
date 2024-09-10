@@ -3,7 +3,7 @@ import { Search } from '@strapi/icons';
 import pluginPkg from '../../package.json';
 import pluginId from './pluginId';
 import { Initializer } from './components/Initializer';
-import pluginPermissions from './permissions';
+import { pluginPermissions } from './permissions';
 
 import { prefixPluginTranslations } from './utils/prefixPluginTranslations';
 
