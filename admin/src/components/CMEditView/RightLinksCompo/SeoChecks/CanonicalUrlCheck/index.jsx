@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import _ from 'lodash';
 
 import { useIntl } from 'react-intl';
-import { getTrad } from '../../../../../utils';
+import { getTrad } from '../../../../../utils/getTrad';
 
 import { Box, Typography } from '@strapi/design-system';
 

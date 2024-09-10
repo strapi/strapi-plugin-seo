@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { getTrad } from '../../../../../../utils';
+import { getTrad } from '../../../../../../utils/getTrad';
 
 import './preview.css';
 
@@ -26,15 +26,13 @@ const FacebookPreview = ({ title, description, image }) => {
               <div className="snippet-fb-url snip-div">
                 {formatMessage({
                   id: getTrad('SEOSocialPreview.website-url'),
-                  defaultMessage: 'url-of-your-website.io'
+                  defaultMessage: 'url-of-your-website.io',
                 })}
               </div>
             </div>
             <div className="title-desc snip-div">
               <div className="snippet-fb-title-default snip-div">
-                {title && title.length > 60
-                  ? `${title.substring(0, 57)}...`
-                  : title}
+                {title && title.length > 60 ? `${title.substring(0, 57)}...` : title}
               </div>
               <div className="snippet-fb-description snip-div">
                 {description && description.length > 65

@@ -5,7 +5,7 @@ import pluginId from './pluginId';
 import { Initializer } from './components/Initializer';
 import pluginPermissions from './permissions';
 
-import { prefixPluginTranslations } from './utils';
+import { prefixPluginTranslations } from './utils/prefixPluginTranslations';
 
 import { SeoChecker } from './components/CMEditView/RightLinksCompo';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { getTrad } from '../../../../../../utils';
+import { getTrad } from '../../../../../../utils/getTrad';
 
 import './preview.css';
 
@@ -28,16 +28,14 @@ const TwitterPreview = ({ title, description, image }) => {
               </div>
 
               <div className="snippet-twitter-description snip-div">
-                {description.length > 125
-                  ? `${description.substring(0, 123)}...`
-                  : description}
+                {description.length > 125 ? `${description.substring(0, 123)}...` : description}
               </div>
             </div>
             <div className="snippet-meta snip-div">
               <div className="snippet-twitter-url snip-div">
                 {formatMessage({
                   id: getTrad('SEOSocialPreview.website-url'),
-                  defaultMessage: 'url-of-your-website'
+                  defaultMessage: 'url-of-your-website',
                 })}
               </div>
             </div>

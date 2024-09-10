@@ -1,4 +1,4 @@
-const prefixPluginTranslations = (trad, pluginId) => {
+export const prefixPluginTranslations = (trad, pluginId) => {
   if (!pluginId) {
     throw new TypeError("pluginId can't be empty");
   }
@@ -12,5 +12,3 @@ const prefixPluginTranslations = (trad, pluginId) => {
     return acc;
   }, {});
 };
-
-export { prefixPluginTranslations };

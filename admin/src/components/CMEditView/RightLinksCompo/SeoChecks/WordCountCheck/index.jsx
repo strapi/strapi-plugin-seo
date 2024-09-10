@@ -7,7 +7,7 @@ import { Box, Typography } from '@strapi/design-system';
 import SEOAccordion from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
-import { getTrad } from '../../../../../utils';
+import { getTrad } from '../../../../../utils/getTrad';
 
 const WordCountCheck = ({ wordCount, checks }) => {
   const { formatMessage } = useIntl();

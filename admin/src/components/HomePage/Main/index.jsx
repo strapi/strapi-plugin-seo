@@ -21,7 +21,7 @@ import { Plus } from '@strapi/icons';
 import { Illo } from './EmptyComponentLayout/illo';
 import { SettingsModal } from './SettingsModal';
 
-import { getTrad } from '../../../utils';
+import { getTrad } from '../../../utils/getTrad';
 
 export const Main = ({ contentTypes }) => {
   const { formatMessage } = useIntl();

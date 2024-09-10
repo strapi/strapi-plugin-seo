@@ -8,7 +8,7 @@ import { More } from '@strapi/icons';
 import SEOAccordion from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
-import { getTrad } from '../../../../../utils';
+import { getTrad } from '../../../../../utils/getTrad';
 
 const robotTags = [
   { name: 'noindex', message: 'Search engines will index this page.' },

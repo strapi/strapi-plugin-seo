@@ -19,7 +19,7 @@ import KeywordCheck from './KeywordCheck';
 
 import { Illo } from '../../../../HomePage/Main/EmptyComponentLayout/illo';
 
-import { getTrad } from '../../../../../utils';
+import { getTrad } from '../../../../../utils/getTrad';
 
 const BrowserPreview = ({ modifiedData, setIsVisible }) => {
   const { formatMessage } = useIntl();

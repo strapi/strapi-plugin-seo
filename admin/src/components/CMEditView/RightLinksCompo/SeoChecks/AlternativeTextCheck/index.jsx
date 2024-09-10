@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { Box, Flex, Typography, Status } from '@strapi/design-system';
 import { More } from '@strapi/icons';
 
-import { getTrad } from '../../../../../utils';
+import { getTrad } from '../../../../../utils/getTrad';
 
 import SEOAccordion from '../SEOAccordion';
 

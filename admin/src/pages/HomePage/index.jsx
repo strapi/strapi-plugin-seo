@@ -8,7 +8,7 @@ import { Page, ContentBox, useFetchClient } from '@strapi/strapi/admin';
 import Info from '../../components/HomePage/Main';
 import Header from '../../components/HomePage/Header';
 
-import { getTrad } from '../../utils';
+import { getTrad } from '../../utils/getTrad';
 import pluginId from '../../pluginId';
 
 export const HomePage = React.memo(() => {

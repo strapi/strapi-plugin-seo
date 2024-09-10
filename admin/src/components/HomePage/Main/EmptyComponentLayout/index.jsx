@@ -1,10 +1,9 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-
 import { Box, EmptyStateLayout } from '@strapi/design-system';
 
 import { Illo } from './illo';
-import { getTrad } from '../../../../utils';
+import { getTrad } from '../../../../utils/getTrad';
 
 export const EmptyComponentLayout = () => {
   const { formatMessage } = useIntl();

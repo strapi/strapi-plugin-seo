@@ -21,7 +21,6 @@ const recursiveSearch = (obj, keyword, relations, results = [], allImageNames = 
   return { alternativeTexts, imageNames };
 };
 
-// TODO fix types
 const getRegularImageAltTexts = (contentType, modifiedData) => {
   // Prevent to recursively search in relations starting with localizations
   let relations = ['localizations'];

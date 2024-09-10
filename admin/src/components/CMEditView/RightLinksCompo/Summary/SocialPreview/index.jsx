@@ -15,7 +15,7 @@ import {
 import { Illo } from '../../../../HomePage/Main/EmptyComponentLayout/illo';
 import TabContent from './TabContent';
 
-import { getTrad } from '../../../../../utils';
+import { getTrad } from '../../../../../utils/getTrad';
 
 const SocialPreview = ({ modifiedData, setIsVisible }) => {
   const { formatMessage } = useIntl();

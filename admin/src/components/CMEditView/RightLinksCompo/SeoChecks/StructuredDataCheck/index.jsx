@@ -8,7 +8,7 @@ import { Box } from '@strapi/design-system';
 import SEOAccordion from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
-import { getTrad } from '../../../../../utils';
+import { getTrad } from '../../../../../utils/getTrad';
 
 const StructuredDataCheck = ({ structuredData, checks }) => {
   const { formatMessage } = useIntl();

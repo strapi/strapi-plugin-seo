@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 
-import { Box, Flex, Switch, Button, Typography, GridLayout, Modal } from '@strapi/design-system';
 // TODO fix icons
 import { Alien as Equalizer, ArrowDown as InformationSquare } from '@strapi/icons';
+import { Box, Flex, Switch, Button, Typography, Grid, Modal } from '@strapi/design-system';
 import { ContentBox, useNotification } from '@strapi/strapi/admin';
 
-import { getTrad } from '../../../../utils';
+import { getTrad } from '../../../../utils/getTrad';
 import { useSettingsApi } from '../../../../hooks/useSettingsApi';
 
 export const SettingsModal = ({ item }) => {
@@ -130,8 +130,8 @@ export const SettingsModal = ({ item }) => {
                 iconBackground="primary100"
               />
             </Box>
-            <GridLayout>
-              <Box padding={4} hasRadius background="neutral0" shadow="tableShadow">
+            <Grid.Root gap={4}>
+              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
                 <Flex horizontal spacing={4} padding={3}>
                   <Switch
                     label="Switch"
@@ -145,8 +145,8 @@ export const SettingsModal = ({ item }) => {
                     })}
                   </Typography>
                 </Flex>
-              </Box>
-              <Box padding={4} hasRadius background="neutral0" shadow="tableShadow">
+              </Grid.Item>
+              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
                 <Flex horizontal spacing={4} padding={3}>
                   <Switch
                     label="Switch"
@@ -160,8 +160,8 @@ export const SettingsModal = ({ item }) => {
                     })}
                   </Typography>
                 </Flex>
-              </Box>
-              <Box padding={4} hasRadius background="neutral0" shadow="tableShadow">
+              </Grid.Item>
+              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
                 <Flex horizontal spacing={4} padding={3}>
                   <Switch
                     label="Switch"
@@ -175,8 +175,8 @@ export const SettingsModal = ({ item }) => {
                     })}
                   </Typography>
                 </Flex>
-              </Box>
-              <Box padding={4} hasRadius background="neutral0" shadow="tableShadow">
+              </Grid.Item>
+              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
                 <Flex horizontal spacing={4} padding={3}>
                   <Switch
                     label="Switch"
@@ -190,8 +190,8 @@ export const SettingsModal = ({ item }) => {
                     })}
                   </Typography>
                 </Flex>
-              </Box>
-              <Box padding={4} hasRadius background="neutral0" shadow="tableShadow">
+              </Grid.Item>
+              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
                 <Flex horizontal spacing={4} padding={3}>
                   <Switch
                     label="Switch"
@@ -205,8 +205,8 @@ export const SettingsModal = ({ item }) => {
                     })}
                   </Typography>
                 </Flex>
-              </Box>
-              <Box padding={4} hasRadius background="neutral0" shadow="tableShadow">
+              </Grid.Item>
+              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
                 <Flex horizontal spacing={4} padding={3}>
                   <Switch
                     label="Switch"
@@ -220,8 +220,8 @@ export const SettingsModal = ({ item }) => {
                     })}
                   </Typography>
                 </Flex>
-              </Box>
-              <Box padding={4} hasRadius background="neutral0" shadow="tableShadow">
+              </Grid.Item>
+              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
                 <Flex horizontal spacing={4} padding={3}>
                   <Switch
                     label="Switch"
@@ -235,8 +235,8 @@ export const SettingsModal = ({ item }) => {
                     })}
                   </Typography>
                 </Flex>
-              </Box>
-              <Box padding={4} hasRadius background="neutral0" shadow="tableShadow">
+              </Grid.Item>
+              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
                 <Flex horizontal spacing={4} padding={3}>
                   <Switch
                     label="Switch"
@@ -250,8 +250,8 @@ export const SettingsModal = ({ item }) => {
                     })}
                   </Typography>
                 </Flex>
-              </Box>
-              <Box padding={4} hasRadius background="neutral0" shadow="tableShadow">
+              </Grid.Item>
+              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
                 <Flex horizontal spacing={4} padding={3}>
                   <Switch
                     label="Switch"
@@ -265,8 +265,8 @@ export const SettingsModal = ({ item }) => {
                     })}
                   </Typography>
                 </Flex>
-              </Box>
-              <Box padding={4} hasRadius background="neutral0" shadow="tableShadow">
+              </Grid.Item>
+              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
                 <Flex horizontal spacing={4} padding={3}>
                   <Switch
                     label="Switch"
@@ -280,8 +280,8 @@ export const SettingsModal = ({ item }) => {
                     })}
                   </Typography>
                 </Flex>
-              </Box>
-            </GridLayout>
+              </Grid.Item>
+            </Grid.Root>
           </Modal.Body>
           <Modal.Footer
             startActions={

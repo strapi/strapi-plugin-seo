@@ -12,8 +12,21 @@ import SocialPreview from './SocialPreview';
 import PreviewChecks from './PreviewChecks';
 import BrowserPreview from './BrowserPreview';
 
-import { getTrad } from '../../../../utils';
+import { getTrad } from '../../../../utils/getTrad';
 import { useSettingsApi } from '../../../../hooks/useSettingsApi';
+import { getRichTextCheck } from '../../utils/index';
+import {
+  canonicalUrlPreview,
+  getAlternativeTextPreview,
+  getKeywordDensityPreview,
+  getMetaDescriptionPreview,
+  getMetaTitleCheckPreview,
+  getWordCountPreview,
+  lastUpdatedAtPreview,
+  metaRobotPreview,
+  metaSocialPreview,
+  structuredDataPreview,
+} from '../../utils/checks';
 
 const initialState = {
   preview: true,

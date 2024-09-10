@@ -18,7 +18,7 @@ import AlternativeTextCheck from './AlternativeTextCheck';
 import { getRichTextCheck } from '../../utils';
 
 import { useIntl } from 'react-intl';
-import { getTrad } from '../../../../utils';
+import { getTrad } from '../../../../utils/getTrad';
 
 import _ from 'lodash';
 

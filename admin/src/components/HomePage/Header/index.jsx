@@ -8,7 +8,7 @@ import { Box, LinkButton } from '@strapi/design-system';
 import { Pencil } from '@strapi/icons';
 import { Layouts } from '@strapi/admin/strapi-admin';
 
-import { getTrad } from '../../../utils';
+import { getTrad } from '../../../utils/getTrad';
 
 const Header = (seoComponent) => {
   const { formatMessage } = useIntl();

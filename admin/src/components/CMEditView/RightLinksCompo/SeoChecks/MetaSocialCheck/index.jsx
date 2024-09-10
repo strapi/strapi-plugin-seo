@@ -7,7 +7,7 @@ import { Box, Badge, Flex } from '@strapi/design-system';
 import SEOAccordion from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
-import { getTrad } from '../../../../../utils';
+import { getTrad } from '../../../../../utils/getTrad';
 
 const MetaSocialCheck = ({ metaSocial, checks }) => {
   const { formatMessage } = useIntl();

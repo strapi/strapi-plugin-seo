@@ -6,7 +6,7 @@ import { formatDistance } from 'date-fns';
 
 import { Box, Typography } from '@strapi/design-system';
 
-import { getTrad } from '../../../../../utils';
+import { getTrad } from '../../../../../utils/getTrad';
 
 import SEOAccordion from '../SEOAccordion';
 

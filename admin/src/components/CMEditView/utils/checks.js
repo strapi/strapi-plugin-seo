@@ -1,8 +1,6 @@
 import * as _ from 'lodash';
 
-import { getRichTextCheck } from './index';
-
-const getMetaTitleCheckPreview = (modifiedData) => {
+export const getMetaTitleCheckPreview = (modifiedData) => {
   const metaTitle = _.get(modifiedData, 'seo.metaTitle');
 
   let status = {
@@ -24,7 +22,7 @@ const getMetaTitleCheckPreview = (modifiedData) => {
   return status;
 };
 
-const getMetaDescriptionPreview = (modifiedData) => {
+export const getMetaDescriptionPreview = (modifiedData) => {
   const metaDescription = _.get(modifiedData, 'seo.metaDescription');
 
   let status = {
@@ -51,7 +49,7 @@ const getMetaDescriptionPreview = (modifiedData) => {
   return status;
 };
 
-const getAlternativeTextPreview = (emptyAltCount) => {
+export const getAlternativeTextPreview = (emptyAltCount) => {
   const intersections = _.get(emptyAltCount, 'intersections', null);
   const richTextAlts = _.get(emptyAltCount, 'richTextAlts', null);
   const altTexts = _.get(emptyAltCount, 'altTexts', null);
@@ -81,7 +79,7 @@ const getAlternativeTextPreview = (emptyAltCount) => {
   return status;
 };
 
-const getWordCountPreview = (wordCount) => {
+export const getWordCountPreview = (wordCount) => {
   let status = {
     message: '',
     color: 'success',
@@ -102,7 +100,7 @@ const getWordCountPreview = (wordCount) => {
   return status;
 };
 
-const getKeywordDensityPreview = (keywordsDensity) => {
+export const getKeywordDensityPreview = (keywordsDensity) => {
   let status = {
     message: '',
     color: 'success',
@@ -133,7 +131,7 @@ const getKeywordDensityPreview = (keywordsDensity) => {
   return status;
 };
 
-const canonicalUrlPreview = (modifiedData) => {
+export const canonicalUrlPreview = (modifiedData) => {
   const canonicalUrl = _.get(modifiedData, 'seo.canonicalURL');
   let status = {
     message: '',
@@ -148,7 +146,7 @@ const canonicalUrlPreview = (modifiedData) => {
   return status;
 };
 
-const lastUpdatedAtPreview = (modifiedData) => {
+export const lastUpdatedAtPreview = (modifiedData) => {
   const updatedAt = _.get(modifiedData, 'updatedAt');
 
   let status = {
@@ -173,7 +171,7 @@ const lastUpdatedAtPreview = (modifiedData) => {
   return status;
 };
 
-const metaRobotPreview = (modifiedData) => {
+export const metaRobotPreview = (modifiedData) => {
   const metaRobots = _.get(modifiedData, 'seo.metaRobots');
   let status = {
     message: '',
@@ -188,7 +186,7 @@ const metaRobotPreview = (modifiedData) => {
   return status;
 };
 
-const metaSocialPreview = (modifiedData) => {
+export const metaSocialPreview = (modifiedData) => {
   const metaSocial = _.get(modifiedData, 'seo.metaSocial');
 
   let status = {
@@ -223,7 +221,7 @@ const metaSocialPreview = (modifiedData) => {
   return status;
 };
 
-const structuredDataPreview = (modifiedData) => {
+export const structuredDataPreview = (modifiedData) => {
   const structuredData = _.get(modifiedData, 'seo.structuredData');
   let status = {
     message: '',
@@ -237,5 +235,3 @@ const structuredDataPreview = (modifiedData) => {
   }
   return status;
 };
-
-export { getMetaTitleCheckPreview };
