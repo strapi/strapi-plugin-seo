@@ -1,8 +1,6 @@
-import _ from 'lodash';
+import * as _ from 'lodash';
 
-const settingsAPI = require('../../../api/settings').default;
-
-import { getRichTextCheck } from '../utils';
+import { getRichTextCheck } from './index';
 
 const getMetaTitleCheckPreview = (modifiedData) => {
   const metaTitle = _.get(modifiedData, 'seo.metaTitle');
@@ -63,9 +61,7 @@ const getAlternativeTextPreview = (emptyAltCount) => {
     color: 'success',
   };
 
-  const missingRichTextAlt = richTextAlts.filter(
-    (x) => x.occurences != 0
-  ).length;
+  const missingRichTextAlt = richTextAlts.filter((x) => x.occurences != 0).length;
   if (intersections === 0) {
     status = {
       message: '',
@@ -119,6 +115,7 @@ const getKeywordDensityPreview = (keywordsDensity) => {
     };
     return status;
   }
+
   Object.keys(keywordsDensity).map((keyword) => {
     if (_.get(keywordsDensity[keyword], 'count', 0) === 0) {
       status = {
@@ -132,6 +129,7 @@ const getKeywordDensityPreview = (keywordsDensity) => {
       };
     }
   });
+
   return status;
 };
 
@@ -164,9 +162,7 @@ const lastUpdatedAtPreview = (modifiedData) => {
       color: 'warning',
     };
   } else {
-    const oneYearAgo = Date.parse(
-      new Date(new Date().setFullYear(new Date().getFullYear() - 1))
-    );
+    const oneYearAgo = Date.parse(new Date(new Date().setFullYear(new Date().getFullYear() - 1)));
     if (Date.parse(updatedAt) >= oneYearAgo) {
       status = {
         message: '',
@@ -242,49 +238,4 @@ const structuredDataPreview = (modifiedData) => {
   return status;
 };
 
-const getAllChecks = async (layout, modifiedData, components, contentType) => {
-  const defaultSettings = await settingsAPI.get();
-
-  const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
-    modifiedData,
-    components,
-    contentType
-  );
-
-  let result = {
-    ...(defaultSettings[layout?.uid]?.seoChecks?.metaTitle && {
-      metaTitle: getMetaTitleCheckPreview(modifiedData),
-    }),
-    ...(defaultSettings[layout?.uid]?.seoChecks?.wordCount && {
-      wordCount: getWordCountPreview(wordCount),
-    }),
-    ...(defaultSettings[layout?.uid]?.seoChecks?.metaRobots && {
-      metaRobots: metaRobotPreview(modifiedData),
-    }),
-    ...(defaultSettings[layout?.uid]?.seoChecks?.metaSocial && {
-      metaSocial: metaSocialPreview(modifiedData),
-    }),
-    ...(defaultSettings[layout?.uid]?.seoChecks?.canonicalUrl && {
-      canonicalUrl: canonicalUrlPreview(modifiedData),
-    }),
-    ...(defaultSettings[layout?.uid]?.seoChecks?.lastUpdatedAt && {
-      lastUpdatedAt: lastUpdatedAtPreview(modifiedData),
-    }),
-    ...(defaultSettings[layout?.uid]?.seoChecks?.structuredData && {
-      structuredData: structuredDataPreview(modifiedData),
-    }),
-    ...(defaultSettings[layout?.uid]?.seoChecks?.metaDescription && {
-      metaDescription: getMetaDescriptionPreview(modifiedData),
-    }),
-    ...(defaultSettings[layout?.uid]?.seoChecks?.alternativeText && {
-      alternativeText: getAlternativeTextPreview(emptyAltCount),
-    }),
-    ...(defaultSettings[layout?.uid]?.seoChecks?.keywordDensity && {
-      keywordsDensity: getKeywordDensityPreview(keywordsDensity),
-    }),
-  };
-
-  return result;
-};
-
-export { getMetaTitleCheckPreview, getAllChecks };
+export { getMetaTitleCheckPreview };

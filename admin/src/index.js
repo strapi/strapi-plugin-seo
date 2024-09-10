@@ -1,12 +1,13 @@
-import { prefixPluginTranslations } from '@strapi/helper-plugin';
+import { Search } from '@strapi/icons';
+
 import pluginPkg from '../../package.json';
 import pluginId from './pluginId';
-import Initializer from './components/Initializer';
-import PluginIcon from './components/PluginIcon';
-
+import { Initializer } from './components/Initializer';
 import pluginPermissions from './permissions';
 
-import SeoChecker from './components/CMEditView/RightLinksCompo';
+import { prefixPluginTranslations } from './utils';
+
+import { SeoChecker } from './components/CMEditView/RightLinksCompo';
 
 const name = pluginPkg.strapi.name;
 
@@ -14,16 +15,16 @@ export default {
   register(app) {
     app.addMenuLink({
       to: `/plugins/${pluginId}`,
-      icon: PluginIcon,
+      icon: Search,
       permissions: pluginPermissions.main,
       intlLabel: {
         id: `${pluginId}.plugin.name`,
         defaultMessage: 'SEO',
       },
       Component: async () => {
-        const component = await import('./pages/App');
+        const { App } = await import('./pages/App');
 
-        return component;
+        return App;
       },
     });
     app.registerPlugin({
@@ -33,19 +34,21 @@ export default {
       name,
     });
   },
-
   bootstrap(app) {
     app.injectContentManagerComponent('editView', 'right-links', {
       name: 'SeoChecker',
       Component: SeoChecker,
     });
   },
-  async registerTrads({ locales }) {
+  async registerTrads(app) {
+    const { locales } = app;
+
     const importedTrads = await Promise.all(
       locales.map((locale) => {
         return import(`./translations/${locale}.json`)
           .then(({ default: data }) => {
             return {
+              // TODO Uncaught TypeError: Function has non-object prototype 'undefined' in instanceof check
               data: prefixPluginTranslations(data, pluginId),
               locale,
             };
