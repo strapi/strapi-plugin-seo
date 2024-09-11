@@ -35,7 +35,7 @@ export default {
     });
   },
   bootstrap(app) {
-    app.injectContentManagerComponent('editView', 'right-links', {
+    app.getPlugin('content-manager').injectComponent('editView', 'right-links', {
       name: 'SeoChecker',
       Component: SeoChecker,
     });
@@ -48,7 +48,6 @@ export default {
         return import(`./translations/${locale}.json`)
           .then(({ default: data }) => {
             return {
-              // TODO Uncaught TypeError: Function has non-object prototype 'undefined' in instanceof check
               data: prefixPluginTranslations(data, pluginId),
               locale,
             };

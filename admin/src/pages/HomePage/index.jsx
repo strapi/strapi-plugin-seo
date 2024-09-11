@@ -3,9 +3,14 @@ import { useIntl } from 'react-intl';
 
 import { Box } from '@strapi/design-system';
 import { Information } from '@strapi/icons';
-import { Page, ContentBox, useFetchClient } from '@strapi/strapi/admin';
+import {
+  Page,
+  ContentBox,
+  useFetchClient,
+  useAutoReloadOverlayBlocker,
+} from '@strapi/strapi/admin';
 
-import Info from '../../components/HomePage/Main';
+import { Main } from '../../components/HomePage/Main';
 import Header from '../../components/HomePage/Header';
 
 import { getTrad } from '../../utils/getTrad';
@@ -13,6 +18,7 @@ import pluginId from '../../pluginId';
 
 export const HomePage = React.memo(() => {
   const { get, post } = useFetchClient();
+  const { lockAppWithAutoreload, unlockAppWithAutoreload } = useAutoReloadOverlayBlocker();
   const { formatMessage } = useIntl();
   const [isLoading, setIsLoading] = React.useState(true);
   const [shouldEffect, setShouldEffect] = React.useState(false);
@@ -22,7 +28,7 @@ export const HomePage = React.memo(() => {
 
   const fetchSeoComponent = async () => {
     try {
-      const data = await get(`/${pluginId}/component`);
+      const { data } = await get(`/${pluginId}/component`);
 
       return data;
     } catch (error) {
@@ -32,7 +38,7 @@ export const HomePage = React.memo(() => {
 
   const fetchContentTypes = async () => {
     try {
-      const data = await get(`/${pluginId}/content-types`);
+      const { data } = await get(`/${pluginId}/content-types`);
 
       return data;
     } catch (error) {
@@ -56,18 +62,15 @@ export const HomePage = React.memo(() => {
       seoComponent.current = await fetchSeoComponent();
       contentTypes.current = await fetchContentTypes();
 
-      if (!seoComponent.current) {
+      const hasNoSeoComponent = !seoComponent.current || seoComponent.current.length === 0;
+      if (hasNoSeoComponent) {
         try {
-          // TODO test functionality with reload blocker removed
-          // import { useAutoReloadOverlayBlocker } from '@strapi/helper-plugin';
-          // const { lockAppWithAutoreload, unlockAppWithAutoreload } = useAutoReloadOverlayBlocker();
-          // lockAppWithAutoreload();
-
+          lockAppWithAutoreload?.();
           await createSeoComponent();
         } catch (error) {
           console.log(error);
         } finally {
-          // unlockAppWithAutoreload();
+          unlockAppWithAutoreload?.();
           setShouldEffect(true);
         }
       }
@@ -100,7 +103,7 @@ export const HomePage = React.memo(() => {
           iconBackground="primary100"
         />
       </Box>
-      <Info contentTypes={contentTypes.current} />
+      <Main contentTypes={contentTypes.current} />
     </React.Fragment>
   );
 });

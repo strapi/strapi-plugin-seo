@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 
-// TODO fix icons
-import { Alien as Equalizer, ArrowDown as InformationSquare } from '@strapi/icons';
+import { Cog, Information } from '@strapi/icons';
 import { Box, Flex, Switch, Button, Typography, Grid, Modal } from '@strapi/design-system';
 import { ContentBox, useNotification } from '@strapi/strapi/admin';
 
@@ -99,7 +98,7 @@ export const SettingsModal = ({ item }) => {
 
   return (
     <>
-      <Button variant="tertiary" startIcon={<Equalizer />} onClick={() => handleOpeningModal()}>
+      <Button variant="tertiary" startIcon={<Cog />} onClick={() => handleOpeningModal()}>
         {formatMessage({
           id: getTrad('SEOPage.info.config'),
           defaultMessage: 'Settings',
@@ -126,7 +125,7 @@ export const SettingsModal = ({ item }) => {
                   id: getTrad('HomePage.info.settings.information'),
                   defaultMessage: 'Disable SEO checks for this specific content-type.',
                 })}
-                icon={<InformationSquare />}
+                icon={<Information />}
                 iconBackground="primary100"
               />
             </Box>

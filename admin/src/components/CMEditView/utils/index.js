@@ -1,9 +1,9 @@
 import * as _ from 'lodash';
+import showdown from 'showdown';
 
 import getRichTextFields from './getRichTextFields';
 import getRegularImageAltTexts from './getRegularImageAltTexts';
 
-const showdown = require('showdown');
 const converter = new showdown.Converter();
 
 let keywordsDensity = {};

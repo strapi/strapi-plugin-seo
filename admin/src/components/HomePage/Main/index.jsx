@@ -34,7 +34,7 @@ export const Main = ({ contentTypes }) => {
 
   return (
     <Box padding={8}>
-      <Tabs.Root id="tabs" variant="simple">
+      <Tabs.Root id="tabs" variant="simple" defaultValue={TabValues.collectionTypes}>
         <Tabs.List>
           <Tabs.Trigger value={TabValues.collectionTypes}>
             <Typography>
@@ -275,5 +275,3 @@ export const Main = ({ contentTypes }) => {
     </Box>
   );
 };
-
-export default Main;
