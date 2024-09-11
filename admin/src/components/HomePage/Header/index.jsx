@@ -2,10 +2,6 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 
-// TODO Document here that BaseHeaderLayout is not exported from
-// @strapi/design-system and becomes Layouts.Header in strapi-admin
-// https://design-system-git-main-strapijs.vercel.app/?path=/docs/getting-started-migration-guides-v1-to-v2--docs
-
 import { Box, LinkButton } from '@strapi/design-system';
 import { Pencil } from '@strapi/icons';
 import { Layouts } from '@strapi/admin/strapi-admin';
