@@ -1,13 +1,12 @@
 import { Search } from '@strapi/icons';
 
 import pluginPkg from '../../package.json';
-import pluginId from './pluginId';
 import { Initializer } from './components/Initializer';
+import { SeoChecker } from './components/CMEditView/RightLinksCompo';
 import { pluginPermissions } from './permissions';
 
+import pluginId from './pluginId';
 import { prefixPluginTranslations } from './utils/prefixPluginTranslations';
-
-import { SeoChecker } from './components/CMEditView/RightLinksCompo';
 
 const name = pluginPkg.strapi.name;
 

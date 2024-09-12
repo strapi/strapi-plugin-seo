@@ -81,7 +81,6 @@ export const HomePage = React.memo(() => {
   }, [shouldEffect]);
 
   if (isLoading) {
-    // Displaying the LoadingIndicatorPage while it fetches the data
     return <Page.Loading />;
   }
 
