@@ -20,8 +20,7 @@
     }
   },
   "files": [
-    "dist",
-    "./strapi-server.js"
+    "dist"
   ],
   "scripts": {
     "build": "strapi-plugin build",
