@@ -19,6 +19,7 @@ import pluginId from '../../pluginId';
 export const HomePage = React.memo(() => {
   const { get, post } = useFetchClient();
   const { lockAppWithAutoreload, unlockAppWithAutoreload } = useAutoReloadOverlayBlocker();
+
   const { formatMessage } = useIntl();
   const [isLoading, setIsLoading] = React.useState(true);
   const [shouldEffect, setShouldEffect] = React.useState(false);
@@ -65,12 +66,14 @@ export const HomePage = React.memo(() => {
       const hasNoSeoComponent = !seoComponent.current || seoComponent.current.length === 0;
       if (hasNoSeoComponent) {
         try {
-          lockAppWithAutoreload?.();
+          lockAppWithAutoreload();
+
           await createSeoComponent();
         } catch (error) {
           console.log(error);
         } finally {
-          unlockAppWithAutoreload?.();
+          unlockAppWithAutoreload();
+
           setShouldEffect(true);
         }
       }
