@@ -37,24 +37,12 @@ const SocialPreview = ({ modifiedData }) => {
       <Modal.Header>
         <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
           {formatMessage({
-            id: getTrad('Plugin.name'),
-            defaultMessage: 'SEO Plugin',
+            id: getTrad('Button.social-preview'),
+            defaultMessage: 'Social Preview',
           })}
         </Typography>
       </Modal.Header>
       <Modal.Body>
-        <Box paddingTop={2} paddingBottom={4} paddingLeft={4}>
-          <Typography variant="beta">
-            {formatMessage({
-              id: getTrad('Button.social-preview'),
-              defaultMessage: 'Social Preview',
-            })}
-          </Typography>
-          <Box paddingTop={4}>
-            <Divider />
-          </Box>
-        </Box>
-
         {hasSeo && hasMetaSocial && hasKeywords ? (
           <Tabs.Root defaultValue={socialTabIds[0]} id="tabs">
             <Tabs.List>

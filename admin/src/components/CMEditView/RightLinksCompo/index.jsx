@@ -1,9 +1,8 @@
 import * as React from 'react';
 
-import { Box } from '@strapi/design-system';
-
 // TODO update this in helper plugin docs
 import { unstable_useContentManagerContext as useContentManagerContext } from '@strapi/strapi/admin';
+import { Box } from '@strapi/design-system';
 
 import Summary from './Summary';
 

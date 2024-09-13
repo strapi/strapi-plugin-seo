@@ -37,23 +37,14 @@ const SeoChecks = ({ modifiedData, components, contentType, checks }) => {
       <Modal.Header>
         <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
           {formatMessage({
-            id: getTrad('Plugin.name'),
-            defaultMessage: 'SEO Plugin',
+            id: getTrad('Button.seo-analyze'),
+            defaultMessage: 'SEO Analyze',
           })}
         </Typography>
       </Modal.Header>
       <Modal.Body>
-        <Box paddingTop={2} paddingBottom={4} paddingLeft={4}>
-          <Typography variant="beta">
-            {formatMessage({
-              id: getTrad('Button.seo-analyze'),
-              defaultMessage: 'SEO Analyze',
-            })}
-          </Typography>
-        </Box>
-
         {hasSeo ? (
-          <Box padding={4}>
+          <Box>
             {checks?.metaTitle && (
               <MetaTitleCheck metaTitle={seo?.metaTitle ?? null} checks={checks} />
             )}

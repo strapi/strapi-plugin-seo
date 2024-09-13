@@ -126,7 +126,7 @@ export const SettingsModal = ({ item }) => {
           }}
         >
           <Modal.Body>
-            <Box paddingBottom={8} paddingTop={4}>
+            <Box paddingBottom={4}>
               <ContentBox
                 title={formatMessage({
                   id: 'Information',
@@ -205,16 +205,19 @@ export const SettingsModal = ({ item }) => {
               ].map(({ state, stateSetter, id, defaultMessage }) => {
                 return (
                   <Grid.Item
+                    key={id}
+                    col={6}
+                    s={6}
+                    gap={2}
+                    padding={4}
                     background="neutral0"
                     borderWidth="2px"
                     shadow="filterShadow"
-                    gap={8}
-                    padding={5}
-                    col={6}
-                    s={6}
-                    key={id}
                   >
-                    <Switch checked={state} onCheckedChange={() => stateSetter((s) => !s)} />
+                    <Switch
+                      checked={state}
+                      onCheckedChange={() => stateSetter((isChecked) => !isChecked)}
+                    />
                     <Typography variant="delta">
                       {formatMessage({
                         id: getTrad(`SEOPage.info.settings.${id}`),

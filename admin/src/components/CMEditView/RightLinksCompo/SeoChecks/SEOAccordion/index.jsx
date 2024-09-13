@@ -4,18 +4,15 @@ import { Box, Typography, Accordion, IconButton } from '@strapi/design-system';
 import { Heart, EmotionHappy, EmotionUnhappy, Information } from '@strapi/icons';
 import { qualityVerdict } from '../../../utils/checks';
 
-// TODO
-// padding on bottom when there is no component
-
 const SEOAccordion = ({ title, status, component, label }) => {
   const getIcon = () => {
     switch (status?.qualityVerdict) {
       case qualityVerdict.good:
-        // TODO apply colors to accordion icons?
-        // return <EmotionHappy aria-hidden={true} fill={`success500`} />;
         return Heart;
       case qualityVerdict.improvements:
         return EmotionHappy;
+      // TODO render icons in accordionwith fill color
+      // return <CustomIcon IconComponent={EmotionHappy} fill="warning500" />;
       case qualityVerdict.bad:
         return EmotionUnhappy;
       default:
@@ -35,7 +32,7 @@ const SEOAccordion = ({ title, status, component, label }) => {
           </Accordion.Actions>
         </Accordion.Header>
         <Accordion.Content>
-          <Box paddingLeft={4} paddingTop={4}>
+          <Box paddingTop={4} paddingLeft={4} paddingBottom={4}>
             <Typography variant="omega">{status?.message}</Typography>
           </Box>
           {component && component}

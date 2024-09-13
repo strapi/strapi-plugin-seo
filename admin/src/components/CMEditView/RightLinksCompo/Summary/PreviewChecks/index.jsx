@@ -31,34 +31,34 @@ const SeoChecker = ({ checks }) => {
       </Typography>
 
       <Box paddingTop={4}>
-        <Flex spacing={2} key="good" horizontal background="neutral0">
+        <Flex gap={2} key={qualityVerdict.good}>
           <Heart aria-hidden={true} fill={`danger500`} />
           <Typography>
             {formatMessage({
               id: getTrad('Good'),
               defaultMessage: 'Good',
             })}
-            : {good}
+            {`: ${good}`}
           </Typography>
         </Flex>
-        <Flex spacing={2} key="improvements" horizontal background="neutral0">
+        <Flex gap={2} key={qualityVerdict.improvements}>
           <EmotionHappy aria-hidden={true} fill={`success500`} />
           <Typography>
             {formatMessage({
               id: getTrad('Improvements'),
               defaultMessage: 'Improvements',
             })}
-            : {improvements}
+            {`: ${improvements}`}
           </Typography>
         </Flex>
-        <Flex spacing={2} key="bad" horizontal background="neutral0">
+        <Flex gap={2} key={qualityVerdict.bad}>
           <EmotionUnhappy aria-hidden={true} fill={`secondary700`} />
           <Typography>
             {formatMessage({
               id: getTrad('Bad'),
               defaultMessage: 'Bad',
             })}
-            : {bad}
+            {`: ${bad}`}
           </Typography>
         </Flex>
       </Box>
