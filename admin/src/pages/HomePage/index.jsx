@@ -7,7 +7,7 @@ import {
   Page,
   ContentBox,
   useFetchClient,
-  useAutoReloadOverlayBlocker,
+  private_useAutoReloadOverlayBlocker as useAutoReloadOverlayBlocker,
 } from '@strapi/strapi/admin';
 
 import { Main } from '../../components/HomePage/Main';

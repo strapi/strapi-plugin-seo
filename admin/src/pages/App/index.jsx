@@ -7,7 +7,10 @@
 
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Page, AutoReloadOverlayBlockerProvider } from '@strapi/strapi/admin';
+import {
+  Page,
+  private_AutoReloadOverlayBlockerProvider as AutoReloadOverlayBlockerProvider,
+} from '@strapi/strapi/admin';
 
 import { HomePage } from '../HomePage';
 import { pluginPermissions } from '../../permissions';
