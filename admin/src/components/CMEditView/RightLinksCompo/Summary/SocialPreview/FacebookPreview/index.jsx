@@ -6,20 +6,23 @@ import './preview.css';
 
 const FacebookPreview = ({ title, description, image }) => {
   const { formatMessage } = useIntl();
+
   return (
     <div className="box-right snipcss-9tU8S snip-div">
       <div className="facebook-snippet-preview snip-div">
         <div className="facebook-snippet-box snip-div">
-          <div className="snippet-fb-img-custom snip-div">
-            <img
-              src={image.url}
-              width="524"
-              height="274"
-              alt=""
-              aria-label=""
-              className="snip-img"
-            />
-          </div>
+          {image?.url && (
+            <div className="snippet-fb-img-custom snip-div">
+              <img
+                src={image.url}
+                width="524"
+                height="274"
+                alt=""
+                aria-label=""
+                className="snip-img"
+              />
+            </div>
+          )}
 
           <div className="facebook-snippet-text snip-div">
             <div className="snippet-meta snip-div">

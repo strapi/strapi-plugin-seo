@@ -17,15 +17,23 @@ import TabContent from './TabContent';
 
 import { getTrad } from '../../../../../utils/getTrad';
 
-const SocialPreview = ({ modifiedData, setIsVisible }) => {
+const SocialPreview = ({ modifiedData }) => {
   const { formatMessage } = useIntl();
 
-  const seo = _.get(modifiedData, 'seo', null);
-  const metaSocial = _.get(seo, 'metaSocial', []);
-  const keywords = _.get(seo, 'keywords', null);
+  const seo = modifiedData?.seo ?? null;
+  const metaSocial = seo?.metaSocial ?? [];
+  const keywords = seo?.keywords ?? null;
+
+  const hasSeo = seo && Object.keys(seo).length > 0;
+  const hasMetaSocial = metaSocial && Array.isArray(metaSocial) && metaSocial.length > 0;
+  const hasKeywords = keywords && typeof keywords === 'string' && keywords.length > 0;
+
+  const socialTabIds = metaSocial.map((item, index) => {
+    return `socialTab-${item?.socialNetwork ?? 'unknown'}-${index}`;
+  });
 
   return (
-    <Modal.Content onClose={() => setIsVisible((prev) => !prev)} labelledBy="title">
+    <Modal.Content labelledBy="title">
       <Modal.Header>
         <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
           {formatMessage({
@@ -47,45 +55,49 @@ const SocialPreview = ({ modifiedData, setIsVisible }) => {
           </Box>
         </Box>
 
-        {seo ? (
-          <Box padding={4}>
-            <Tabs.Root label="Some stuff for the label" id="tabs" variant="simple">
-              <Tabs.List>
-                {metaSocial &&
-                  metaSocial.map((item, index) => {
-                    if (item.socialNetwork) {
-                      return <Tabs.Trigger key={index}>{item.socialNetwork}</Tabs.Trigger>;
-                    }
-                  })}
-              </Tabs.List>
-              <Tabs.Content>
-                {metaSocial &&
-                  metaSocial.map((item, index) => {
-                    if (item.socialNetwork && item.title && item.description)
-                      return (
-                        <TabContent
-                          key={index}
-                          item={item}
-                          keywords={keywords}
-                          defaultMetaImage={seo?.metaImage}
-                        />
-                      );
-                    else {
-                      return (
-                        <Box paddingTop={4} key={index}>
-                          <Alert closeLabel="Close alert" title="Notice">
-                            {formatMessage({
-                              id: getTrad('Social-preview.alert'),
-                              defaultMessage: 'Complete you social component to see the preview',
-                            })}
-                          </Alert>
-                        </Box>
-                      );
-                    }
-                  })}
-              </Tabs.Content>
-            </Tabs.Root>
-          </Box>
+        {hasSeo && hasMetaSocial && hasKeywords ? (
+          <Tabs.Root defaultValue={socialTabIds[0]} id="tabs">
+            <Tabs.List>
+              {metaSocial &&
+                metaSocial.map((item, index) => {
+                  if (item.socialNetwork) {
+                    return (
+                      <Tabs.Trigger key={index} value={socialTabIds[index]}>
+                        {item.socialNetwork}
+                      </Tabs.Trigger>
+                    );
+                  }
+                })}
+            </Tabs.List>
+            {metaSocial &&
+              metaSocial.map((item, index) => {
+                if (item.socialNetwork && item.title && item.description)
+                  return (
+                    <Tabs.Content value={socialTabIds[index]}>
+                      <TabContent
+                        key={index}
+                        item={item}
+                        keywords={keywords}
+                        defaultMetaImage={seo?.metaImage}
+                      />
+                    </Tabs.Content>
+                  );
+                else {
+                  return (
+                    <Tabs.Content value={socialTabIds[index]}>
+                      <Box paddingTop={4} key={index}>
+                        <Alert closeLabel="Close alert" title="Notice">
+                          {formatMessage({
+                            id: getTrad('Social-preview.alert'),
+                            defaultMessage: 'Complete you social component to see the preview',
+                          })}
+                        </Alert>
+                      </Box>
+                    </Tabs.Content>
+                  );
+                }
+              })}
+          </Tabs.Root>
         ) : (
           <Box paddingLeft={4}>
             <EmptyStateLayout
@@ -98,7 +110,6 @@ const SocialPreview = ({ modifiedData, setIsVisible }) => {
           </Box>
         )}
       </Modal.Body>
-      <Modal.Footer />
     </Modal.Content>
   );
 };

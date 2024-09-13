@@ -1,25 +1,20 @@
 import * as React from 'react';
 
 import { Box } from '@strapi/design-system';
-import { useForm } from '@strapi/admin/strapi-admin';
+
+// TODO update this in helper plugin docs
+import { unstable_useContentManagerContext as useContentManagerContext } from '@strapi/strapi/admin';
 
 import Summary from './Summary';
 
 export const SeoChecker = () => {
-  const modifiedData = useForm('ActionName', ({ modified }) => modified);
+  const {
+    form: { values },
+  } = useContentManagerContext();
 
-  if (modifiedData.hasOwnProperty('seo')) {
+  if (values.hasOwnProperty('seo')) {
     return (
-      <Box
-        background="neutral0"
-        borderColor="neutral150"
-        hasRadius
-        paddingBottom={4}
-        paddingLeft={4}
-        paddingRight={4}
-        paddingTop={6}
-        shadow="tableShadow"
-      >
+      <Box background="neutral0" borderColor="neutral150" padding={4} shadow="tableShadow">
         <Summary />
       </Box>
     );

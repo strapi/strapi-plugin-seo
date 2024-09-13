@@ -9,6 +9,7 @@ import SEOAccordion from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
 import { getTrad } from '../../../../../utils/getTrad';
+import { qualityVerdict } from '../../../utils/checks';
 
 const StructuredDataCheck = ({ structuredData, checks }) => {
   const { formatMessage } = useIntl();
@@ -20,7 +21,7 @@ const StructuredDataCheck = ({ structuredData, checks }) => {
       defaultMessage:
         'A Structured Data json has been found! However we can validate the accuracy of its content.',
     }),
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const StructuredDataCheck = ({ structuredData, checks }) => {
           id: getTrad('SEOChecks.structuredDataCheck.not-found'),
           defaultMessage: 'No Structured Data json has been found.',
         }),
-        color: 'warning',
+        qualityVerdict: qualityVerdict.bad,
       };
     }
     if (!_.isEqual(status, checks.structuredData))

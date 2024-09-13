@@ -10,16 +10,18 @@ const TwitterPreview = ({ title, description, image }) => {
     <div className="box-right snipcss-lxedG snip-div">
       <div className="twitter-snippet-preview snip-div">
         <div className="twitter-snippet-box snip-div">
-          <div className="snippet-twitter-img-custom snip-div">
-            <img
-              src={image.url}
-              width="600"
-              height="314"
-              alt=""
-              aria-label=""
-              className="snip-img"
-            />
-          </div>
+          {image?.url && (
+            <div className="snippet-twitter-img-custom snip-div">
+              <img
+                src={image.url}
+                width="600"
+                height="314"
+                alt=""
+                aria-label=""
+                className="snip-img"
+              />
+            </div>
+          )}
 
           <div className="twitter-snippet-text snip-div">
             <div className="title-desc snip-div">

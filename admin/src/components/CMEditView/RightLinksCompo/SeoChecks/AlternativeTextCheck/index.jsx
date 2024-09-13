@@ -10,6 +10,7 @@ import { getTrad } from '../../../../../utils/getTrad';
 import SEOAccordion from '../SEOAccordion';
 
 import { SeoCheckerContext } from '../../Summary';
+import { qualityVerdict } from '../../../utils/checks';
 
 const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, checks }) => {
   const { formatMessage } = useIntl();
@@ -20,7 +21,7 @@ const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, checks })
       id: getTrad('SEOChecks.alternativeTextCheck.default'),
       defaultMessage: 'All your images contain an alt attribute! Congrats!',
     }),
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, checks })
           defaultMessage:
             'The name and the alternative text of your images are all the same. Strapi automatically generate the alt attribute from the name by default if the field was empty during the media upload. Having alt attribute clearly describing images is a very good practice.',
         }),
-        color: 'warning',
+        qualityVerdict: qualityVerdict.bad,
       };
     } else if (altTexts.includes('')) {
       const count = altTexts.filter((x) => x === '').length;
@@ -42,7 +43,7 @@ const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, checks })
           id: getTrad('SEOChecks.alternativeTextCheck.intersection-negative'),
           defaultMessage: 'Some images from a media field are missing an alt attribute.',
         })}`,
-        color: 'danger',
+        qualityVerdict: qualityVerdict.improvements,
       };
     } else if (missingRichTextAlt >= 1) {
       status = {
@@ -51,7 +52,7 @@ const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, checks })
           defaultMessage:
             'At least one image in any 1st level richtext editor is missing an alt attribute.',
         }),
-        color: 'danger',
+        qualityVerdict: qualityVerdict.improvements,
       };
     }
     if (!_.isEqual(status, checks.alternativeText))

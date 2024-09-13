@@ -10,6 +10,7 @@ import { Box, Typography } from '@strapi/design-system';
 import SEOAccordion from '../SEOAccordion';
 
 import { SeoCheckerContext } from '../../Summary';
+import { qualityVerdict } from '../../../utils/checks';
 
 const CanonicalUrlCheck = ({ canonicalUrl, checks }) => {
   const { formatMessage } = useIntl();
@@ -20,7 +21,7 @@ const CanonicalUrlCheck = ({ canonicalUrl, checks }) => {
       id: getTrad('SEOChecks.canonicalUrlCheck.found'),
       defaultMessage: 'A canonical URL has been found.',
     }),
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const CanonicalUrlCheck = ({ canonicalUrl, checks }) => {
           id: getTrad('SEOChecks.canonicalUrlCheck.default'),
           defaultMessage: 'No Canonical URL has been found.',
         }),
-        color: 'warning',
+        qualityVerdict: qualityVerdict.bad,
       };
     }
     if (!_.isEqual(status, checks.canonicalUrl))

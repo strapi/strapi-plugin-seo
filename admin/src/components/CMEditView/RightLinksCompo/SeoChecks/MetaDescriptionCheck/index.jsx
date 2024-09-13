@@ -8,6 +8,7 @@ import SEOAccordion from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
 import { getTrad } from '../../../../../utils/getTrad';
+import { qualityVerdict } from '../../../utils/checks';
 
 const MetaDescriptionCheck = ({ metaDescription, checks }) => {
   const { formatMessage } = useIntl();
@@ -21,7 +22,7 @@ const MetaDescriptionCheck = ({ metaDescription, checks }) => {
       id: getTrad('SEOChecks.metaDescriptionCheck.default'),
       defaultMessage: 'A Meta Description has been found!',
     }),
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const MetaDescriptionCheck = ({ metaDescription, checks }) => {
           id: getTrad('SEOChecks.metaDescriptionCheck.not-found'),
           defaultMessage: 'No Meta Description has been found.',
         }),
-        color: 'danger',
+        qualityVerdict: qualityVerdict.improvements,
       };
     } else if (metaDescription.length > maxLength) {
       status = {
@@ -39,7 +40,7 @@ const MetaDescriptionCheck = ({ metaDescription, checks }) => {
           id: getTrad('Title-settings.metaDescription-too-long'),
           defaultMessage: 'Meta Description is too long',
         }),
-        color: 'warning',
+        qualityVerdict: qualityVerdict.bad,
       };
     } else if (metaDescription.length < minimumLength) {
       status = {
@@ -47,7 +48,7 @@ const MetaDescriptionCheck = ({ metaDescription, checks }) => {
           id: getTrad('Title-settings.metaDescription-too-short'),
           defaultMessage: 'Meta Description is too short',
         }),
-        color: 'warning',
+        qualityVerdict: qualityVerdict.bad,
       };
     }
     if (!_.isEqual(status, checks.metaDescription))

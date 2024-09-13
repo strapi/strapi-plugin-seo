@@ -9,6 +9,7 @@ import { getTrad } from '../../../../../utils/getTrad';
 import SEOAccordion from '../SEOAccordion';
 
 import { SeoCheckerContext } from '../../Summary';
+import { qualityVerdict } from '../../../utils/checks';
 
 const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
   const { formatMessage } = useIntl();
@@ -19,7 +20,7 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
       id: getTrad('SEOChecks.keywordsDensityCheck.default'),
       defaultMessage: 'Every keywords are used more than 2 times.',
     }),
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
           id: getTrad('SEOChecks.keywordsDensityCheck.no-keywords'),
           defaultMessage: 'No keywords were found in your SEO component.',
         }),
-        color: 'danger',
+        qualityVerdict: qualityVerdict.improvements,
       };
     } else {
       Object.keys(keywordsDensity).map((keyword) => {
@@ -39,7 +40,7 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
               id: getTrad('SEOChecks.keywordsDensityCheck.one-not-used'),
               defaultMessage: 'One keyword is not being used in your content.',
             }),
-            color: 'danger',
+            qualityVerdict: qualityVerdict.improvements,
           };
         } else if (_.get(keywordsDensity[keyword], 'count', 0) <= 1) {
           status = {
@@ -47,7 +48,7 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
               id: getTrad('SEOChecks.keywordsDensityCheck.one-used-once'),
               defaultMessage: 'One keyword is only used once in your content.',
             }),
-            color: 'warning',
+            qualityVerdict: qualityVerdict.bad,
           };
         }
       });

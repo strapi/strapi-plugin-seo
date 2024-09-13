@@ -9,6 +9,7 @@ import SEOAccordion from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
 import { getTrad } from '../../../../../utils/getTrad';
+import { qualityVerdict } from '../../../utils/checks';
 
 const robotTags = [
   { name: 'noindex', message: 'Search engines will index this page.' },
@@ -40,7 +41,7 @@ const MetaRobotCheck = ({ metaRobots, checks }) => {
       id: getTrad('SEOChecks.metaRobotsCheck.default'),
       defaultMessage: 'Robot meta tags have been found!',
     }),
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
   const [tags, setTags] = useState([]);
 
@@ -51,7 +52,7 @@ const MetaRobotCheck = ({ metaRobots, checks }) => {
           id: getTrad('SEOChecks.metaRobotsCheck.not-found'),
           defaultMessage: 'No Robot meta tags have been found.',
         }),
-        color: 'success',
+        qualityVerdict: qualityVerdict.good,
       };
     } else {
       setTags(metaRobots.split(','));

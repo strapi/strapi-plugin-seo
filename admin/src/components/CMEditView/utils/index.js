@@ -26,7 +26,7 @@ const getEmptyAltCount = (richtext, field) => {
 };
 
 const increaseCounter = (base, field) => {
-  const richtext = _.get(base, field, '');
+  const richtext = base?.field ?? '';
 
   // Get empty HTML and Markdown empty alternativeText
   const emptyAlts = getEmptyAltCount(richtext, field);
@@ -74,7 +74,7 @@ const getRichTextCheck = (modifiedData, components, contentType) => {
   let keywords = [];
 
   // Keywords
-  const tmp = _.get(modifiedData, 'seo.keywords', null);
+  const tmp = modifiedData?.seo?.keywords ?? null;
   if (tmp) keywords = tmp.toLowerCase().split(',');
   keywordsDensity = {};
 

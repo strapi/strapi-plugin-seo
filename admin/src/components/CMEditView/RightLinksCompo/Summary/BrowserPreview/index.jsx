@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
 import _ from 'lodash';
 
@@ -21,9 +21,9 @@ import { Illo } from '../../../../HomePage/Main/EmptyComponentLayout/illo';
 
 import { getTrad } from '../../../../../utils/getTrad';
 
-const BrowserPreview = ({ modifiedData, setIsVisible }) => {
+const BrowserPreview = ({ modifiedData }) => {
   const { formatMessage } = useIntl();
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = React.useState(false);
 
   const seo = _.get(modifiedData, 'seo', null);
   const metaTitle = _.get(seo, 'metaTitle', null);
@@ -31,7 +31,7 @@ const BrowserPreview = ({ modifiedData, setIsVisible }) => {
   const keywords = _.get(seo, 'keywords', null);
 
   return (
-    <Modal.Body onClose={() => setIsVisible((prev) => !prev)} labelledBy="title">
+    <Modal.Content labelledBy="title">
       <Modal.Header>
         <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
           {formatMessage({
@@ -40,7 +40,7 @@ const BrowserPreview = ({ modifiedData, setIsVisible }) => {
           })}
         </Typography>
       </Modal.Header>
-      <Modal.Content>
+      <Modal.Body>
         <Box paddingTop={2} paddingBottom={4} paddingLeft={4}>
           <Typography variant="beta">
             {formatMessage({
@@ -83,13 +83,13 @@ const BrowserPreview = ({ modifiedData, setIsVisible }) => {
               <MetaChecks item={metaDescription} max={160} label="description" minLimit={true} />
             )}
             {keywords && (
-              <>
+              <React.Fragment>
                 {metaTitle && <KeywordCheck item={metaTitle} keywords={keywords} label="title" />}
 
                 {metaDescription && (
                   <KeywordCheck item={metaDescription} keywords={keywords} label="description" />
                 )}
-              </>
+              </React.Fragment>
             )}
           </Flex>
         ) : (
@@ -103,9 +103,8 @@ const BrowserPreview = ({ modifiedData, setIsVisible }) => {
             />
           </Box>
         )}
-      </Modal.Content>
-      <Modal.Footer />
-    </Modal.Body>
+      </Modal.Body>
+    </Modal.Content>
   );
 };
 

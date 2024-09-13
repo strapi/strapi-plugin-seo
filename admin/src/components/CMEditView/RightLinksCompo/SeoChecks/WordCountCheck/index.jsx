@@ -8,6 +8,7 @@ import SEOAccordion from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
 import { getTrad } from '../../../../../utils/getTrad';
+import { qualityVerdict } from '../../../utils/checks';
 
 const WordCountCheck = ({ wordCount, checks }) => {
   const { formatMessage } = useIntl();
@@ -19,7 +20,7 @@ const WordCountCheck = ({ wordCount, checks }) => {
       defaultMessage:
         'You have more than 300 words. The word counter is not a direct ranking factor. But your content should be as high quality as possible, with relevant and unique information. To meet these conditions, your content requires a minimum of paragraphs, and therefore of words.',
     }),
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const WordCountCheck = ({ wordCount, checks }) => {
           id: getTrad('SEOChecks.wordCountCheck.not-found'),
           defaultMessage: 'No Richtext content have been found.',
         }),
-        color: 'danger',
+        qualityVerdict: qualityVerdict.improvements,
       };
       return;
     } else if (wordCount < 300) {
@@ -38,7 +39,7 @@ const WordCountCheck = ({ wordCount, checks }) => {
           id: getTrad('SEOChecks.wordCountCheck.300'),
           defaultMessage: 'Your 1st level Richtext contents have less than 300 words.',
         }),
-        color: 'danger',
+        qualityVerdict: qualityVerdict.improvements,
       };
     }
     if (!_.isEqual(status, checks.wordCount))

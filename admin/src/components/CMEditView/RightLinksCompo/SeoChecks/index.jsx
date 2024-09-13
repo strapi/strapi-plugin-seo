@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Button, Typography, EmptyStateLayout, Modal } from '@strapi/design-system';
+import { Box, Typography, EmptyStateLayout, Modal } from '@strapi/design-system';
 
 import { Illo } from '../../../HomePage/Main/EmptyComponentLayout/illo';
 
@@ -20,9 +20,7 @@ import { getRichTextCheck } from '../../utils';
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../../utils/getTrad';
 
-import _ from 'lodash';
-
-const SeoChecks = ({ modifiedData, components, contentType, checks, setIsVisible }) => {
+const SeoChecks = ({ modifiedData, components, contentType, checks }) => {
   const { formatMessage } = useIntl();
 
   const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
@@ -31,10 +29,11 @@ const SeoChecks = ({ modifiedData, components, contentType, checks, setIsVisible
     contentType
   );
 
-  const seo = _.get(modifiedData, 'seo', null);
+  const seo = modifiedData?.seo ?? null;
+  const hasSeo = seo && Object.keys(seo).length > 0;
 
   return (
-    <Modal.Content onClose={() => setIsVisible((prev) => !prev)} labelledBy="title">
+    <Modal.Content labelledBy="title">
       <Modal.Header>
         <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
           {formatMessage({
@@ -53,17 +52,14 @@ const SeoChecks = ({ modifiedData, components, contentType, checks, setIsVisible
           </Typography>
         </Box>
 
-        {seo ? (
+        {hasSeo ? (
           <Box padding={4}>
             {checks?.metaTitle && (
-              <MetaTitleCheck
-                metaTitle={_.get(modifiedData, 'seo.metaTitle', null)}
-                checks={checks}
-              />
+              <MetaTitleCheck metaTitle={seo?.metaTitle ?? null} checks={checks} />
             )}
             {checks?.metaDescription && (
               <MetaDescriptionCheck
-                metaDescription={_.get(modifiedData, 'seo.metaDescription', null)}
+                metaDescription={seo?.metaDescription ?? null}
                 checks={checks}
               />
             )}
@@ -72,42 +68,27 @@ const SeoChecks = ({ modifiedData, components, contentType, checks, setIsVisible
               <KeywordDensityCheck keywordsDensity={keywordsDensity} checks={checks} />
             )}
             {checks?.metaSocial && (
-              <MetaSocialCheck
-                metaSocial={_.get(modifiedData, 'seo.metaSocial', null)}
-                checks={checks}
-              />
+              <MetaSocialCheck metaSocial={seo?.metaSocial ?? null} checks={checks} />
             )}
             {checks?.canonicalUrl && (
-              <CanonicalUrlCheck
-                canonicalUrl={_.get(modifiedData, 'seo.canonicalURL', null)}
-                checks={checks}
-              />
+              <CanonicalUrlCheck canonicalUrl={seo?.canonicalURL ?? null} checks={checks} />
             )}
             {checks?.structuredData && (
-              <StructuredDataCheck
-                structuredData={_.get(modifiedData, 'seo.structuredData', null)}
-                checks={checks}
-              />
+              <StructuredDataCheck structuredData={seo?.structuredData ?? null} checks={checks} />
             )}
             {checks?.metaRobots && (
-              <MetaRobotCheck
-                metaRobots={_.get(modifiedData, 'seo.metaRobots', null)}
-                checks={checks}
-              />
+              <MetaRobotCheck metaRobots={seo?.metaRobots ?? null} checks={checks} />
             )}
             {checks?.alternativeText && (
               <AlternativeTextCheck
-                intersections={_.get(emptyAltCount, 'intersections', null)}
-                richTextAlts={_.get(emptyAltCount, 'richTextAlts', null)}
-                altTexts={_.get(emptyAltCount, 'altTexts', null)}
+                intersections={emptyAltCount?.intersections ?? null}
+                richTextAlts={emptyAltCount?.richTextAlts ?? null}
+                altTexts={emptyAltCount?.altTexts ?? null}
                 checks={checks}
               />
             )}
             {checks?.lastUpdatedAt && (
-              <LastUpdatedAtCheck
-                updatedAt={_.get(modifiedData, 'updatedAt', null)}
-                checks={checks}
-              />
+              <LastUpdatedAtCheck updatedAt={seo?.updatedAt ?? null} checks={checks} />
             )}
           </Box>
         ) : (
@@ -122,16 +103,6 @@ const SeoChecks = ({ modifiedData, components, contentType, checks, setIsVisible
           </Box>
         )}
       </Modal.Body>
-      <Modal.Footer
-        startActions={
-          <Button onClick={() => setIsVisible((prev) => !prev)} variant="tertiary">
-            {formatMessage({
-              id: getTrad('Modal.cancel'),
-              defaultMessage: 'Cancel',
-            })}
-          </Button>
-        }
-      />
     </Modal.Content>
   );
 };

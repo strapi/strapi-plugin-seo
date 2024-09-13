@@ -2,7 +2,7 @@ import React, { useEffect, useState, useReducer, createContext } from 'react';
 import { useIntl } from 'react-intl';
 
 import { unstable_useContentManagerContext as useContentManagerContext } from '@strapi/strapi/admin';
-import { Box, Button, Divider, Typography, TextButton } from '@strapi/design-system';
+import { Box, Button, Divider, Typography, TextButton, Modal } from '@strapi/design-system';
 import { Eye, ArrowRight } from '@strapi/icons';
 
 import reducer from './reducer';
@@ -39,21 +39,14 @@ const Summary = () => {
   const { getSettings } = useSettingsApi();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isBrowserPreviewVisible, setIsBrowserPreviewVisible] = useState(false);
-  const [isSocialPreviewVisible, setIsSocialPreviewVisible] = useState(false);
-  const [isSeoChecksVisible, setIsSeoChecksVisible] = useState(false);
   const [localChecks, setLocalChecks] = useState({});
   const [checks, dispatch] = useReducer(reducer, initialState);
 
-  const { layout, form, model: contentType } = useContentManagerContext();
+  const { form, contentType, components } = useContentManagerContext();
+  const { values: modifiedData } = form;
 
-  const {
-    edit: { components },
-  } = layout;
-  const { modifiedData } = form;
-
-  const getAllChecks = async (layout, modifiedData, components, contentType) => {
-    const defaultSettings = await getSettings();
+  const getAllChecks = async (modifiedData, components, contentType) => {
+    const { data: defaultSettings } = await getSettings();
 
     const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
       modifiedData,
@@ -62,34 +55,34 @@ const Summary = () => {
     );
 
     let result = {
-      ...(defaultSettings[layout?.uid]?.seoChecks?.metaTitle && {
+      ...(defaultSettings[contentType?.uid]?.seoChecks?.metaTitle && {
         metaTitle: getMetaTitleCheckPreview(modifiedData),
       }),
-      ...(defaultSettings[layout?.uid]?.seoChecks?.wordCount && {
+      ...(defaultSettings[contentType?.uid]?.seoChecks?.wordCount && {
         wordCount: getWordCountPreview(wordCount),
       }),
-      ...(defaultSettings[layout?.uid]?.seoChecks?.metaRobots && {
+      ...(defaultSettings[contentType?.uid]?.seoChecks?.metaRobots && {
         metaRobots: metaRobotPreview(modifiedData),
       }),
-      ...(defaultSettings[layout?.uid]?.seoChecks?.metaSocial && {
+      ...(defaultSettings[contentType?.uid]?.seoChecks?.metaSocial && {
         metaSocial: metaSocialPreview(modifiedData),
       }),
-      ...(defaultSettings[layout?.uid]?.seoChecks?.canonicalUrl && {
+      ...(defaultSettings[contentType?.uid]?.seoChecks?.canonicalUrl && {
         canonicalUrl: canonicalUrlPreview(modifiedData),
       }),
-      ...(defaultSettings[layout?.uid]?.seoChecks?.lastUpdatedAt && {
+      ...(defaultSettings[contentType?.uid]?.seoChecks?.lastUpdatedAt && {
         lastUpdatedAt: lastUpdatedAtPreview(modifiedData),
       }),
-      ...(defaultSettings[layout?.uid]?.seoChecks?.structuredData && {
+      ...(defaultSettings[contentType?.uid]?.seoChecks?.structuredData && {
         structuredData: structuredDataPreview(modifiedData),
       }),
-      ...(defaultSettings[layout?.uid]?.seoChecks?.metaDescription && {
+      ...(defaultSettings[contentType?.uid]?.seoChecks?.metaDescription && {
         metaDescription: getMetaDescriptionPreview(modifiedData),
       }),
-      ...(defaultSettings[layout?.uid]?.seoChecks?.alternativeText && {
+      ...(defaultSettings[contentType?.uid]?.seoChecks?.alternativeText && {
         alternativeText: getAlternativeTextPreview(emptyAltCount),
       }),
-      ...(defaultSettings[layout?.uid]?.seoChecks?.keywordDensity && {
+      ...(defaultSettings[contentType?.uid]?.seoChecks?.keywordDensity && {
         keywordsDensity: getKeywordDensityPreview(keywordsDensity),
       }),
     };
@@ -101,7 +94,8 @@ const Summary = () => {
     const fetchChecks = async () => {
       if (!(JSON.stringify(localChecks) === JSON.stringify(checks))) {
         if (checks?.preview) {
-          const status = await getAllChecks(layout, modifiedData, components, contentType);
+          const status = await getAllChecks(modifiedData, components, contentType);
+
           dispatch({
             type: 'UPDATE_FOR_PREVIEW',
             value: status,
@@ -129,65 +123,59 @@ const Summary = () => {
             defaultMessage: 'SEO Plugin',
           })}
         </Typography>
+
         <Box paddingTop={2} paddingBottom={6}>
           <Divider />
         </Box>
-        <Box paddingTop={1}>
-          <Button
-            fullWidth
-            variant="secondary"
-            startIcon={<Eye />}
-            onClick={() => setIsBrowserPreviewVisible((prev) => !prev)}
-          >
-            {formatMessage({
-              id: getTrad('Button.browser-preview'),
-              defaultMessage: 'Browser Preview',
-            })}
-          </Button>
-        </Box>
 
-        <Box paddingTop={2}>
-          <Button
-            fullWidth
-            variant="secondary"
-            startIcon={<Eye />}
-            onClick={() => setIsSocialPreviewVisible((prev) => !prev)}
-          >
-            {formatMessage({
-              id: getTrad('Button.social-preview'),
-              defaultMessage: 'Social Preview',
-            })}
-          </Button>
-        </Box>
+        <Modal.Root>
+          <Modal.Trigger>
+            <Box paddingTop={1}>
+              <Button fullWidth variant="secondary" startIcon={<Eye />}>
+                {formatMessage({
+                  id: getTrad('Button.browser-preview'),
+                  defaultMessage: 'Browser Preview',
+                })}
+              </Button>
+            </Box>
+          </Modal.Trigger>
+          <BrowserPreview modifiedData={modifiedData} />
+        </Modal.Root>
+
+        <Modal.Root>
+          <Modal.Trigger>
+            <Box paddingTop={2}>
+              <Button fullWidth variant="secondary" startIcon={<Eye />}>
+                {formatMessage({
+                  id: getTrad('Button.social-preview'),
+                  defaultMessage: 'Social Preview',
+                })}
+              </Button>
+            </Box>
+          </Modal.Trigger>
+          <SocialPreview modifiedData={modifiedData} />
+        </Modal.Root>
 
         {!isLoading && <PreviewChecks checks={checks} />}
-        <Box paddingTop={4}>
-          <TextButton
-            startIcon={<ArrowRight />}
-            onClick={() => setIsSeoChecksVisible((prev) => !prev)}
-          >
-            {formatMessage({
-              id: getTrad('Button.see-details'),
-              defaultMessage: 'SEE DETAILS',
-            })}
-          </TextButton>
-        </Box>
 
-        {isBrowserPreviewVisible && (
-          <BrowserPreview modifiedData={modifiedData} setIsVisible={setIsBrowserPreviewVisible} />
-        )}
-        {isSocialPreviewVisible && (
-          <SocialPreview modifiedData={modifiedData} setIsVisible={setIsSocialPreviewVisible} />
-        )}
-        {isSeoChecksVisible && (
+        <Modal.Root>
+          <Modal.Trigger>
+            <Box paddingTop={4}>
+              <TextButton startIcon={<ArrowRight />}>
+                {formatMessage({
+                  id: getTrad('Button.see-details'),
+                  defaultMessage: 'SEE DETAILS',
+                })}
+              </TextButton>
+            </Box>
+          </Modal.Trigger>
           <SeoChecks
             modifiedData={modifiedData}
             components={components}
             contentType={contentType}
             checks={checks}
-            setIsVisible={setIsSeoChecksVisible}
           />
-        )}
+        </Modal.Root>
       </Box>
     </SeoCheckerContext.Provider>
   );

@@ -11,6 +11,7 @@ import { getTrad } from '../../../../../utils/getTrad';
 import SEOAccordion from '../SEOAccordion';
 
 import { SeoCheckerContext } from '../../Summary';
+import { qualityVerdict } from '../../../utils/checks';
 
 const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
   const { formatMessage } = useIntl();
@@ -22,7 +23,7 @@ const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
       defaultMessage:
         'This content was modified over a year ago! Search engines love fresh content.',
     }),
-    color: 'danger',
+    qualityVerdict: qualityVerdict.improvements,
   };
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
           id: getTrad('SEOChecks.lastUpdatedAtCheck.save-content'),
           defaultMessage: 'You must save this entry first.',
         }),
-        color: 'warning',
+        qualityVerdict: qualityVerdict.bad,
       };
     } else {
       const oneYearAgo = Date.parse(new Date(new Date().setFullYear(new Date().getFullYear() - 1)));
@@ -42,7 +43,7 @@ const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
             id: getTrad('SEOChecks.lastUpdatedAtCheck.success'),
             defaultMessage: 'Awesome! This content was last modified in less than an year ago!',
           }),
-          color: 'success',
+          qualityVerdict: qualityVerdict.good,
         };
       }
     }

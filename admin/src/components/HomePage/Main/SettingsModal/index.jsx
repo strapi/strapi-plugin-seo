@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 
 import { Cog, Information } from '@strapi/icons';
-import { Box, Flex, Switch, Button, Typography, Grid, Modal } from '@strapi/design-system';
+import { Box, Switch, Button, Typography, Grid, Modal } from '@strapi/design-system';
 import { ContentBox, useNotification } from '@strapi/strapi/admin';
 
 import { getTrad } from '../../../../utils/getTrad';
@@ -12,6 +12,8 @@ export const SettingsModal = ({ item }) => {
   const { toggleNotification } = useNotification();
   const { formatMessage } = useIntl();
   const { getSettings, setSettings } = useSettingsApi();
+
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const [metaTitle, setMetaTitle] = React.useState(true);
   const [metaDescription, setMetaDescription] = React.useState(true);
@@ -23,20 +25,22 @@ export const SettingsModal = ({ item }) => {
   const [structuredData, setStructuredData] = React.useState(true);
   const [alternativeText, setAlternativeText] = React.useState(true);
   const [lastUpdatedAt, setLastUpdatedAt] = React.useState(true);
-  const [defaultSettings, setDefaultSettings] = (React.useState < object) | (null > null);
-  const [isVisible, setIsVisible] = React.useState < boolean > false;
+
+  const [defaultSettings, setDefaultSettings] = React.useState(null);
 
   React.useEffect(() => {
     const fetchDefaultSettings = async () => {
-      const tmpSettings = await getSettings();
+      const { data: defaultSettingsResult } = await getSettings();
 
-      setDefaultSettings(tmpSettings);
+      setDefaultSettings(defaultSettingsResult);
     };
+
     fetchDefaultSettings();
   }, []);
 
-  const handleOpeningModal = () => {
+  const setupModalSettings = () => {
     const seoChecks = defaultSettings?.[item?.uid]?.seoChecks;
+
     if (!seoChecks) {
       return;
     }
@@ -51,8 +55,6 @@ export const SettingsModal = ({ item }) => {
     setStructuredData(seoChecks?.structuredData);
     setAlternativeText(seoChecks?.alternativeText);
     setLastUpdatedAt(seoChecks?.lastUpdatedAt);
-
-    setIsVisible((prev) => !prev);
   };
 
   const handleSavingSettingsModal = () => {
@@ -97,23 +99,32 @@ export const SettingsModal = ({ item }) => {
   };
 
   return (
-    <>
-      <Button variant="tertiary" startIcon={<Cog />} onClick={() => handleOpeningModal()}>
-        {formatMessage({
-          id: getTrad('SEOPage.info.config'),
-          defaultMessage: 'Settings',
-        })}
-      </Button>
-      {isVisible && (
-        <Modal.Content onClose={() => setIsVisible((prev) => !prev)} labelledBy="title">
-          <Modal.Header>
-            <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
-              {formatMessage({
-                id: getTrad('SEOPage.info.settings'),
-                defaultMessage: 'Settings',
-              })}
-            </Typography>
-          </Modal.Header>
+    <Modal.Root open={isOpen} onOpenChange={setIsOpen}>
+      <Modal.Trigger>
+        <Button variant="tertiary" startIcon={<Cog />} onClick={() => setupModalSettings()}>
+          {formatMessage({
+            id: getTrad('SEOPage.info.config'),
+            defaultMessage: 'Settings',
+          })}
+        </Button>
+      </Modal.Trigger>
+      <Modal.Content labelledBy="title">
+        <Modal.Header>
+          <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
+            {formatMessage({
+              id: getTrad('SEOPage.info.settings'),
+              defaultMessage: 'Settings',
+            })}
+          </Typography>
+        </Modal.Header>
+        <form
+          onSubmit={(event) => {
+            handleSavingSettingsModal();
+            setIsOpen(false);
+
+            event.preventDefault();
+          }}
+        >
           <Modal.Body>
             <Box paddingBottom={8} paddingTop={4}>
               <ContentBox
@@ -130,180 +141,109 @@ export const SettingsModal = ({ item }) => {
               />
             </Box>
             <Grid.Root gap={4}>
-              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
-                <Flex horizontal spacing={4} padding={3}>
-                  <Switch
-                    label="Switch"
-                    selected={metaTitle}
-                    onChange={() => setMetaTitle((s) => !s)}
-                  />
-                  <Typography variant="delta">
-                    {formatMessage({
-                      id: getTrad('SEOPage.info.settings.meta-title-check'),
-                      defaultMessage: 'Meta Title',
-                    })}
-                  </Typography>
-                </Flex>
-              </Grid.Item>
-              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
-                <Flex horizontal spacing={4} padding={3}>
-                  <Switch
-                    label="Switch"
-                    selected={metaDescription}
-                    onChange={() => setMetaDescription((s) => !s)}
-                  />
-                  <Typography variant="delta">
-                    {formatMessage({
-                      id: getTrad('SEOPage.info.settings.meta-description-check'),
-                      defaultMessage: 'Meta Description',
-                    })}
-                  </Typography>
-                </Flex>
-              </Grid.Item>
-              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
-                <Flex horizontal spacing={4} padding={3}>
-                  <Switch
-                    label="Switch"
-                    selected={metaRobots}
-                    onChange={() => setMetaRobots((s) => !s)}
-                  />
-                  <Typography variant="delta">
-                    {formatMessage({
-                      id: getTrad('SEOPage.info.settings.meta-robots-check'),
-                      defaultMessage: 'Meta Robots',
-                    })}
-                  </Typography>
-                </Flex>
-              </Grid.Item>
-              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
-                <Flex horizontal spacing={4} padding={3}>
-                  <Switch
-                    label="Switch"
-                    selected={metaSocial}
-                    onChange={() => setMetaSocial((s) => !s)}
-                  />
-                  <Typography variant="delta">
-                    {formatMessage({
-                      id: getTrad('SEOPage.info.settings.meta-social-check'),
-                      defaultMessage: 'Meta Social',
-                    })}
-                  </Typography>
-                </Flex>
-              </Grid.Item>
-              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
-                <Flex horizontal spacing={4} padding={3}>
-                  <Switch
-                    label="Switch"
-                    selected={wordCount}
-                    onChange={() => setWordCount((s) => !s)}
-                  />
-                  <Typography variant="delta">
-                    {formatMessage({
-                      id: getTrad('SEOPage.info.settings.word-count-check'),
-                      defaultMessage: 'Word Count',
-                    })}
-                  </Typography>
-                </Flex>
-              </Grid.Item>
-              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
-                <Flex horizontal spacing={4} padding={3}>
-                  <Switch
-                    label="Switch"
-                    selected={canonicalUrl}
-                    onChange={() => setCanonicalUrl((s) => !s)}
-                  />
-                  <Typography variant="delta">
-                    {formatMessage({
-                      id: getTrad('SEOPage.info.settings.canonical-url-check'),
-                      defaultMessage: 'Canonical URL',
-                    })}
-                  </Typography>
-                </Flex>
-              </Grid.Item>
-              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
-                <Flex horizontal spacing={4} padding={3}>
-                  <Switch
-                    label="Switch"
-                    selected={keywordDensity}
-                    onChange={() => setKeywordDensity((s) => !s)}
-                  />
-                  <Typography variant="delta">
-                    {formatMessage({
-                      id: getTrad('SEOPage.info.settings.keyword-density-check'),
-                      defaultMessage: 'Keyword Density',
-                    })}
-                  </Typography>
-                </Flex>
-              </Grid.Item>
-              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
-                <Flex horizontal spacing={4} padding={3}>
-                  <Switch
-                    label="Switch"
-                    selected={structuredData}
-                    onChange={() => setStructuredData((s) => !s)}
-                  />
-                  <Typography variant="delta">
-                    {formatMessage({
-                      id: getTrad('SEOPage.info.settings.structured-data-check'),
-                      defaultMessage: 'Structured Data',
-                    })}
-                  </Typography>
-                </Flex>
-              </Grid.Item>
-              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
-                <Flex horizontal spacing={4} padding={3}>
-                  <Switch
-                    label="Switch"
-                    selected={alternativeText}
-                    onChange={() => setAlternativeText((s) => !s)}
-                  />
-                  <Typography variant="delta">
-                    {formatMessage({
-                      id: getTrad('SEOPage.info.settings.alternative-text-check'),
-                      defaultMessage: 'Alt Text',
-                    })}
-                  </Typography>
-                </Flex>
-              </Grid.Item>
-              <Grid.Item hasRadius background="neutral0" shadow="tableShadow">
-                <Flex horizontal spacing={4} padding={3}>
-                  <Switch
-                    label="Switch"
-                    selected={lastUpdatedAt}
-                    onChange={() => setLastUpdatedAt((s) => !s)}
-                  />
-                  <Typography variant="delta">
-                    {formatMessage({
-                      id: getTrad('SEOPage.info.settings.last-updated-at-check'),
-                      defaultMessage: 'Last Updated At',
-                    })}
-                  </Typography>
-                </Flex>
-              </Grid.Item>
+              {[
+                {
+                  state: metaTitle,
+                  stateSetter: setMetaTitle,
+                  id: 'meta-title-check',
+                  defaultMessage: 'Meta Title',
+                },
+                {
+                  state: metaDescription,
+                  stateSetter: setMetaDescription,
+                  id: 'meta-description-check',
+                  defaultMessage: 'Meta Description',
+                },
+                {
+                  state: metaRobots,
+                  stateSetter: setMetaRobots,
+                  id: 'meta-robots-check',
+                  defaultMessage: 'Meta Robots',
+                },
+                {
+                  state: metaSocial,
+                  stateSetter: setMetaSocial,
+                  id: 'meta-social-check',
+                  defaultMessage: 'Meta Social',
+                },
+                {
+                  state: wordCount,
+                  stateSetter: setWordCount,
+                  id: 'word-count-check',
+                  defaultMessage: 'Word Count',
+                },
+                {
+                  state: canonicalUrl,
+                  stateSetter: setCanonicalUrl,
+                  id: 'canonical-url-check',
+                  defaultMessage: 'Canonical URL',
+                },
+                {
+                  state: keywordDensity,
+                  stateSetter: setKeywordDensity,
+                  id: 'keyword-density-check',
+                  defaultMessage: 'Keyword Density',
+                },
+                {
+                  state: structuredData,
+                  stateSetter: setStructuredData,
+                  id: 'structured-data-check',
+                  defaultMessage: 'Structured Data',
+                },
+                {
+                  state: alternativeText,
+                  stateSetter: setAlternativeText,
+                  id: 'alternative-text-check',
+                  defaultMessage: 'Alt Text',
+                },
+                {
+                  state: lastUpdatedAt,
+                  stateSetter: setLastUpdatedAt,
+                  id: 'last-updated-at-check',
+                  defaultMessage: 'Last Updated At',
+                },
+              ].map(({ state, stateSetter, id, defaultMessage }) => {
+                return (
+                  <Grid.Item
+                    background="neutral0"
+                    borderWidth="2px"
+                    shadow="filterShadow"
+                    gap={8}
+                    padding={5}
+                    col={6}
+                    s={6}
+                    key={id}
+                  >
+                    <Switch checked={state} onCheckedChange={() => stateSetter((s) => !s)} />
+                    <Typography variant="delta">
+                      {formatMessage({
+                        id: getTrad(`SEOPage.info.settings.${id}`),
+                        defaultMessage,
+                      })}
+                    </Typography>
+                  </Grid.Item>
+                );
+              })}
             </Grid.Root>
           </Modal.Body>
-          <Modal.Footer
-            startActions={
-              <Button onClick={() => setIsVisible((prev) => !prev)} variant="tertiary">
+          <Modal.Footer>
+            <Modal.Close>
+              <Button variant="tertiary">
                 {formatMessage({
                   id: getTrad('SEOPage.info.settings.cancel.button'),
                   defaultMessage: 'Cancel',
                 })}
               </Button>
-            }
-            endActions={
-              <>
-                <Button onClick={() => handleSavingSettingsModal()}>
-                  {formatMessage({
-                    id: getTrad('SEOPage.info.settings.save.button'),
-                    defaultMessage: 'Save',
-                  })}
-                </Button>
-              </>
-            }
-          />
-        </Modal.Content>
-      )}
-    </>
+            </Modal.Close>
+            <Button type="submit">
+              {formatMessage({
+                id: getTrad('SEOPage.info.settings.save.button'),
+                defaultMessage: 'Save',
+              })}
+            </Button>
+          </Modal.Footer>
+        </form>
+      </Modal.Content>
+    </Modal.Root>
   );
 };

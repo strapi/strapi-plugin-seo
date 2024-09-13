@@ -8,6 +8,7 @@ import SEOAccordion from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
 import { getTrad } from '../../../../../utils/getTrad';
+import { qualityVerdict } from '../../../utils/checks';
 
 const MetaSocialCheck = ({ metaSocial, checks }) => {
   const { formatMessage } = useIntl();
@@ -15,7 +16,7 @@ const MetaSocialCheck = ({ metaSocial, checks }) => {
 
   let status = {
     message: '',
-    color: '',
+    qualityVerdict: qualityVerdict.good,
   };
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const MetaSocialCheck = ({ metaSocial, checks }) => {
           id: getTrad('SEOChecks.metaSocialCheck.not-found'),
           defaultMessage: 'No Meta Social tags have been found.',
         }),
-        color: 'danger',
+        qualityVerdict: qualityVerdict.improvements,
       };
     } else {
       const count = metaSocial.filter((meta) => !_.isNull(meta.id)).length;
@@ -35,7 +36,7 @@ const MetaSocialCheck = ({ metaSocial, checks }) => {
             id: getTrad('SEOChecks.metaSocialCheck.not-found'),
             defaultMessage: 'No Meta Social tags have been found.',
           }),
-          color: 'danger',
+          qualityVerdict: qualityVerdict.improvements,
         };
       } else if (count == 1) {
         status = {
@@ -43,7 +44,7 @@ const MetaSocialCheck = ({ metaSocial, checks }) => {
             id: getTrad('SEOChecks.metaSocialCheck.one'),
             defaultMessage: 'Only one Meta Social tag is being used.',
           }),
-          color: 'warning',
+          qualityVerdict: qualityVerdict.bad,
         };
       } else {
         status = {
@@ -51,7 +52,7 @@ const MetaSocialCheck = ({ metaSocial, checks }) => {
             id: getTrad('SEOChecks.metaSocialCheck.configured'),
             defaultMessage: ' Meta Social tags are configured',
           })}`,
-          color: 'success',
+          qualityVerdict: qualityVerdict.good,
         };
       }
     }

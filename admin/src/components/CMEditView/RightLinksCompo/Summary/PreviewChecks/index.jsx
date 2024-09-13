@@ -3,16 +3,23 @@ import { useIntl } from 'react-intl';
 import _ from 'lodash';
 
 import { Box, Flex, Typography } from '@strapi/design-system';
-import { More } from '@strapi/icons';
+import { Heart, EmotionHappy, EmotionUnhappy } from '@strapi/icons';
 
 import { getTrad } from '../../../../../utils/getTrad';
+import { qualityVerdict } from '../../../utils/checks';
 
 const SeoChecker = ({ checks }) => {
   const { formatMessage } = useIntl();
 
-  const good = Object.values(checks).filter((x) => x.color === 'success').length;
-  const improvements = Object.values(checks).filter((x) => x.color === 'warning').length;
-  const bad = Object.values(checks).filter((x) => x.color === 'danger').length;
+  const good = Object.values(checks).filter(
+    (check) => check.qualityVerdict === qualityVerdict.good
+  ).length;
+  const improvements = Object.values(checks).filter(
+    (check) => check.qualityVerdict === qualityVerdict.improvements
+  ).length;
+  const bad = Object.values(checks).filter(
+    (check) => check.qualityVerdict === qualityVerdict.bad
+  ).length;
 
   return (
     <Box paddingTop={4}>
@@ -25,14 +32,7 @@ const SeoChecker = ({ checks }) => {
 
       <Box paddingTop={4}>
         <Flex spacing={2} key="good" horizontal background="neutral0">
-          <More
-            aria-hidden={true}
-            colors={(theme) => ({
-              rect: {
-                fill: _.get(theme, `colors.success600`),
-              },
-            })}
-          />
+          <Heart aria-hidden={true} fill={`danger500`} />
           <Typography>
             {formatMessage({
               id: getTrad('Good'),
@@ -42,14 +42,7 @@ const SeoChecker = ({ checks }) => {
           </Typography>
         </Flex>
         <Flex spacing={2} key="improvements" horizontal background="neutral0">
-          <More
-            aria-hidden={true}
-            colors={(theme) => ({
-              rect: {
-                fill: _.get(theme, `colors.warning600`),
-              },
-            })}
-          />
+          <EmotionHappy aria-hidden={true} fill={`success500`} />
           <Typography>
             {formatMessage({
               id: getTrad('Improvements'),
@@ -59,14 +52,7 @@ const SeoChecker = ({ checks }) => {
           </Typography>
         </Flex>
         <Flex spacing={2} key="bad" horizontal background="neutral0">
-          <More
-            aria-hidden={true}
-            colors={(theme) => ({
-              rect: {
-                fill: _.get(theme, `colors.danger600`),
-              },
-            })}
-          />
+          <EmotionUnhappy aria-hidden={true} fill={`secondary700`} />
           <Typography>
             {formatMessage({
               id: getTrad('Bad'),

@@ -1,22 +1,28 @@
 import * as _ from 'lodash';
 
+export const qualityVerdict = {
+  good: 'good',
+  improvements: 'improvements',
+  bad: 'bad',
+};
+
 export const getMetaTitleCheckPreview = (modifiedData) => {
   const metaTitle = _.get(modifiedData, 'seo.metaTitle');
 
   let status = {
     message: '',
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
 
   if (_.isNull(metaTitle) || _.isEmpty(metaTitle)) {
     status = {
       message: '',
-      color: 'danger',
+      qualityVerdict: qualityVerdict.improvements,
     };
   } else if (metaTitle.length > 60) {
     status = {
       message: '',
-      color: 'warning',
+      qualityVerdict: qualityVerdict.bad,
     };
   }
   return status;
@@ -27,23 +33,23 @@ export const getMetaDescriptionPreview = (modifiedData) => {
 
   let status = {
     message: '',
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
 
   if (_.isNull(metaDescription) || _.isEmpty(metaDescription)) {
     status = {
       message: '',
-      color: 'danger',
+      qualityVerdict: qualityVerdict.improvements,
     };
   } else if (metaDescription.length > 160) {
     status = {
       message: '',
-      color: 'warning',
+      qualityVerdict: qualityVerdict.bad,
     };
   } else if (metaDescription.length < 50) {
     status = {
       message: '',
-      color: 'warning',
+      qualityVerdict: qualityVerdict.bad,
     };
   }
   return status;
@@ -56,24 +62,24 @@ export const getAlternativeTextPreview = (emptyAltCount) => {
 
   let status = {
     message: '',
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
 
   const missingRichTextAlt = richTextAlts.filter((x) => x.occurences != 0).length;
   if (intersections === 0) {
     status = {
       message: '',
-      color: 'warning',
+      qualityVerdict: qualityVerdict.bad,
     };
   } else if (altTexts.includes('')) {
     status = {
       message: '',
-      color: 'danger',
+      qualityVerdict: qualityVerdict.improvements,
     };
   } else if (missingRichTextAlt >= 1) {
     status = {
       message: '',
-      color: 'danger',
+      qualityVerdict: qualityVerdict.improvements,
     };
   }
   return status;
@@ -82,19 +88,19 @@ export const getAlternativeTextPreview = (emptyAltCount) => {
 export const getWordCountPreview = (wordCount) => {
   let status = {
     message: '',
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
 
   if (_.isNull(wordCount)) {
     status = {
       message: '',
-      color: 'danger',
+      qualityVerdict: qualityVerdict.improvements,
     };
     return;
   } else if (wordCount < 300) {
     status = {
       message: '',
-      color: 'danger',
+      qualityVerdict: qualityVerdict.improvements,
     };
   }
   return status;
@@ -103,13 +109,13 @@ export const getWordCountPreview = (wordCount) => {
 export const getKeywordDensityPreview = (keywordsDensity) => {
   let status = {
     message: '',
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
 
   if (_.isEmpty(keywordsDensity)) {
     status = {
       message: '',
-      color: 'danger',
+      qualityVerdict: qualityVerdict.improvements,
     };
     return status;
   }
@@ -118,12 +124,12 @@ export const getKeywordDensityPreview = (keywordsDensity) => {
     if (_.get(keywordsDensity[keyword], 'count', 0) === 0) {
       status = {
         message: '',
-        color: 'danger',
+        qualityVerdict: qualityVerdict.improvements,
       };
     } else if (_.get(keywordsDensity[keyword], 'count', 0) <= 1) {
       status = {
         message: '',
-        color: 'warning',
+        qualityVerdict: qualityVerdict.bad,
       };
     }
   });
@@ -135,12 +141,12 @@ export const canonicalUrlPreview = (modifiedData) => {
   const canonicalUrl = _.get(modifiedData, 'seo.canonicalURL');
   let status = {
     message: '',
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
   if (_.isNull(canonicalUrl)) {
     status = {
       message: '',
-      color: 'warning',
+      qualityVerdict: qualityVerdict.bad,
     };
   }
   return status;
@@ -151,20 +157,20 @@ export const lastUpdatedAtPreview = (modifiedData) => {
 
   let status = {
     message: '',
-    color: 'danger',
+    qualityVerdict: qualityVerdict.improvements,
   };
 
   if (_.isNull(updatedAt)) {
     status = {
       message: '',
-      color: 'warning',
+      qualityVerdict: qualityVerdict.bad,
     };
   } else {
     const oneYearAgo = Date.parse(new Date(new Date().setFullYear(new Date().getFullYear() - 1)));
     if (Date.parse(updatedAt) >= oneYearAgo) {
       status = {
         message: '',
-        color: 'success',
+        qualityVerdict: qualityVerdict.good,
       };
     }
   }
@@ -175,12 +181,12 @@ export const metaRobotPreview = (modifiedData) => {
   const metaRobots = _.get(modifiedData, 'seo.metaRobots');
   let status = {
     message: '',
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
   if (_.isNull(metaRobots) || _.isEmpty(metaRobots)) {
     status = {
       message: '',
-      color: 'success',
+      qualityVerdict: qualityVerdict.good,
     };
   }
   return status;
@@ -191,13 +197,13 @@ export const metaSocialPreview = (modifiedData) => {
 
   let status = {
     message: '',
-    color: '',
+    qualityVerdict: qualityVerdict.good,
   };
 
   if (_.isNull(metaSocial) || metaSocial === undefined) {
     status = {
       message: '',
-      color: 'danger',
+      qualityVerdict: qualityVerdict.improvements,
     };
     return status;
   }
@@ -205,17 +211,17 @@ export const metaSocialPreview = (modifiedData) => {
   if (count === 0) {
     status = {
       message: '',
-      color: 'danger',
+      qualityVerdict: qualityVerdict.improvements,
     };
   } else if (count == 1) {
     status = {
       message: '',
-      color: 'warning',
+      qualityVerdict: qualityVerdict.bad,
     };
   } else {
     status = {
       message: '',
-      color: 'success',
+      qualityVerdict: qualityVerdict.good,
     };
   }
   return status;
@@ -225,12 +231,12 @@ export const structuredDataPreview = (modifiedData) => {
   const structuredData = _.get(modifiedData, 'seo.structuredData');
   let status = {
     message: '',
-    color: 'success',
+    qualityVerdict: qualityVerdict.good,
   };
   if (_.isEmpty(structuredData)) {
     status = {
       message: '',
-      color: 'warning',
+      qualityVerdict: qualityVerdict.bad,
     };
   }
   return status;
