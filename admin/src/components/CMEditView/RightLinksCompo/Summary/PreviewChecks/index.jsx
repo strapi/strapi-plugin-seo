@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import _ from 'lodash';
 
 import { Box, Flex, Typography } from '@strapi/design-system';
-import { Heart, EmotionHappy, EmotionUnhappy } from '@strapi/icons';
+import { CheckCircle, CrossCircle, WarningCircle } from '@strapi/icons';
 
 import { getTrad } from '../../../../../utils/getTrad';
 import { qualityVerdict } from '../../../utils/checks';
@@ -32,7 +32,7 @@ const SeoChecker = ({ checks }) => {
 
       <Box paddingTop={4}>
         <Flex gap={2} key={qualityVerdict.good}>
-          <Heart aria-hidden={true} fill={`danger500`} />
+          <CheckCircle aria-hidden={true} fill={`success600`} />
           <Typography>
             {formatMessage({
               id: getTrad('Good'),
@@ -42,7 +42,7 @@ const SeoChecker = ({ checks }) => {
           </Typography>
         </Flex>
         <Flex gap={2} key={qualityVerdict.improvements}>
-          <EmotionHappy aria-hidden={true} fill={`success500`} />
+          <WarningCircle aria-hidden={true} fill={`warning600`} />
           <Typography>
             {formatMessage({
               id: getTrad('Improvements'),
@@ -52,7 +52,7 @@ const SeoChecker = ({ checks }) => {
           </Typography>
         </Flex>
         <Flex gap={2} key={qualityVerdict.bad}>
-          <EmotionUnhappy aria-hidden={true} fill={`secondary700`} />
+          <CrossCircle aria-hidden={true} fill={`danger600`} />
           <Typography>
             {formatMessage({
               id: getTrad('Bad'),

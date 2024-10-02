@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import { Flex, Typography } from '@strapi/design-system';
-import { EmotionHappy, EmotionUnhappy } from '@strapi/icons';
+import { CheckCircle, WarningCircle } from '@strapi/icons';
 
 const KeywordCheck = ({ item, keywords, label }) => {
   const _keywords = keywords.split(',');
@@ -10,9 +10,9 @@ const KeywordCheck = ({ item, keywords, label }) => {
 
   const getIcon = () => {
     if (matches.length === 0) {
-      return <EmotionUnhappy aria-hidden={true} fill={`secondary700`} />;
+      return <WarningCircle aria-hidden={true} fill={`secondary700`} />;
     } else {
-      return <EmotionHappy aria-hidden={true} fill={`success600`} />;
+      return <CheckCircle aria-hidden={true} fill={`success600`} />;
     }
   };
 

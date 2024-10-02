@@ -1,22 +1,22 @@
 import * as React from 'react';
 
 import { Box, Typography, Accordion, IconButton } from '@strapi/design-system';
-import { Heart, EmotionHappy, EmotionUnhappy, Information } from '@strapi/icons';
+import { Information, CrossCircle, CheckCircle, WarningCircle } from '@strapi/icons';
 import { qualityVerdict } from '../../../utils/checks';
 
 const SEOAccordion = ({ title, status, component, label }) => {
   const getIcon = () => {
     switch (status?.qualityVerdict) {
       case qualityVerdict.good:
-        return Heart;
+        return CheckCircle;
       case qualityVerdict.improvements:
-        return EmotionHappy;
-      // TODO render icons in accordionwith fill color
-      // return <CustomIcon IconComponent={EmotionHappy} fill="warning500" />;
+        return WarningCircle;
+      // TODO update the DS to support icons like this
+      // <WarningCircle fill="warning600" />
       case qualityVerdict.bad:
-        return EmotionUnhappy;
+        return CrossCircle;
       default:
-        return EmotionHappy;
+        return WarningCircle;
     }
   };
 
