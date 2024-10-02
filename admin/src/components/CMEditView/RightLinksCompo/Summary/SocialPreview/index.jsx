@@ -91,8 +91,8 @@ const SocialPreview = ({ modifiedData }) => {
             <EmptyStateLayout
               icon={<Illo />}
               content={formatMessage({
-                id: getTrad('Modal.seo-component-empy'),
-                defaultMessage: 'Your SEO component is empty...',
+                id: getTrad('Modal.seo-component-empty-socials'),
+                defaultMessage: 'The social metadata is empty...',
               })}
             />
           </Box>

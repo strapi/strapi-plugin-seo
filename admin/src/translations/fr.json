@@ -81,7 +81,7 @@
     "SEOChecks.wordCountCheck.300": "Votre contenu Richtext de 1er niveau contient moins de 300 mots.",
     "SEOChecks.wordCountCheck.label": "Votre contenu doit être de la plus haute qualité possible, avec des informations pertinentes et uniques. Votre contenu nécessite un minimum de paragraphes, et donc de mots.",
     "SEOChecks.wordCountCheck.words": "Mots:",
-    "Modal.seo-component-empy": "Votre composant SEO est vide...",
+    "Modal.seo-component-empty": "Votre composant SEO est vide...",
     "Tabs.title-settings": "Paramètres de titres",
     "Tabs.social-network": "Réseaux sociaux",
     "Tabs.seo-analyse": "Analyse SEO",

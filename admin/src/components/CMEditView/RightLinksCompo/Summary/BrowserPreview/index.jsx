@@ -35,26 +35,14 @@ const BrowserPreview = ({ modifiedData }) => {
       <Modal.Header>
         <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
           {formatMessage({
-            id: getTrad('Plugin.name'),
-            defaultMessage: 'SEO Plugin',
+            id: getTrad('Button.browser-preview'),
+            defaultMessage: 'Browser Preview',
           })}
         </Typography>
       </Modal.Header>
       <Modal.Body>
-        <Box paddingTop={2} paddingBottom={4} paddingLeft={4}>
-          <Typography variant="beta">
-            {formatMessage({
-              id: getTrad('Button.browser-preview'),
-              defaultMessage: 'Browser Preview',
-            })}
-          </Typography>
-          <Box paddingTop={4}>
-            <Divider />
-          </Box>
-        </Box>
-
         {seo ? (
-          <Flex spacing={2} padding={4}>
+          <Flex direction="column" gap={2} alignItems="flex-start">
             <Box paddingBottom={6}>
               <Box paddingBottom={4}>
                 <Switch
@@ -62,7 +50,7 @@ const BrowserPreview = ({ modifiedData }) => {
                   offLabel="Web"
                   onLabel="Mobile"
                   selected={checked}
-                  onChange={() => setChecked((s) => !s)}
+                  onCheckedChange={() => setChecked((s) => !s)}
                   visibleLabels={true}
                 />
               </Box>
@@ -74,9 +62,7 @@ const BrowserPreview = ({ modifiedData }) => {
               )}
             </Box>
 
-            <Box paddingBottom={6}>
-              <Divider />
-            </Box>
+            <Divider marginBottom={4} width="100%" />
 
             {metaTitle && <MetaChecks item={metaTitle} max={60} label="title" />}
             {metaDescription && (
@@ -97,7 +83,7 @@ const BrowserPreview = ({ modifiedData }) => {
             <EmptyStateLayout
               icon={<Illo />}
               content={formatMessage({
-                id: getTrad('Modal.seo-component-empy'),
+                id: getTrad('Modal.seo-component-empty'),
                 defaultMessage: 'Your SEO component is empty...',
               })}
             />

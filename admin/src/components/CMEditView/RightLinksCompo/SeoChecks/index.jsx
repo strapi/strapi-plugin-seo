@@ -87,7 +87,7 @@ const SeoChecks = ({ modifiedData, components, contentType, checks }) => {
             <EmptyStateLayout
               icon={<Illo />}
               content={formatMessage({
-                id: getTrad('Modal.seo-component-empy'),
+                id: getTrad('Modal.seo-component-empty'),
                 defaultMessage: 'Your SEO component is empty...',
               })}
             />

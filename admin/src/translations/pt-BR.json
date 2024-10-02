@@ -67,7 +67,7 @@
     "SEOChecks.wordCountCheck.300": "Seu conteúdo rico (campo Richtext) de 1º nível tem menos de 300 palavras.",
     "SEOChecks.wordCountCheck.label": "Seu conteúdo deve ser da mais alta qualidade possível, com informações relevantes e únicas. Sua entrada requer um mínimo de parágrafos e, portanto, de palavras.",
     "SEOChecks.wordCountCheck.words": "Palavras:",
-    "Modal.seo-component-empy": "Seu componente SEO está vazio...",
+    "Modal.seo-component-empty": "Seu componente SEO está vazio...",
     "Tabs.title-settings": "Configurações de Título",
     "Tabs.social-network": "Redes Sociais",
     "Tabs.seo-analyse": "Analizador de SEO",
