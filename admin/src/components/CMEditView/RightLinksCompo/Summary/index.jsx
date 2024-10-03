@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 
-import { unstable_useContentManagerContext as useContentManagerContext } from '@strapi/strapi/admin';
+import {
+  unstable_useContentManagerContext as useContentManagerContext,
+  unstable_useDocument as useDocument,
+} from '@strapi/strapi/admin';
 import { Box, Button, Divider, Typography, TextButton, Modal } from '@strapi/design-system';
 import { Eye, ArrowRight } from '@strapi/icons';
 
@@ -42,8 +45,14 @@ export const Summary = () => {
   const [localChecks, setLocalChecks] = React.useState({});
   const [checks, dispatch] = React.useReducer(reducer, initialState);
 
-  const { form, contentType, components } = useContentManagerContext();
+  const { model, collectionType, id, form, contentType, components } = useContentManagerContext();
   const { values: modifiedData } = form;
+
+  const { document } = useDocument({
+    model,
+    collectionType,
+    documentId: id,
+  });
 
   const getAllChecks = async (modifiedData, components, contentType) => {
     const { data: defaultSettings } = await getSettings();
@@ -170,6 +179,7 @@ export const Summary = () => {
             </Box>
           </Modal.Trigger>
           <SeoChecks
+            updatedAt={document?.updatedAt ?? null}
             modifiedData={modifiedData}
             components={components}
             contentType={contentType}

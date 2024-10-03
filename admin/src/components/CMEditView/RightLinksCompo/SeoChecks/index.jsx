@@ -20,7 +20,7 @@ import { getRichTextCheck } from '../../utils';
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../../utils/getTrad';
 
-export const SeoChecks = ({ modifiedData, components, contentType, checks }) => {
+export const SeoChecks = ({ updatedAt, modifiedData, components, contentType, checks }) => {
   const { formatMessage } = useIntl();
 
   const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
@@ -78,9 +78,7 @@ export const SeoChecks = ({ modifiedData, components, contentType, checks }) => 
                 checks={checks}
               />
             )}
-            {checks?.lastUpdatedAt && (
-              <LastUpdatedAtCheck updatedAt={seo?.updatedAt ?? null} checks={checks} />
-            )}
+            {checks?.lastUpdatedAt && <LastUpdatedAtCheck updatedAt={updatedAt} checks={checks} />}
           </Box>
         ) : (
           <Box paddingLeft={4}>
