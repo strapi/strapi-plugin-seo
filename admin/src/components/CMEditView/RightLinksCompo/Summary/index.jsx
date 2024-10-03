@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useReducer, createContext } from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
 
 import { unstable_useContentManagerContext as useContentManagerContext } from '@strapi/strapi/admin';
 import { Box, Button, Divider, Typography, TextButton, Modal } from '@strapi/design-system';
 import { Eye, ArrowRight } from '@strapi/icons';
 
-import reducer from './reducer';
+import { reducer } from './reducer';
 
-import SeoChecks from '../SeoChecks';
-import SocialPreview from './SocialPreview';
-import PreviewChecks from './PreviewChecks';
-import BrowserPreview from './BrowserPreview';
+import { SeoChecks } from '../SeoChecks';
+import { SocialPreview } from './SocialPreview';
+import { PreviewChecks } from './PreviewChecks';
+import { BrowserPreview } from './BrowserPreview';
 
 import { getTrad } from '../../../../utils/getTrad';
 import { useSettingsApi } from '../../../../hooks/useSettingsApi';
@@ -32,15 +32,15 @@ const initialState = {
   preview: true,
 };
 
-export const SeoCheckerContext = createContext(null);
+export const SeoCheckerContext = React.createContext(null);
 
-const Summary = () => {
+export const Summary = () => {
   const { formatMessage } = useIntl();
   const { getSettings } = useSettingsApi();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [localChecks, setLocalChecks] = useState({});
-  const [checks, dispatch] = useReducer(reducer, initialState);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [localChecks, setLocalChecks] = React.useState({});
+  const [checks, dispatch] = React.useReducer(reducer, initialState);
 
   const { form, contentType, components } = useContentManagerContext();
   const { values: modifiedData } = form;
@@ -90,7 +90,7 @@ const Summary = () => {
     return result;
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchChecks = async () => {
       if (!(JSON.stringify(localChecks) === JSON.stringify(checks))) {
         if (checks?.preview) {
@@ -180,5 +180,3 @@ const Summary = () => {
     </SeoCheckerContext.Provider>
   );
 };
-
-export default Summary;

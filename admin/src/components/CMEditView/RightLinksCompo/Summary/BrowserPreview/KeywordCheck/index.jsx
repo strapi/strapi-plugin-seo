@@ -1,16 +1,15 @@
-import React from 'react';
-import _ from 'lodash';
+import * as React from 'react';
 
 import { Flex, Typography } from '@strapi/design-system';
 import { CheckCircle, WarningCircle } from '@strapi/icons';
 
-const KeywordCheck = ({ item, keywords, label }) => {
+export const KeywordCheck = ({ item, keywords, label }) => {
   const _keywords = keywords.split(',');
   const matches = _keywords.filter((x) => item.toLowerCase().includes(x.toLowerCase().trim()));
 
   const getIcon = () => {
     if (matches.length === 0) {
-      return <WarningCircle aria-hidden={true} fill={`secondary700`} />;
+      return <WarningCircle aria-hidden={true} fill={`warning600`} />;
     } else {
       return <CheckCircle aria-hidden={true} fill={`success600`} />;
     }
@@ -25,5 +24,3 @@ const KeywordCheck = ({ item, keywords, label }) => {
     </Flex>
   );
 };
-
-export default KeywordCheck;

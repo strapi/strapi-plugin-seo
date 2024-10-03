@@ -3351,7 +3351,7 @@ __metadata:
     "@strapi/icons": "npm:^2.0.0-rc.10"
     "@strapi/sdk-plugin": "npm:0.0.0-experimental.3ddc4bc338d159d83d4b4e1119dbda5e56f10cf4"
     "@strapi/strapi": "workspace:*"
-    date-fns: "npm:^2.29.3"
+    date-fns: "npm:^4.1.0"
     eslint-plugin-react-hooks: "npm:^4.3.0"
     lodash: "npm:^4.17.21"
     prettier: "npm:^3.3.3"
@@ -3359,7 +3359,7 @@ __metadata:
     react-dom: "npm:^18.0.0"
     react-intl: "npm:^6.6.8"
     react-router-dom: "npm:^6.0.0"
-    showdown: "npm:^1.9.1"
+    showdown: "npm:^2.1.0"
     styled-components: "npm:^6.0.0"
   peerDependencies:
     "@strapi/strapi": "workspace:*"
@@ -5943,6 +5943,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^9.0.0":
+  version: 9.5.0
+  resolution: "commander@npm:9.5.0"
+  checksum: 10c0/5f7784fbda2aaec39e89eb46f06a999e00224b3763dc65976e05929ec486e174fe9aac2655f03ba6a5e83875bd173be5283dc19309b7c65954701c02025b3c1d
+  languageName: node
+  linkType: hard
+
 "common-path-prefix@npm:^3.0.0":
   version: 3.0.0
   resolution: "common-path-prefix@npm:3.0.0"
@@ -6275,12 +6282,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:2.30.0, date-fns@npm:^2.29.3, date-fns@npm:^2.30.0":
+"date-fns@npm:2.30.0, date-fns@npm:^2.30.0":
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
   dependencies:
     "@babel/runtime": "npm:^7.21.0"
   checksum: 10c0/e4b521fbf22bc8c3db332bbfb7b094fd3e7627de0259a9d17c7551e2d2702608a7307a449206065916538e384f37b181565447ce2637ae09828427aed9cb5581
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: 10c0/b79ff32830e6b7faa009590af6ae0fb8c3fd9ffad46d930548fbb5acf473773b4712ae887e156ba91a7b3dc30591ce0f517d69fd83bd9c38650fdc03b4e0bac8
   languageName: node
   linkType: hard
 
@@ -13293,14 +13307,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"showdown@npm:^1.9.1":
-  version: 1.9.1
-  resolution: "showdown@npm:1.9.1"
+"showdown@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "showdown@npm:2.1.0"
   dependencies:
-    yargs: "npm:^14.2"
+    commander: "npm:^9.0.0"
   bin:
     showdown: bin/showdown.js
-  checksum: 10c0/46c904390bbb7b7e367acb62b0d8498da9fade25ff468b4f5c0a601f6938e977ce6f8df3cd7de66e9573edf0320e62f54cbbaf81c940de084fa138e32f9ac4e3
+  checksum: 10c0/8508e060874c42338b9ebfe884763e8042d9575185d9dd3a12f7380736732893a4738f37140add97bde0c4c87d6bad66ed0761505f310df6044ee3385e2ae349
   languageName: node
   linkType: hard
 

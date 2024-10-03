@@ -1,20 +1,22 @@
-import React, { useEffect, useContext } from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
-import _ from 'lodash';
+
+import get from 'lodash/get';
+import isEqual from 'lodash/isEqual';
 
 import { Box, Flex, Typography, Status } from '@strapi/design-system';
 import { More } from '@strapi/icons';
 
 import { getTrad } from '../../../../../utils/getTrad';
 
-import SEOAccordion from '../SEOAccordion';
+import { SEOAccordion } from '../SEOAccordion';
 
 import { SeoCheckerContext } from '../../Summary';
 import { qualityVerdict } from '../../../utils/checks';
 
-const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, checks }) => {
+export const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, checks }) => {
   const { formatMessage } = useIntl();
-  const dispatch = useContext(SeoCheckerContext);
+  const dispatch = React.useContext(SeoCheckerContext);
 
   let status = {
     message: formatMessage({
@@ -24,7 +26,7 @@ const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, checks })
     qualityVerdict: qualityVerdict.good,
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const missingRichTextAlt = richTextAlts.filter((x) => x.occurences != 0).length;
 
     if (intersections === 0) {
@@ -55,7 +57,7 @@ const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, checks })
         qualityVerdict: qualityVerdict.improvements,
       };
     }
-    if (!_.isEqual(status, checks.alternativeText))
+    if (!isEqual(status, checks.alternativeText))
       dispatch({
         type: 'UPDATE_PONCTUAL',
         value: { ...status, entity: 'alternativeText' },
@@ -82,7 +84,7 @@ const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, checks })
                 aria-hidden={true}
                 colors={(theme) => ({
                   rect: {
-                    fill: _.get(theme, `colors.${alt.occurences === 0 ? 'success' : 'danger'}600`),
+                    fill: get(theme, `colors.${alt.occurences === 0 ? 'success' : 'danger'}600`),
                   },
                 })}
               />
@@ -112,5 +114,3 @@ const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, checks })
     />
   );
 };
-
-export default AlternativeTextCheck;

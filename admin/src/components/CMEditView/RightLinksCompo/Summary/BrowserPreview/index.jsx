@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import _ from 'lodash';
+
+import get from 'lodash/get';
 
 import {
   Box,
@@ -12,23 +13,23 @@ import {
   Modal,
 } from '@strapi/design-system';
 
-import Serp from './Serp';
-import SerpMobile from './SerpMobile';
-import MetaChecks from './MetaChecks';
-import KeywordCheck from './KeywordCheck';
+import { Serp } from './Serp';
+import { SerpMobile } from './SerpMobile';
+import { MetaChecks } from './MetaChecks';
+import { KeywordCheck } from './KeywordCheck';
 
 import { Illo } from '../../../../HomePage/Main/EmptyComponentLayout/illo';
 
 import { getTrad } from '../../../../../utils/getTrad';
 
-const BrowserPreview = ({ modifiedData }) => {
+export const BrowserPreview = ({ modifiedData }) => {
   const { formatMessage } = useIntl();
   const [checked, setChecked] = React.useState(false);
 
-  const seo = _.get(modifiedData, 'seo', null);
-  const metaTitle = _.get(seo, 'metaTitle', null);
-  const metaDescription = _.get(seo, 'metaDescription', null);
-  const keywords = _.get(seo, 'keywords', null);
+  const seo = get(modifiedData, 'seo', null);
+  const metaTitle = get(seo, 'metaTitle', null);
+  const metaDescription = get(seo, 'metaDescription', null);
+  const keywords = get(seo, 'keywords', null);
 
   return (
     <Modal.Content labelledBy="title">
@@ -93,5 +94,3 @@ const BrowserPreview = ({ modifiedData }) => {
     </Modal.Content>
   );
 };
-
-export default BrowserPreview;

@@ -1,19 +1,20 @@
-import React, { useEffect, useContext } from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
 
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
+import isEmpty from 'lodash/isEmpty';
 
 import { Box } from '@strapi/design-system';
 
-import SEOAccordion from '../SEOAccordion';
+import { SEOAccordion } from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
 import { getTrad } from '../../../../../utils/getTrad';
 import { qualityVerdict } from '../../../utils/checks';
 
-const StructuredDataCheck = ({ structuredData, checks }) => {
+export const StructuredDataCheck = ({ structuredData, checks }) => {
   const { formatMessage } = useIntl();
-  const dispatch = useContext(SeoCheckerContext);
+  const dispatch = React.useContext(SeoCheckerContext);
 
   let status = {
     message: formatMessage({
@@ -24,8 +25,8 @@ const StructuredDataCheck = ({ structuredData, checks }) => {
     qualityVerdict: qualityVerdict.good,
   };
 
-  useEffect(() => {
-    if (_.isEmpty(structuredData)) {
+  React.useEffect(() => {
+    if (isEmpty(structuredData)) {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.structuredDataCheck.not-found'),
@@ -34,7 +35,7 @@ const StructuredDataCheck = ({ structuredData, checks }) => {
         qualityVerdict: qualityVerdict.bad,
       };
     }
-    if (!_.isEqual(status, checks.structuredData))
+    if (!isEqual(status, checks.structuredData))
       dispatch({
         type: 'UPDATE_PONCTUAL',
         value: { ...status, entity: 'structuredData' },
@@ -57,5 +58,3 @@ const StructuredDataCheck = ({ structuredData, checks }) => {
     />
   );
 };
-
-export default StructuredDataCheck;

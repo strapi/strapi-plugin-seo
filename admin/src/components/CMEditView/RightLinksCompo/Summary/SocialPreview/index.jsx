@@ -1,23 +1,14 @@
-import React from 'react';
-import _ from 'lodash';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
 
-import {
-  Box,
-  Alert,
-  Divider,
-  Typography,
-  EmptyStateLayout,
-  Tabs,
-  Modal,
-} from '@strapi/design-system';
+import { Box, Alert, Typography, EmptyStateLayout, Tabs, Modal } from '@strapi/design-system';
 
 import { Illo } from '../../../../HomePage/Main/EmptyComponentLayout/illo';
-import TabContent from './TabContent';
+import { TabContent } from './TabContent';
 
 import { getTrad } from '../../../../../utils/getTrad';
 
-const SocialPreview = ({ modifiedData }) => {
+export const SocialPreview = ({ modifiedData }) => {
   const { formatMessage } = useIntl();
 
   const seo = modifiedData?.seo ?? null;
@@ -101,5 +92,3 @@ const SocialPreview = ({ modifiedData }) => {
     </Modal.Content>
   );
 };
-
-export default SocialPreview;

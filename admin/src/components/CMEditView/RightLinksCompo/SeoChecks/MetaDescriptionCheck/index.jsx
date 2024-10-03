@@ -1,18 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
+import isNull from 'lodash/isNull';
+import isEmpty from 'lodash/isEmpty';
 
 import { Box, Flex, ProgressBar, Typography } from '@strapi/design-system';
 
-import SEOAccordion from '../SEOAccordion';
+import { SEOAccordion } from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
 import { getTrad } from '../../../../../utils/getTrad';
 import { qualityVerdict } from '../../../utils/checks';
 
-const MetaDescriptionCheck = ({ metaDescription, checks }) => {
+export const MetaDescriptionCheck = ({ metaDescription, checks }) => {
   const { formatMessage } = useIntl();
-  const dispatch = useContext(SeoCheckerContext);
+  const dispatch = React.useContext(SeoCheckerContext);
 
   const maxLength = 160;
   const minimumLength = 50;
@@ -25,8 +27,8 @@ const MetaDescriptionCheck = ({ metaDescription, checks }) => {
     qualityVerdict: qualityVerdict.good,
   };
 
-  useEffect(() => {
-    if (_.isNull(metaDescription) || _.isEmpty(metaDescription)) {
+  React.useEffect(() => {
+    if (isNull(metaDescription) || isEmpty(metaDescription)) {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.metaDescriptionCheck.not-found'),
@@ -51,7 +53,7 @@ const MetaDescriptionCheck = ({ metaDescription, checks }) => {
         qualityVerdict: qualityVerdict.bad,
       };
     }
-    if (!_.isEqual(status, checks.metaDescription))
+    if (!isEqual(status, checks.metaDescription))
       dispatch({
         type: 'UPDATE_PONCTUAL',
         value: { ...status, entity: 'metaDescription' },
@@ -95,5 +97,3 @@ const MetaDescriptionCheck = ({ metaDescription, checks }) => {
     />
   );
 };
-
-export default MetaDescriptionCheck;

@@ -1,18 +1,21 @@
-import React, { useEffect, useContext } from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
-import _ from 'lodash';
+
+import isEqual from 'lodash/isEqual';
+import isNull from 'lodash/isNull';
+import isEmpty from 'lodash/isEmpty';
 
 import { Box, Flex, ProgressBar, Typography } from '@strapi/design-system';
 
-import SEOAccordion from '../SEOAccordion';
+import { SEOAccordion } from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
 import { getTrad } from '../../../../../utils/getTrad';
 import { qualityVerdict } from '../../../utils/checks';
 
-const MetaTitleCheck = ({ metaTitle, checks }) => {
+export const MetaTitleCheck = ({ metaTitle, checks }) => {
   const { formatMessage } = useIntl();
-  const dispatch = useContext(SeoCheckerContext);
+  const dispatch = React.useContext(SeoCheckerContext);
 
   const maxLength = 60;
 
@@ -24,8 +27,8 @@ const MetaTitleCheck = ({ metaTitle, checks }) => {
     qualityVerdict: qualityVerdict.good,
   };
 
-  useEffect(() => {
-    if (_.isNull(metaTitle) || _.isEmpty(metaTitle)) {
+  React.useEffect(() => {
+    if (isNull(metaTitle) || isEmpty(metaTitle)) {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.metaTitleCheck.not-found'),
@@ -42,7 +45,7 @@ const MetaTitleCheck = ({ metaTitle, checks }) => {
         qualityVerdict: qualityVerdict.bad,
       };
     }
-    if (!_.isEqual(status, checks.metaTitle))
+    if (!isEqual(status, checks.metaTitle))
       dispatch({
         type: 'UPDATE_PONCTUAL',
         value: { ...status, entity: 'metaTitle' },
@@ -88,5 +91,3 @@ const MetaTitleCheck = ({ metaTitle, checks }) => {
     />
   );
 };
-
-export default MetaTitleCheck;

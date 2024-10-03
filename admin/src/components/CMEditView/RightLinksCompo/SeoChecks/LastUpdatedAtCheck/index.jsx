@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
+import isNull from 'lodash/isNull';
 
 import { formatDistance } from 'date-fns';
 
@@ -8,14 +9,14 @@ import { Box, Typography } from '@strapi/design-system';
 
 import { getTrad } from '../../../../../utils/getTrad';
 
-import SEOAccordion from '../SEOAccordion';
+import { SEOAccordion } from '../SEOAccordion';
 
 import { SeoCheckerContext } from '../../Summary';
 import { qualityVerdict } from '../../../utils/checks';
 
-const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
+export const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
   const { formatMessage } = useIntl();
-  const dispatch = useContext(SeoCheckerContext);
+  const dispatch = React.useContext(SeoCheckerContext);
 
   let status = {
     message: formatMessage({
@@ -26,8 +27,8 @@ const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
     qualityVerdict: qualityVerdict.improvements,
   };
 
-  useEffect(() => {
-    if (_.isNull(updatedAt)) {
+  React.useEffect(() => {
+    if (isNull(updatedAt)) {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.lastUpdatedAtCheck.save-content'),
@@ -47,7 +48,7 @@ const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
         };
       }
     }
-    if (!_.isEqual(status, checks.lastUpdatedAt))
+    if (!isEqual(status, checks.lastUpdatedAt))
       dispatch({
         type: 'UPDATE_PONCTUAL',
         value: { ...status, entity: 'lastUpdatedAt' },
@@ -87,5 +88,3 @@ const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
     />
   );
 };
-
-export default LastUpdatedAtCheck;

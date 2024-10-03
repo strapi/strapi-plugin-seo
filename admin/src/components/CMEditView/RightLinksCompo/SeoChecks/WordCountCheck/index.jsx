@@ -1,18 +1,21 @@
-import React, { useContext, useEffect } from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
-import _ from 'lodash';
+
+import isEqual from 'lodash/isEqual';
+import isNull from 'lodash/isNull';
+import isNumber from 'lodash/isNumber';
 
 import { Box, Typography } from '@strapi/design-system';
 
-import SEOAccordion from '../SEOAccordion';
+import { SEOAccordion } from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
 import { getTrad } from '../../../../../utils/getTrad';
 import { qualityVerdict } from '../../../utils/checks';
 
-const WordCountCheck = ({ wordCount, checks }) => {
+export const WordCountCheck = ({ wordCount, checks }) => {
   const { formatMessage } = useIntl();
-  const dispatch = useContext(SeoCheckerContext);
+  const dispatch = React.useContext(SeoCheckerContext);
 
   let status = {
     message: formatMessage({
@@ -23,8 +26,8 @@ const WordCountCheck = ({ wordCount, checks }) => {
     qualityVerdict: qualityVerdict.good,
   };
 
-  useEffect(() => {
-    if (_.isNull(wordCount)) {
+  React.useEffect(() => {
+    if (isNull(wordCount)) {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.wordCountCheck.not-found'),
@@ -42,7 +45,7 @@ const WordCountCheck = ({ wordCount, checks }) => {
         qualityVerdict: qualityVerdict.improvements,
       };
     }
-    if (!_.isEqual(status, checks.wordCount))
+    if (!isEqual(status, checks.wordCount))
       dispatch({
         type: 'UPDATE_PONCTUAL',
         value: { ...status, entity: 'wordCount' },
@@ -62,7 +65,7 @@ const WordCountCheck = ({ wordCount, checks }) => {
           'Your content should be as high quality as possible, with relevant and unique information. You entry requires a minimum of paragraphs, and therefore of words.',
       })}
       component={
-        _.isNumber(wordCount) && (
+        isNumber(wordCount) && (
           <Box padding={4}>
             <Typography variant="omega" fontWeight="semiBold">
               {formatMessage({
@@ -77,5 +80,3 @@ const WordCountCheck = ({ wordCount, checks }) => {
     />
   );
 };
-
-export default WordCountCheck;

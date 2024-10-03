@@ -1,19 +1,21 @@
-import React, { useContext, useEffect } from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
-import _ from 'lodash';
+import isEmpty from 'lodash/isEmpty';
+import get from 'lodash/get';
+import isEqual from 'lodash/isEqual';
 
 import { Box, Flex, Badge } from '@strapi/design-system';
 
 import { getTrad } from '../../../../../utils/getTrad';
 
-import SEOAccordion from '../SEOAccordion';
+import { SEOAccordion } from '../SEOAccordion';
 
 import { SeoCheckerContext } from '../../Summary';
 import { qualityVerdict } from '../../../utils/checks';
 
-const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
+export const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
   const { formatMessage } = useIntl();
-  const dispatch = useContext(SeoCheckerContext);
+  const dispatch = React.useContext(SeoCheckerContext);
 
   let status = {
     message: formatMessage({
@@ -23,8 +25,8 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
     qualityVerdict: qualityVerdict.good,
   };
 
-  useEffect(() => {
-    if (_.isEmpty(keywordsDensity)) {
+  React.useEffect(() => {
+    if (isEmpty(keywordsDensity)) {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.keywordsDensityCheck.no-keywords'),
@@ -34,7 +36,7 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
       };
     } else {
       Object.keys(keywordsDensity).map((keyword) => {
-        if (_.get(keywordsDensity[keyword], 'count', 0) === 0) {
+        if (get(keywordsDensity[keyword], 'count', 0) === 0) {
           status = {
             message: formatMessage({
               id: getTrad('SEOChecks.keywordsDensityCheck.one-not-used'),
@@ -42,7 +44,7 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
             }),
             qualityVerdict: qualityVerdict.improvements,
           };
-        } else if (_.get(keywordsDensity[keyword], 'count', 0) <= 1) {
+        } else if (get(keywordsDensity[keyword], 'count', 0) <= 1) {
           status = {
             message: formatMessage({
               id: getTrad('SEOChecks.keywordsDensityCheck.one-used-once'),
@@ -54,7 +56,7 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
       });
     }
 
-    if (!_.isEqual(status, checks.keywordsDensity))
+    if (!isEqual(status, checks.keywordsDensity))
       dispatch({
         type: 'UPDATE_PONCTUAL',
         value: { ...status, entity: 'keywordsDensity' },
@@ -75,14 +77,14 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
       })}
       component={
         keywordsDensity &&
-        !_.isEmpty(keywordsDensity) && (
+        !isEmpty(keywordsDensity) && (
           <Box padding={2}>
             <Flex wrap="wrap">
               {Object.keys(keywordsDensity).map((keyword) => (
                 <Box padding={2} key={keyword}>
                   <Badge>
                     {`${keyword}:
-                      ${_.get(keywordsDensity[keyword], 'count', 0).toString()}`}
+                      ${get(keywordsDensity[keyword], 'count', 0).toString()}`}
                   </Badge>
                 </Box>
               ))}
@@ -93,5 +95,3 @@ const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
     />
   );
 };
-
-export default KeywordDensityCheck;

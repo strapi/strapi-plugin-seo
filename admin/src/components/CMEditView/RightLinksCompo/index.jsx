@@ -4,7 +4,7 @@ import * as React from 'react';
 import { unstable_useContentManagerContext as useContentManagerContext } from '@strapi/strapi/admin';
 import { Flex } from '@strapi/design-system';
 
-import Summary from './Summary';
+import { Summary } from './Summary';
 
 export const SeoChecker = () => {
   const {

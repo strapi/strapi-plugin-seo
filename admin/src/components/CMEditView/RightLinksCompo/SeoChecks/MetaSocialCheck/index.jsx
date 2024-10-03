@@ -1,26 +1,29 @@
-import React, { useContext, useEffect } from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
-import _ from 'lodash';
+
+import isEqual from 'lodash/isEqual';
+import isNull from 'lodash/isNull';
+import isEmpty from 'lodash/isEmpty';
 
 import { Box, Badge, Flex } from '@strapi/design-system';
 
-import SEOAccordion from '../SEOAccordion';
+import { SEOAccordion } from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
 import { getTrad } from '../../../../../utils/getTrad';
 import { qualityVerdict } from '../../../utils/checks';
 
-const MetaSocialCheck = ({ metaSocial, checks }) => {
+export const MetaSocialCheck = ({ metaSocial, checks }) => {
   const { formatMessage } = useIntl();
-  const dispatch = useContext(SeoCheckerContext);
+  const dispatch = React.useContext(SeoCheckerContext);
 
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.good,
   };
 
-  useEffect(() => {
-    if (_.isNull(metaSocial) || metaSocial === undefined) {
+  React.useEffect(() => {
+    if (isNull(metaSocial) || metaSocial === undefined) {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.metaSocialCheck.not-found'),
@@ -29,7 +32,7 @@ const MetaSocialCheck = ({ metaSocial, checks }) => {
         qualityVerdict: qualityVerdict.improvements,
       };
     } else {
-      const count = metaSocial.filter((meta) => !_.isNull(meta.id)).length;
+      const count = metaSocial.filter((meta) => !isNull(meta.id)).length;
       if (count === 0) {
         status = {
           message: formatMessage({
@@ -57,7 +60,7 @@ const MetaSocialCheck = ({ metaSocial, checks }) => {
       }
     }
 
-    if (!_.isEqual(status, checks.metaSocial))
+    if (!isEqual(status, checks.metaSocial))
       dispatch({
         type: 'UPDATE_PONCTUAL',
         value: { ...status, entity: 'metaSocial' },
@@ -78,7 +81,7 @@ const MetaSocialCheck = ({ metaSocial, checks }) => {
       })}
       component={
         metaSocial &&
-        !_.isEmpty(metaSocial) && (
+        !isEmpty(metaSocial) && (
           <Box padding={2}>
             <Flex>
               {metaSocial.map((tag, index) => (
@@ -93,5 +96,3 @@ const MetaSocialCheck = ({ metaSocial, checks }) => {
     />
   );
 };
-
-export default MetaSocialCheck;

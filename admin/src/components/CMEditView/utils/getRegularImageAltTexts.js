@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import isNull from 'lodash/isNull';
 
 const recursiveSearch = (obj, keyword, relations, results = [], allImageNames = []) => {
   const alternativeTexts = results;
@@ -13,7 +13,7 @@ const recursiveSearch = (obj, keyword, relations, results = [], allImageNames = 
       // It pushes the value in an array and the name in another
       alternativeTexts.push(value);
       imageNames.push(obj['name']);
-    } else if (typeof value === 'object' && !relations.includes(key) && !_.isNull(value)) {
+    } else if (typeof value === 'object' && !relations.includes(key) && !isNull(value)) {
       recursiveSearch(value, keyword, relations, alternativeTexts, imageNames);
     }
   });
@@ -21,7 +21,7 @@ const recursiveSearch = (obj, keyword, relations, results = [], allImageNames = 
   return { alternativeTexts, imageNames };
 };
 
-const getRegularImageAltTexts = (contentType, modifiedData) => {
+export const getRegularImageAltTexts = (contentType, modifiedData) => {
   // Prevent to recursively search in relations starting with localizations
   let relations = ['localizations'];
 
@@ -44,5 +44,3 @@ const getRegularImageAltTexts = (contentType, modifiedData) => {
 
   return { intersections, altTexts: alternativeTexts };
 };
-
-export default getRegularImageAltTexts;

@@ -1,11 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react';
-import _ from 'lodash';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
+
+import isEqual from 'lodash/isEqual';
+import isNull from 'lodash/isNull';
+import isEmpty from 'lodash/isEmpty';
+import get from 'lodash/get';
 
 import { Box, Status, Flex, Typography } from '@strapi/design-system';
 import { More } from '@strapi/icons';
 
-import SEOAccordion from '../SEOAccordion';
+import { SEOAccordion } from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
 
 import { getTrad } from '../../../../../utils/getTrad';
@@ -32,9 +36,9 @@ const robotTags = [
   },
 ];
 
-const MetaRobotCheck = ({ metaRobots, checks }) => {
+export const MetaRobotCheck = ({ metaRobots, checks }) => {
   const { formatMessage } = useIntl();
-  const dispatch = useContext(SeoCheckerContext);
+  const dispatch = React.useContext(SeoCheckerContext);
 
   let status = {
     message: formatMessage({
@@ -43,10 +47,10 @@ const MetaRobotCheck = ({ metaRobots, checks }) => {
     }),
     qualityVerdict: qualityVerdict.good,
   };
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = React.useState([]);
 
-  useEffect(() => {
-    if (_.isNull(metaRobots) || _.isEmpty(metaRobots)) {
+  React.useEffect(() => {
+    if (isNull(metaRobots) || isEmpty(metaRobots)) {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.metaRobotsCheck.not-found'),
@@ -57,7 +61,7 @@ const MetaRobotCheck = ({ metaRobots, checks }) => {
     } else {
       setTags(metaRobots.split(','));
     }
-    if (!_.isEqual(status, checks.metaRobots))
+    if (!isEqual(status, checks.metaRobots))
       dispatch({
         type: 'UPDATE_PONCTUAL',
         value: { ...status, entity: 'metaRobots' },
@@ -84,7 +88,7 @@ const MetaRobotCheck = ({ metaRobots, checks }) => {
                 aria-hidden={true}
                 colors={(theme) => ({
                   rect: {
-                    fill: _.get(
+                    fill: get(
                       theme,
                       `colors.${tags.find((x) => x.trim() === tag.name) ? `warning` : `success`}600`
                     ),
@@ -116,5 +120,3 @@ const MetaRobotCheck = ({ metaRobots, checks }) => {
     />
   );
 };
-
-export default MetaRobotCheck;

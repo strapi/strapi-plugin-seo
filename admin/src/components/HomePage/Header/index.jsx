@@ -8,7 +8,7 @@ import { Layouts } from '@strapi/admin/strapi-admin';
 
 import { getTrad } from '../../../utils/getTrad';
 
-const Header = (seoComponent) => {
+export const Header = (seoComponent) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -42,5 +42,3 @@ const Header = (seoComponent) => {
     </Box>
   );
 };
-
-export default Header;

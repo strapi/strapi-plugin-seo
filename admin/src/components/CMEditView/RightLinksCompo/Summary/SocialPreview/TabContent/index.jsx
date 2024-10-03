@@ -4,22 +4,22 @@ import { useIntl } from 'react-intl';
 import { Box, Flex, Typography, Divider } from '@strapi/design-system';
 
 import { getTrad } from '../../../../../../utils/getTrad';
-import MetaChecks from '../../BrowserPreview/MetaChecks';
-import KeywordCheck from '../../BrowserPreview/KeywordCheck';
+import { MetaChecks } from '../../BrowserPreview/MetaChecks';
+import { KeywordCheck } from '../../BrowserPreview/KeywordCheck';
 
-const TabContent = ({ item, keywords, defaultMetaImage }) => {
+export const TabContent = ({ item, keywords, defaultMetaImage }) => {
   const { formatMessage } = useIntl();
   const imageToUse = item?.image ?? defaultMetaImage;
 
   return (
-    <Flex alignItems="center" justifyContent="center" direction="column" spacing={2}>
+    <Flex paddingTop={4} alignItems="center" justifyContent="center" direction="column" spacing={2}>
       <Box padding={4} background="neutral100" shadow="tableShadow" hasRadius>
         {item && (
           <React.Fragment>
             {imageToUse?.url && (
-              <Box marginBottom={4}>
-                <img src={item.image.url} alt="" style={{ maxWidth: '100%', maxHeight: '300px' }} />
-              </Box>
+              <Flex justifyContent="center" marginBottom={4}>
+                <img src={item.image.url} alt="" style={{ maxWidth: '100%', maxHeight: '200px' }} />
+              </Flex>
             )}
             <Flex direction="column" alignItems="flex-start">
               <Typography variant="pi" textColor="neutral600">
@@ -61,5 +61,3 @@ const TabContent = ({ item, keywords, defaultMetaImage }) => {
     </Flex>
   );
 };
-
-export default TabContent;

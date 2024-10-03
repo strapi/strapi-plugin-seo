@@ -1,8 +1,11 @@
-import * as _ from 'lodash';
+import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
+import isNull from 'lodash/isNull';
+import isArray from 'lodash/isArray';
 import showdown from 'showdown';
 
-import getRichTextFields from './getRichTextFields';
-import getRegularImageAltTexts from './getRegularImageAltTexts';
+import { getRichTextFields } from './getRichTextFields';
+import { getRegularImageAltTexts } from './getRegularImageAltTexts';
 
 const converter = new showdown.Converter();
 
@@ -50,7 +53,7 @@ const increaseCounter = (base, field) => {
 
 const buildKeywordDensityObject = (keywords, words) => {
   keywords.map((keyword) => {
-    if (!_.isEmpty(keyword)) {
+    if (!isEmpty(keyword)) {
       const trimmedKeyword = keyword.trim();
       const exp = new RegExp(trimmedKeyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
       const count = (words.join(' ').match(exp) || []).length;
@@ -81,7 +84,7 @@ const getRichTextCheck = (modifiedData, components, contentType) => {
   // Iterate on every richtext fields we have
   richTextFields.map((data) => {
     // 1st level field
-    if (_.isNull(data.field)) {
+    if (isNull(data.field)) {
       const { words, length, emptyAlts } = increaseCounter(modifiedData, data.name);
 
       wordCount += length;
@@ -90,9 +93,9 @@ const getRichTextCheck = (modifiedData, components, contentType) => {
     }
     // Repeatable and non-repeatable component that contains richtext
     else if (!data.inDz) {
-      const item = _.get(modifiedData, _.last(data.name.split('.')), '');
+      const item = get(modifiedData, data.name.split('.').pop(), '');
       if (item) {
-        const isRepeatable = _.isArray(item);
+        const isRepeatable = isArray(item);
 
         if (isRepeatable) {
           item.map((x) => {
@@ -111,16 +114,16 @@ const getRichTextCheck = (modifiedData, components, contentType) => {
     }
     // Dynamic zone
     else {
-      const components = _.get(modifiedData, data.inDz, []);
-      if (!_.isEmpty(components)) {
+      const components = get(modifiedData, data.inDz, []);
+      if (!isEmpty(components)) {
         const richTextComponents = components.filter((x) => x.__component === data.name);
 
         richTextComponents.map((component) => {
-          const item = _.get(component, data.field, []);
-          const isRepeatable = _.isArray(item);
+          const item = get(component, data.field, []);
+          const isRepeatable = isArray(item);
 
           if (isRepeatable) {
-            const repeatableField = _.get(component, _.last(data.name.split('.')), []);
+            const repeatableField = get(component, data.name.split('.').pop(), []);
             repeatableField.map((x) => {
               const { words, length, emptyAlts } = increaseCounter(x, data.field);
               wordCount += length;

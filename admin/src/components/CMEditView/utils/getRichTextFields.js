@@ -1,13 +1,17 @@
-import * as _ from 'lodash';
+import isArray from 'lodash/isArray';
+import last from 'lodash/last';
+import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
+import pull from 'lodash/pull';
 
 // Get every 1st level richtext fields
-const getRichTextFields = (contentType, components, modifiedData) => {
+export const getRichTextFields = (contentType, components, modifiedData) => {
   let dynamicZones = [];
   let richTextFields = [];
 
   // Get every Dynamic Zones from the actual content-type
   Object.values(modifiedData).map((field, index) => {
-    if (_.isArray(field)) {
+    if (isArray(field)) {
       const isComponent = field.find((subFields) => Object.keys(subFields).includes('__component'));
 
       if (isComponent) dynamicZones.push(Object.keys(modifiedData)[index]);
@@ -34,8 +38,8 @@ const getRichTextFields = (contentType, components, modifiedData) => {
   // Necessary when having DZ => Component => richtext
   richTextFields.map((item, index) => {
     const exploded = item.name.split('.');
-    const last = _.last(exploded);
-    const tmp = _.get(modifiedData, last, null);
+    const lastField = last(exploded);
+    const tmp = get(modifiedData, lastField, null);
     if (!tmp) {
       Object.keys(components).map((name) => {
         if (components[name].isComponent) {
@@ -56,23 +60,21 @@ const getRichTextFields = (contentType, components, modifiedData) => {
 
   // Remove components that are not in the CT
   dynamicZones.map((dz) => {
-    const item = _.get(modifiedData, dz, []);
+    const item = get(modifiedData, dz, []);
     richTextFields.map((field, index) => {
       const compoIsInModifiedData = item.find((x) => x.__component === field.name);
 
       // If component is in the DZ but doesn't have an associated DZ, we add it to the object
-      if (!_.isEmpty(compoIsInModifiedData) && !field.inDz) {
+      if (!isEmpty(compoIsInModifiedData) && !field.inDz) {
         richTextFields[index] = { ...field, inDz: dz };
       }
 
       // If the component is not included in the DZ, we remove the object
-      if (_.isEmpty(compoIsInModifiedData) && field.inDz) {
-        _.pull(richTextFields, field);
+      if (isEmpty(compoIsInModifiedData) && field.inDz) {
+        pull(richTextFields, field);
       }
     });
   });
 
   return richTextFields;
 };
-
-export default getRichTextFields;

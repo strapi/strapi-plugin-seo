@@ -1,20 +1,21 @@
-import React, { useContext, useEffect } from 'react';
+import * as React from 'react';
 
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
+import isNull from 'lodash/isNull';
 
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../../../utils/getTrad';
 
 import { Box, Typography } from '@strapi/design-system';
 
-import SEOAccordion from '../SEOAccordion';
+import { SEOAccordion } from '../SEOAccordion';
 
 import { SeoCheckerContext } from '../../Summary';
 import { qualityVerdict } from '../../../utils/checks';
 
-const CanonicalUrlCheck = ({ canonicalUrl, checks }) => {
+export const CanonicalUrlCheck = ({ canonicalUrl, checks }) => {
   const { formatMessage } = useIntl();
-  const dispatch = useContext(SeoCheckerContext);
+  const dispatch = React.useContext(SeoCheckerContext);
 
   let status = {
     message: formatMessage({
@@ -24,8 +25,8 @@ const CanonicalUrlCheck = ({ canonicalUrl, checks }) => {
     qualityVerdict: qualityVerdict.good,
   };
 
-  useEffect(() => {
-    if (_.isNull(canonicalUrl)) {
+  React.useEffect(() => {
+    if (isNull(canonicalUrl)) {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.canonicalUrlCheck.default'),
@@ -34,7 +35,7 @@ const CanonicalUrlCheck = ({ canonicalUrl, checks }) => {
         qualityVerdict: qualityVerdict.bad,
       };
     }
-    if (!_.isEqual(status, checks.canonicalUrl))
+    if (!isEqual(status, checks.canonicalUrl))
       dispatch({
         type: 'UPDATE_PONCTUAL',
         value: { ...status, entity: 'canonicalUrl' },
@@ -64,5 +65,3 @@ const CanonicalUrlCheck = ({ canonicalUrl, checks }) => {
     />
   );
 };
-
-export default CanonicalUrlCheck;

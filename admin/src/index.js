@@ -5,7 +5,7 @@ import { Initializer } from './components/Initializer';
 import { SeoChecker } from './components/CMEditView/RightLinksCompo';
 import { pluginPermissions } from './permissions';
 
-import pluginId from './pluginId';
+import { pluginId } from './pluginId';
 import { prefixPluginTranslations } from './utils/prefixPluginTranslations';
 
 const name = pluginPkg.strapi.name;

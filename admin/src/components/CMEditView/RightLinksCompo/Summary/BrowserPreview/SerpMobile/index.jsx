@@ -1,21 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 
 import './serpmobile.css';
 
-const SerpMobile = ({ metaTitle, metaDescription }) => {
+export const SerpMobile = ({ metaTitle, metaDescription }) => {
   return (
     <div className="google-snippet-preview">
       <div className="wrap-snippet snipcss-N3O8b snip-div">
         <div className="wrap-m-icon-permalink snip-div">
-          <div className="snippet-permalink snip-div">
-            https://url-of-your-website.io
-          </div>
+          <div className="snippet-permalink snip-div">https://url-of-your-website.io</div>
         </div>
 
         <div className="snippet-title-custom snip-div">
-          {metaTitle && metaTitle.length > 60
-            ? `${metaTitle.substring(0, 60)}...`
-            : metaTitle}
+          {metaTitle && metaTitle.length > 60 ? `${metaTitle.substring(0, 60)}...` : metaTitle}
         </div>
 
         <div className="snippet-description-default snip-div">
@@ -27,5 +23,3 @@ const SerpMobile = ({ metaTitle, metaDescription }) => {
     </div>
   );
 };
-
-export default SerpMobile;

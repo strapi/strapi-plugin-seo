@@ -1,6 +1,5 @@
-import React from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
-import _ from 'lodash';
 
 import { Box, Flex, Typography } from '@strapi/design-system';
 import { CheckCircle, CrossCircle, WarningCircle } from '@strapi/icons';
@@ -8,7 +7,7 @@ import { CheckCircle, CrossCircle, WarningCircle } from '@strapi/icons';
 import { getTrad } from '../../../../../utils/getTrad';
 import { qualityVerdict } from '../../../utils/checks';
 
-const SeoChecker = ({ checks }) => {
+export const PreviewChecks = ({ checks }) => {
   const { formatMessage } = useIntl();
 
   const good = Object.values(checks).filter(
@@ -65,5 +64,3 @@ const SeoChecker = ({ checks }) => {
     </Box>
   );
 };
-
-export default SeoChecker;

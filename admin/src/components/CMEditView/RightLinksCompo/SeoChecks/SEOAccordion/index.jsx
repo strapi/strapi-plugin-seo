@@ -4,14 +4,14 @@ import { Box, Typography, Accordion, IconButton } from '@strapi/design-system';
 import { Information, CrossCircle, CheckCircle, WarningCircle } from '@strapi/icons';
 import { qualityVerdict } from '../../../utils/checks';
 
-const SEOAccordion = ({ title, status, component, label }) => {
+export const SEOAccordion = ({ title, status, component, label }) => {
   const getIcon = () => {
     switch (status?.qualityVerdict) {
       case qualityVerdict.good:
         return CheckCircle;
       case qualityVerdict.improvements:
         return WarningCircle;
-      // TODO update the DS to support icons like this
+      // TODO update the design system to support icons like this
       // <WarningCircle fill="warning600" />
       case qualityVerdict.bad:
         return CrossCircle;
@@ -41,5 +41,3 @@ const SEOAccordion = ({ title, status, component, label }) => {
     </Accordion.Root>
   );
 };
-
-export default SEOAccordion;

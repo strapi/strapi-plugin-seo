@@ -1,4 +1,6 @@
-import * as _ from 'lodash';
+import get from 'lodash/get';
+import isNull from 'lodash/isNull';
+import isEmpty from 'lodash/isEmpty';
 
 export const qualityVerdict = {
   good: 'good',
@@ -7,14 +9,14 @@ export const qualityVerdict = {
 };
 
 export const getMetaTitleCheckPreview = (modifiedData) => {
-  const metaTitle = _.get(modifiedData, 'seo.metaTitle');
+  const metaTitle = get(modifiedData, 'seo.metaTitle');
 
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.good,
   };
 
-  if (_.isNull(metaTitle) || _.isEmpty(metaTitle)) {
+  if (isNull(metaTitle) || isEmpty(metaTitle)) {
     status = {
       message: '',
       qualityVerdict: qualityVerdict.improvements,
@@ -29,14 +31,14 @@ export const getMetaTitleCheckPreview = (modifiedData) => {
 };
 
 export const getMetaDescriptionPreview = (modifiedData) => {
-  const metaDescription = _.get(modifiedData, 'seo.metaDescription');
+  const metaDescription = get(modifiedData, 'seo.metaDescription');
 
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.good,
   };
 
-  if (_.isNull(metaDescription) || _.isEmpty(metaDescription)) {
+  if (isNull(metaDescription) || isEmpty(metaDescription)) {
     status = {
       message: '',
       qualityVerdict: qualityVerdict.improvements,
@@ -56,9 +58,9 @@ export const getMetaDescriptionPreview = (modifiedData) => {
 };
 
 export const getAlternativeTextPreview = (emptyAltCount) => {
-  const intersections = _.get(emptyAltCount, 'intersections', null);
-  const richTextAlts = _.get(emptyAltCount, 'richTextAlts', null);
-  const altTexts = _.get(emptyAltCount, 'altTexts', null);
+  const intersections = get(emptyAltCount, 'intersections', null);
+  const richTextAlts = get(emptyAltCount, 'richTextAlts', null);
+  const altTexts = get(emptyAltCount, 'altTexts', null);
 
   let status = {
     message: '',
@@ -91,7 +93,7 @@ export const getWordCountPreview = (wordCount) => {
     qualityVerdict: qualityVerdict.good,
   };
 
-  if (_.isNull(wordCount)) {
+  if (isNull(wordCount)) {
     status = {
       message: '',
       qualityVerdict: qualityVerdict.improvements,
@@ -112,7 +114,7 @@ export const getKeywordDensityPreview = (keywordsDensity) => {
     qualityVerdict: qualityVerdict.good,
   };
 
-  if (_.isEmpty(keywordsDensity)) {
+  if (isEmpty(keywordsDensity)) {
     status = {
       message: '',
       qualityVerdict: qualityVerdict.improvements,
@@ -121,12 +123,12 @@ export const getKeywordDensityPreview = (keywordsDensity) => {
   }
 
   Object.keys(keywordsDensity).map((keyword) => {
-    if (_.get(keywordsDensity[keyword], 'count', 0) === 0) {
+    if (get(keywordsDensity[keyword], 'count', 0) === 0) {
       status = {
         message: '',
         qualityVerdict: qualityVerdict.improvements,
       };
-    } else if (_.get(keywordsDensity[keyword], 'count', 0) <= 1) {
+    } else if (get(keywordsDensity[keyword], 'count', 0) <= 1) {
       status = {
         message: '',
         qualityVerdict: qualityVerdict.bad,
@@ -138,12 +140,12 @@ export const getKeywordDensityPreview = (keywordsDensity) => {
 };
 
 export const canonicalUrlPreview = (modifiedData) => {
-  const canonicalUrl = _.get(modifiedData, 'seo.canonicalURL');
+  const canonicalUrl = get(modifiedData, 'seo.canonicalURL');
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.good,
   };
-  if (_.isNull(canonicalUrl)) {
+  if (isNull(canonicalUrl)) {
     status = {
       message: '',
       qualityVerdict: qualityVerdict.bad,
@@ -153,14 +155,14 @@ export const canonicalUrlPreview = (modifiedData) => {
 };
 
 export const lastUpdatedAtPreview = (modifiedData) => {
-  const updatedAt = _.get(modifiedData, 'updatedAt');
+  const updatedAt = get(modifiedData, 'updatedAt');
 
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.improvements,
   };
 
-  if (_.isNull(updatedAt)) {
+  if (isNull(updatedAt)) {
     status = {
       message: '',
       qualityVerdict: qualityVerdict.bad,
@@ -178,12 +180,12 @@ export const lastUpdatedAtPreview = (modifiedData) => {
 };
 
 export const metaRobotPreview = (modifiedData) => {
-  const metaRobots = _.get(modifiedData, 'seo.metaRobots');
+  const metaRobots = get(modifiedData, 'seo.metaRobots');
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.good,
   };
-  if (_.isNull(metaRobots) || _.isEmpty(metaRobots)) {
+  if (isNull(metaRobots) || isEmpty(metaRobots)) {
     status = {
       message: '',
       qualityVerdict: qualityVerdict.good,
@@ -193,21 +195,21 @@ export const metaRobotPreview = (modifiedData) => {
 };
 
 export const metaSocialPreview = (modifiedData) => {
-  const metaSocial = _.get(modifiedData, 'seo.metaSocial');
+  const metaSocial = get(modifiedData, 'seo.metaSocial');
 
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.good,
   };
 
-  if (_.isNull(metaSocial) || metaSocial === undefined) {
+  if (isNull(metaSocial) || metaSocial === undefined) {
     status = {
       message: '',
       qualityVerdict: qualityVerdict.improvements,
     };
     return status;
   }
-  const count = metaSocial.filter((meta) => !_.isNull(meta.id)).length;
+  const count = metaSocial.filter((meta) => !isNull(meta.id)).length;
   if (count === 0) {
     status = {
       message: '',
@@ -228,12 +230,12 @@ export const metaSocialPreview = (modifiedData) => {
 };
 
 export const structuredDataPreview = (modifiedData) => {
-  const structuredData = _.get(modifiedData, 'seo.structuredData');
+  const structuredData = get(modifiedData, 'seo.structuredData');
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.good,
   };
-  if (_.isEmpty(structuredData)) {
+  if (isEmpty(structuredData)) {
     status = {
       message: '',
       qualityVerdict: qualityVerdict.bad,

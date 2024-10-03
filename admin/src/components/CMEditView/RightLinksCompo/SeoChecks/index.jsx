@@ -1,26 +1,26 @@
-import React from 'react';
+import * as React from 'react';
 
 import { Box, Typography, EmptyStateLayout, Modal } from '@strapi/design-system';
 
 import { Illo } from '../../../HomePage/Main/EmptyComponentLayout/illo';
 
-import MetaRobotCheck from './MetaRobotCheck';
-import WordCountCheck from './WordCountCheck';
-import MetaTitleCheck from './MetaTitleCheck';
-import MetaSocialCheck from './MetaSocialCheck';
-import CanonicalUrlCheck from './CanonicalUrlCheck';
-import LastUpdatedAtCheck from './LastUpdatedAtCheck';
-import KeywordDensityCheck from './KeywordDensityCheck';
-import StructuredDataCheck from './StructuredDataCheck';
-import MetaDescriptionCheck from './MetaDescriptionCheck';
-import AlternativeTextCheck from './AlternativeTextCheck';
+import { MetaRobotCheck } from './MetaRobotCheck';
+import { WordCountCheck } from './WordCountCheck';
+import { MetaTitleCheck } from './MetaTitleCheck';
+import { MetaSocialCheck } from './MetaSocialCheck';
+import { CanonicalUrlCheck } from './CanonicalUrlCheck';
+import { LastUpdatedAtCheck } from './LastUpdatedAtCheck';
+import { KeywordDensityCheck } from './KeywordDensityCheck';
+import { StructuredDataCheck } from './StructuredDataCheck';
+import { MetaDescriptionCheck } from './MetaDescriptionCheck';
+import { AlternativeTextCheck } from './AlternativeTextCheck';
 
 import { getRichTextCheck } from '../../utils';
 
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../../utils/getTrad';
 
-const SeoChecks = ({ modifiedData, components, contentType, checks }) => {
+export const SeoChecks = ({ modifiedData, components, contentType, checks }) => {
   const { formatMessage } = useIntl();
 
   const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
@@ -97,5 +97,3 @@ const SeoChecks = ({ modifiedData, components, contentType, checks }) => {
     </Modal.Content>
   );
 };
-
-export default SeoChecks;

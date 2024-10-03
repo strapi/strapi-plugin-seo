@@ -15,4 +15,4 @@ function reducer(state, action) {
   }
 }
 
-export default reducer;
+export { reducer };
