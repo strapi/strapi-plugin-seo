@@ -125,17 +125,13 @@ export const Summary = () => {
 
   return (
     <SeoCheckerContext.Provider value={dispatch}>
-      <Box>
-        <Typography variant="sigma" textColor="neutral600" id="seo">
+      <Box width="100%">
+        <Typography tag="h2" variant="sigma" textTransform="uppercase" textColor="neutral600">
           {formatMessage({
             id: getTrad('Plugin.name'),
             defaultMessage: 'SEO Plugin',
           })}
         </Typography>
-
-        <Box paddingTop={2} paddingBottom={6}>
-          <Divider />
-        </Box>
 
         <Modal.Root>
           <Modal.Trigger>

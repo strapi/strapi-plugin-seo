@@ -21,46 +21,37 @@ export const PreviewChecks = ({ checks }) => {
   ).length;
 
   return (
-    <Box paddingTop={4}>
-      <Typography variant="omega" fontWeight="semiBold">
-        {formatMessage({
-          id: getTrad('SEORightLinks.summary-title'),
-          defaultMessage: 'SEO Summary',
-        })}
-      </Typography>
-
-      <Box paddingTop={4}>
-        <Flex gap={2} key={qualityVerdict.good}>
-          <CheckCircle aria-hidden={true} fill={`success600`} />
-          <Typography>
-            {formatMessage({
-              id: getTrad('Good'),
-              defaultMessage: 'Good',
-            })}
-            {`: ${good}`}
-          </Typography>
-        </Flex>
-        <Flex gap={2} key={qualityVerdict.improvements}>
-          <WarningCircle aria-hidden={true} fill={`warning600`} />
-          <Typography>
-            {formatMessage({
-              id: getTrad('Improvements'),
-              defaultMessage: 'Improvements',
-            })}
-            {`: ${improvements}`}
-          </Typography>
-        </Flex>
-        <Flex gap={2} key={qualityVerdict.bad}>
-          <CrossCircle aria-hidden={true} fill={`danger600`} />
-          <Typography>
-            {formatMessage({
-              id: getTrad('Bad'),
-              defaultMessage: 'Bad',
-            })}
-            {`: ${bad}`}
-          </Typography>
-        </Flex>
-      </Box>
+    <Box paddingTop={2}>
+      <Flex gap={2} key={qualityVerdict.good}>
+        <CheckCircle aria-hidden={true} fill={`success600`} />
+        <Typography>
+          {formatMessage({
+            id: getTrad('Good'),
+            defaultMessage: 'Good',
+          })}
+          {`: ${good}`}
+        </Typography>
+      </Flex>
+      <Flex gap={2} key={qualityVerdict.improvements}>
+        <WarningCircle aria-hidden={true} fill={`warning600`} />
+        <Typography>
+          {formatMessage({
+            id: getTrad('Improvements'),
+            defaultMessage: 'Improvements',
+          })}
+          {`: ${improvements}`}
+        </Typography>
+      </Flex>
+      <Flex gap={2} key={qualityVerdict.bad}>
+        <CrossCircle aria-hidden={true} fill={`danger600`} />
+        <Typography>
+          {formatMessage({
+            id: getTrad('Bad'),
+            defaultMessage: 'Bad',
+          })}
+          {`: ${bad}`}
+        </Typography>
+      </Flex>
     </Box>
   );
 };
