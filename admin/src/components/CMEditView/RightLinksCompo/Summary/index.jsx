@@ -125,7 +125,7 @@ export const Summary = () => {
 
   return (
     <SeoCheckerContext.Provider value={dispatch}>
-      <Box width="100%">
+      <Box paddingTop={4} width="100%">
         <Typography tag="h2" variant="sigma" textTransform="uppercase" textColor="neutral600">
           {formatMessage({
             id: getTrad('Plugin.name'),

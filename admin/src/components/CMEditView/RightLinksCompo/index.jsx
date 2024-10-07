@@ -13,5 +13,6 @@ export const SeoChecker = () => {
   if (values.hasOwnProperty('seo')) {
     return <Summary />;
   }
+
   return <React.Fragment />;
 };
