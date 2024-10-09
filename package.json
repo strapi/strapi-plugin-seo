@@ -43,7 +43,7 @@
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
-    "@strapi/sdk-plugin": "0.0.0-experimental.3ddc4bc338d159d83d4b4e1119dbda5e56f10cf4",
+    "@strapi/sdk-plugin": "5.2.6",
     "@strapi/strapi": "workspace:*"
   },
   "peerDependencies": {
