@@ -1,12 +1,10 @@
-
-
 function reducer(state, action) {
   switch (action.type) {
     case 'UPDATE_PONCTUAL':
       return {
         ...state,
         [action.value.entity]: {
-          color: action.value?.color,
+          qualityVerdict: action.value?.qualityVerdict,
           message: action.value?.message,
         },
       };
@@ -17,4 +15,4 @@ function reducer(state, action) {
   }
 }
 
-export default reducer;
+export { reducer };

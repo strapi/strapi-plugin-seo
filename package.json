@@ -1,29 +1,61 @@
 {
   "name": "@strapi/plugin-seo",
-  "version": "1.9.9",
+  "version": "2.0.0",
   "description": "Make your Strapi content SEO friendly.",
-  "strapi": {
-    "name": "seo",
-    "displayName": "SEO",
-    "description": "Make your Strapi content SEO friendly.",
-    "kind": "plugin"
+  "keywords": [],
+  "type": "commonjs",
+  "exports": {
+    "./package.json": "./package.json",
+    "./strapi-admin": {
+      "source": "./admin/src/index.js",
+      "import": "./dist/admin/index.mjs",
+      "require": "./dist/admin/index.js",
+      "default": "./dist/admin/index.js"
+    },
+    "./strapi-server": {
+      "source": "./server/src/index.js",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js",
+      "default": "./dist/server/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "strapi-plugin build",
+    "verify": "strapi-plugin verify",
+    "watch": "strapi-plugin watch",
+    "watch:link": "strapi-plugin watch:link"
+  },
+  "dependencies": {
+    "@strapi/design-system": "^2.0.0-rc.10",
+    "@strapi/icons": "^2.0.0-rc.10",
+    "date-fns": "^4.1.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "lodash": "^4.17.21",
+    "prettier": "^3.3.3",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-intl": "^6.6.8",
+    "react-router-dom": "^6.0.0",
+    "showdown": "^2.1.0",
+    "styled-components": "^6.0.0"
+  },
+  "devDependencies": {
+    "@strapi/sdk-plugin": "0.0.0-experimental.3ddc4bc338d159d83d4b4e1119dbda5e56f10cf4",
+    "@strapi/strapi": "workspace:*"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "workspace:*"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/strapi/strapi-plugin-seo.git"
   },
-  "dependencies": {
-    "date-fns": "^2.29.3",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "lodash": "^4.17.21",
-    "showdown": "^1.9.1",
-    "styled-components": "^6.0.7"
-  },
   "resolutions": {
-    "yargs": "^17.2.1"
-  },
-  "peerDependencies": {
-    "@strapi/strapi": "^4.0.0"
+    "yargs": "^17.2.1",
+    "prettier": "3.3.3"
   },
   "author": {
     "name": "Strapi Solutions SAS",
@@ -37,5 +69,10 @@
       "url": "https://strapi.io"
     }
   ],
-  "license": "MIT"
+  "strapi": {
+    "name": "seo",
+    "displayName": "SEO",
+    "description": "Make your Strapi content SEO friendly.",
+    "kind": "plugin"
+  }
 }
