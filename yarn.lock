@@ -2098,10 +2098,10 @@
     lodash "4.17.21"
     winston "3.10.0"
 
-"@strapi/pack-up@0.0.0-experimental.d0238c20f2d2af79a77b594f297c7380a46dfe33":
-  version "0.0.0-experimental.d0238c20f2d2af79a77b594f297c7380a46dfe33"
-  resolved "https://registry.yarnpkg.com/@strapi/pack-up/-/pack-up-0.0.0-experimental.d0238c20f2d2af79a77b594f297c7380a46dfe33.tgz#9cbbbd60a54bf622cf099d3366e707055cc6692d"
-  integrity sha512-dAo33lOG6azhqxshipm0PClmdBWiAcx7LDbG7WjsK75LaCLL2oNLzXgmU1V4lnhFBM12NJHdG7CO5EyZFtQKiw==
+"@strapi/pack-up@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@strapi/pack-up/-/pack-up-5.0.0.tgz#aeca7cee2a2e5555e3bdd39528c36385c4ed6ad4"
+  integrity sha512-XN00SUwiR/rFTXxA3TMyuPt6SN4r6vuhUtx3y2D0NTzgVToNi++MyspPQ/jHbolHhQxUWnet6X/2JRprtE/YpQ==
   dependencies:
     "@vitejs/plugin-react-swc" "3.6.0"
     boxen "5.1.2"
@@ -2125,10 +2125,10 @@
     vite "5.2.8"
     yup "0.32.9"
 
-"@strapi/pack-up@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@strapi/pack-up/-/pack-up-5.0.0.tgz#aeca7cee2a2e5555e3bdd39528c36385c4ed6ad4"
-  integrity sha512-XN00SUwiR/rFTXxA3TMyuPt6SN4r6vuhUtx3y2D0NTzgVToNi++MyspPQ/jHbolHhQxUWnet6X/2JRprtE/YpQ==
+"@strapi/pack-up@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@strapi/pack-up/-/pack-up-5.0.1.tgz#02d99b65ccbc81b1421aca21475ec4717fd71f4d"
+  integrity sha512-q1+lzhbfgAhaCNxKMxxog52laGRf2XGY1jegENzHrurKI7qngD8Q8XKD4GuiUc3foFy2GrAHVKCKEUyC0xhHgQ==
   dependencies:
     "@vitejs/plugin-react-swc" "3.6.0"
     boxen "5.1.2"
@@ -2196,12 +2196,12 @@
     react-redux "8.1.3"
     yup "0.32.9"
 
-"@strapi/sdk-plugin@0.0.0-experimental.3ddc4bc338d159d83d4b4e1119dbda5e56f10cf4":
-  version "0.0.0-experimental.3ddc4bc338d159d83d4b4e1119dbda5e56f10cf4"
-  resolved "https://registry.yarnpkg.com/@strapi/sdk-plugin/-/sdk-plugin-0.0.0-experimental.3ddc4bc338d159d83d4b4e1119dbda5e56f10cf4.tgz#9701ca4b0c957ea4ed1c4e3e1c058ce03f96eb62"
-  integrity sha512-aqJFE527PVa9uC5iDt69dFGIRvcalF/twFMKP+5qIuBV9f/ZjejU+L3yhLMw+CIjYfd5Al/2jN1DBsKBhO1zfA==
+"@strapi/sdk-plugin@5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@strapi/sdk-plugin/-/sdk-plugin-5.2.6.tgz#6d6679b1cc2f070dbbc33da4f31baacb7863c8da"
+  integrity sha512-nMbQEiP1QvjUWEoDvG6/4aw0QORC6gL9hE7zxgQh6B6rKUvdw06nhzfMTYocfHyP/GKMourcsdzKGbz1NuIwvw==
   dependencies:
-    "@strapi/pack-up" "0.0.0-experimental.d0238c20f2d2af79a77b594f297c7380a46dfe33"
+    "@strapi/pack-up" "^5.0.1"
     "@types/prompts" "2.4.9"
     boxen "5.1.2"
     chalk "4.1.2"
