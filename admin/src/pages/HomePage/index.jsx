@@ -57,7 +57,6 @@ export const HomePage = React.memo(() => {
     }
   };
 
-  // Fetching the SEO component & Content-Types
   React.useEffect(() => {
     const fetchData = async () => {
       seoComponent.current = await fetchSeoComponent();

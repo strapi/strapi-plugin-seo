@@ -54,7 +54,7 @@ export const CanonicalUrlCheck = ({ canonicalUrl, checks }) => {
         defaultMessage: 'This will check if you have a canonical URL.',
       })}
       component={
-        <Box padding={canonicalUrl ? 4 : 2}>
+        <Box padding={canonicalUrl ? 4 : 0} background="neutral100">
           {canonicalUrl && (
             <Typography variant="omega" fontWeight="bold">
               {canonicalUrl}

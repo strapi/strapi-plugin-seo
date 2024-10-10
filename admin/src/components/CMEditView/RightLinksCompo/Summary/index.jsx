@@ -5,19 +5,19 @@ import {
   unstable_useContentManagerContext as useContentManagerContext,
   unstable_useDocument as useDocument,
 } from '@strapi/strapi/admin';
-import { Box, Button, Divider, Typography, TextButton, Modal } from '@strapi/design-system';
+import { Box, Button, Typography, TextButton, Modal } from '@strapi/design-system';
 import { Eye, ArrowRight } from '@strapi/icons';
 
 import { reducer } from './reducer';
 
 import { SeoChecks } from '../SeoChecks';
-import { SocialPreview } from './SocialPreview';
 import { PreviewChecks } from './PreviewChecks';
 import { BrowserPreview } from './BrowserPreview';
+import { OpenGraphPreview } from './OpenGraphPreview';
 
 import { getTrad } from '../../../../utils/getTrad';
 import { useSettingsApi } from '../../../../hooks/useSettingsApi';
-import { getRichTextCheck } from '../../utils/index';
+import { getRichTextData } from '../../utils/getRichTextData';
 import {
   canonicalUrlPreview,
   getAlternativeTextPreview,
@@ -27,7 +27,7 @@ import {
   getWordCountPreview,
   lastUpdatedAtPreview,
   metaRobotPreview,
-  metaSocialPreview,
+  openGraphPreview,
   structuredDataPreview,
 } from '../../utils/checks';
 
@@ -48,6 +48,8 @@ export const Summary = () => {
   const { model, collectionType, id, form, contentType, components } = useContentManagerContext();
   const { values: modifiedData } = form;
 
+  const { metaTitle, metaDescription, openGraph } = modifiedData.seo;
+
   const { document } = useDocument({
     model,
     collectionType,
@@ -57,7 +59,7 @@ export const Summary = () => {
   const getAllChecks = async (modifiedData, components, contentType) => {
     const { data: defaultSettings } = await getSettings();
 
-    const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
+    const { wordCount, keywordsDensity, emptyAltCount } = getRichTextData(
       modifiedData,
       components,
       contentType
@@ -73,8 +75,8 @@ export const Summary = () => {
       ...(defaultSettings[contentType?.uid]?.seoChecks?.metaRobots && {
         metaRobots: metaRobotPreview(modifiedData),
       }),
-      ...(defaultSettings[contentType?.uid]?.seoChecks?.metaSocial && {
-        metaSocial: metaSocialPreview(modifiedData),
+      ...(defaultSettings[contentType?.uid]?.seoChecks?.openGraph && {
+        openGraph: openGraphPreview(modifiedData),
       }),
       ...(defaultSettings[contentType?.uid]?.seoChecks?.canonicalUrl && {
         canonicalUrl: canonicalUrlPreview(modifiedData),
@@ -133,33 +135,37 @@ export const Summary = () => {
           })}
         </Typography>
 
-        <Modal.Root>
-          <Modal.Trigger>
-            <Box paddingTop={1}>
-              <Button fullWidth variant="secondary" startIcon={<Eye />}>
-                {formatMessage({
-                  id: getTrad('Button.browser-preview'),
-                  defaultMessage: 'Browser Preview',
-                })}
-              </Button>
-            </Box>
-          </Modal.Trigger>
-          <BrowserPreview modifiedData={modifiedData} />
-        </Modal.Root>
+        {metaTitle && metaDescription && (
+          <Modal.Root>
+            <Modal.Trigger>
+              <Box paddingTop={1}>
+                <Button fullWidth variant="secondary" startIcon={<Eye />}>
+                  {formatMessage({
+                    id: getTrad('Button.browser-preview'),
+                    defaultMessage: 'Browser Preview',
+                  })}
+                </Button>
+              </Box>
+            </Modal.Trigger>
+            <BrowserPreview modifiedData={modifiedData} />
+          </Modal.Root>
+        )}
 
-        <Modal.Root>
-          <Modal.Trigger>
-            <Box paddingTop={2}>
-              <Button fullWidth variant="secondary" startIcon={<Eye />}>
-                {formatMessage({
-                  id: getTrad('Button.social-preview'),
-                  defaultMessage: 'Social Preview',
-                })}
-              </Button>
-            </Box>
-          </Modal.Trigger>
-          <SocialPreview modifiedData={modifiedData} />
-        </Modal.Root>
+        {openGraph && (
+          <Modal.Root>
+            <Modal.Trigger>
+              <Box paddingTop={2}>
+                <Button fullWidth variant="secondary" startIcon={<Eye />}>
+                  {formatMessage({
+                    id: getTrad('Button.open-graph-preview'),
+                    defaultMessage: 'Open Graph Preview',
+                  })}
+                </Button>
+              </Box>
+            </Modal.Trigger>
+            <OpenGraphPreview modifiedData={modifiedData} />
+          </Modal.Root>
+        )}
 
         {!isLoading && <PreviewChecks checks={checks} />}
 

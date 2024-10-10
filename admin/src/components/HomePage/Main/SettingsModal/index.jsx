@@ -18,7 +18,7 @@ export const SettingsModal = ({ item }) => {
   const [metaTitle, setMetaTitle] = React.useState(true);
   const [metaDescription, setMetaDescription] = React.useState(true);
   const [metaRobots, setMetaRobots] = React.useState(true);
-  const [metaSocial, setMetaSocial] = React.useState(true);
+  const [openGraph, setOpenGraph] = React.useState(true);
   const [wordCount, setWordCount] = React.useState(true);
   const [canonicalUrl, setCanonicalUrl] = React.useState(true);
   const [keywordDensity, setKeywordDensity] = React.useState(true);
@@ -48,7 +48,7 @@ export const SettingsModal = ({ item }) => {
     setMetaTitle(seoChecks?.metaTitle);
     setMetaDescription(seoChecks?.metaDescription);
     setMetaRobots(seoChecks?.metaRobots);
-    setMetaSocial(seoChecks?.metaSocial);
+    setOpenGraph(seoChecks?.openGraph);
     setWordCount(seoChecks?.wordCount);
     setCanonicalUrl(seoChecks?.canonicalUrl);
     setKeywordDensity(seoChecks?.keywordDensity);
@@ -70,7 +70,7 @@ export const SettingsModal = ({ item }) => {
           metaTitle,
           metaDescription,
           metaRobots,
-          metaSocial,
+          openGraph,
           wordCount,
           canonicalUrl,
           keywordDensity,
@@ -161,10 +161,10 @@ export const SettingsModal = ({ item }) => {
                   defaultMessage: 'Meta Robots',
                 },
                 {
-                  state: metaSocial,
-                  stateSetter: setMetaSocial,
-                  id: 'meta-social-check',
-                  defaultMessage: 'Meta Social',
+                  state: openGraph,
+                  stateSetter: setOpenGraph,
+                  id: 'open-graph-check',
+                  defaultMessage: 'Open Graph',
                 },
                 {
                   state: wordCount,

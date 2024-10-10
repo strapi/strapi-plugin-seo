@@ -78,7 +78,7 @@ export const KeywordDensityCheck = ({ keywordsDensity, checks }) => {
       component={
         keywordsDensity &&
         !isEmpty(keywordsDensity) && (
-          <Box padding={2}>
+          <Box padding={2} background="neutral100">
             <Flex wrap="wrap">
               {Object.keys(keywordsDensity).map((keyword) => (
                 <Box padding={2} key={keyword}>

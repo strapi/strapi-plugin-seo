@@ -1,7 +1,7 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 import seoContent from '../components/seo.json';
-import metaSocialContent from '../components/meta-social.json';
+import openGraph from '../components/open-graph.json';
 
 export const seoService = ({ strapi }) => ({
   getSeoComponent() {
@@ -55,7 +55,7 @@ export const seoService = ({ strapi }) => ({
     const seoComponent = await this.getSeoComponent();
 
     if (!seoComponent) {
-      if (metaSocialContent && seoContent) {
+      if (openGraph && seoContent) {
         try {
           const res = await strapi
             .plugin('content-type-builder')
@@ -68,11 +68,11 @@ export const seoService = ({ strapi }) => ({
               },
               components: [
                 {
-                  tmpUID: 'shared.meta-social',
+                  tmpUID: 'shared.open-graph',
                   category: 'shared',
-                  displayName: metaSocialContent.info.displayName,
-                  icon: metaSocialContent.info.icon,
-                  attributes: metaSocialContent.attributes,
+                  displayName: openGraph.info.displayName,
+                  icon: openGraph.info.icon,
+                  attributes: openGraph.attributes,
                 },
               ],
             });

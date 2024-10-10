@@ -54,7 +54,6 @@ export const StructuredDataCheck = ({ structuredData, checks }) => {
         defaultMessage:
           'Structured data is a standardized format for providing information about a page and classifying the page content.',
       })}
-      component={<Box padding={2}></Box>}
     />
   );
 };
