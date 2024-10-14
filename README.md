@@ -17,6 +17,9 @@ To install this plugin, you need to add an NPM dependency to your Strapi applica
 # Using Yarn
 yarn add @strapi/plugin-seo
 
+# Or using PNPM
+pnpm add @strapi/plugin-seo
+
 # Or using NPM
 npm install @strapi/plugin-seo
 ```
