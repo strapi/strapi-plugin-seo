@@ -44,10 +44,10 @@
   },
   "devDependencies": {
     "@strapi/sdk-plugin": "5.2.6",
-    "@strapi/strapi": "workspace:*"
+    "@strapi/strapi": "^5.0.6"
   },
   "peerDependencies": {
-    "@strapi/strapi": "workspace:*"
+    "@strapi/strapi": "^5.0.6"
   },
   "repository": {
     "type": "git",
