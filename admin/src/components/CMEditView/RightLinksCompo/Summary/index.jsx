@@ -43,6 +43,8 @@ export const Summary = () => {
 
   const [isLoading, setIsLoading] = React.useState(true);
   const [localChecks, setLocalChecks] = React.useState({});
+  const [manualCheck, setManualCheck] = React.useState(false);
+
   const [checks, dispatch] = React.useReducer(reducer, initialState);
 
   const { model, collectionType, id, form, contentType, components } = useContentManagerContext();
@@ -99,29 +101,31 @@ export const Summary = () => {
     return result;
   };
 
-  React.useEffect(() => {
-    const fetchChecks = async () => {
-      if (!(JSON.stringify(localChecks) === JSON.stringify(checks))) {
-        if (checks?.preview) {
-          const status = await getAllChecks(modifiedData, components, contentType);
+  const fetchChecks = async (manualCheck = false) => {
+    if (manualCheck || !(JSON.stringify(localChecks) === JSON.stringify(checks))) {
+      setIsLoading(true);
+      const status = await getAllChecks(modifiedData, components, contentType);
 
-          dispatch({
-            type: 'UPDATE_FOR_PREVIEW',
-            value: status,
-          });
-        } else
-          dispatch({
-            type: 'UPDATE_FOR_PREVIEW',
-            value: checks,
-          });
-        setLocalChecks(checks);
-      }
-    };
+      dispatch({
+        type: 'UPDATE_FOR_PREVIEW',
+        value: status,
+      });
 
-    fetchChecks().then(() => {
+      setLocalChecks(checks);
       setIsLoading(false);
-    });
-  }, [checks]);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchChecks();
+  }, [checks, modifiedData, components, contentType]);
+
+  React.useEffect(() => {
+    if (manualCheck) {
+      fetchChecks(true);
+      setManualCheck(false);
+    }
+  }, [manualCheck, fetchChecks]);
 
   return (
     <SeoCheckerContext.Provider value={dispatch}>
@@ -162,6 +166,15 @@ export const Summary = () => {
         </Modal.Root>
 
         {!isLoading && <PreviewChecks checks={checks} />}
+
+        <Box paddingTop={4}>
+          <Button fullWidth variant="secondary" onClick={() => setManualCheck(true)}>
+            {formatMessage({
+              id: getTrad('Button.manual-recheck'),
+              defaultMessage: 'Manual Re-check',
+            })}
+          </Button>
+        </Box>
 
         <Modal.Root>
           <Modal.Trigger>
