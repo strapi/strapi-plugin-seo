@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 
-import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
 
 import { Box, Flex, Typography, Status } from '@strapi/design-system';
-import { More } from '@strapi/icons';
+import { WarningCircle } from '@strapi/icons';
 
 import { getTrad } from '../../../../../utils/getTrad';
 
@@ -39,7 +38,7 @@ export const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, ch
         qualityVerdict: qualityVerdict.bad,
       };
     } else if (altTexts.includes('')) {
-      const count = altTexts.filter((x) => x === '').length;
+      const count = Math.abs(intersections);
       status = {
         message: `${count} ${formatMessage({
           id: getTrad('SEOChecks.alternativeTextCheck.intersection-negative'),
@@ -77,26 +76,35 @@ export const AlternativeTextCheck = ({ intersections, richTextAlts, altTexts, ch
           'This will check if you have any missing alternative text for your images (media fields) and in your 1st level richtext editors.',
       })}
       component={
-        <Box padding={2}>
-          {richTextAlts.map((alt, index) => (
-            <Flex key={index} spacing={2} horizontal background="neutral0" padding={2}>
-              <More
-                aria-hidden={true}
-                colors={(theme) => ({
-                  rect: {
-                    fill: get(theme, `colors.${alt.occurences === 0 ? 'success' : 'danger'}600`),
-                  },
-                })}
-              />
-
-              <Typography>
-                <Typography fontWeight="bold">{alt.occurences} </Typography>
-                {formatMessage({
-                  id: getTrad('SEOChecks.alternativeTextCheck.missing-text'),
-                  defaultMessage: 'missing alt in the following richtext field:',
-                })}
-                <Typography fontWeight="bold"> {alt.field}</Typography>
+        <Box padding={2} background="neutral100">
+          <Flex spacing={2} horizontal padding={2}>
+            <WarningCircle aria-hidden={true} fill={`warning600`} />
+            <Typography paddingLeft={1}>
+              <Typography fontWeight="bold">
+                {altTexts.filter((item) => item === '').length}{' '}
               </Typography>
+              {formatMessage({
+                id: getTrad('SEOChecks.alternativeTextCheck.missing-image'),
+                defaultMessage: 'missing on first level image fields or inside a component.',
+              })}
+            </Typography>
+          </Flex>
+
+          {richTextAlts.map((alt, index) => (
+            <Flex key={index} spacing={2} horizontal padding={2}>
+              {alt.occurences > 0 && (
+                <>
+                  <WarningCircle aria-hidden={true} fill={`warning600`} />
+                  <Typography paddingLeft={1}>
+                    <Typography fontWeight="bold">{alt.occurences} </Typography>
+                    {formatMessage({
+                      id: getTrad('SEOChecks.alternativeTextCheck.missing-text'),
+                      defaultMessage: 'missing alt in the following richtext field:',
+                    })}
+                    <Typography fontWeight="bold"> {alt.field}</Typography>
+                  </Typography>
+                </>
+              )}
             </Flex>
           ))}
           <Flex spacing={2} paddingTop={4} paddingLeft={2} paddingRight={2} paddingBottom={4}>

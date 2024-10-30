@@ -7,7 +7,7 @@ import { Illo } from '../../../HomePage/Main/EmptyComponentLayout/illo';
 import { MetaRobotCheck } from './MetaRobotCheck';
 import { WordCountCheck } from './WordCountCheck';
 import { MetaTitleCheck } from './MetaTitleCheck';
-import { MetaSocialCheck } from './MetaSocialCheck';
+import { OpenGraphCheck } from './OpenGraphCheck';
 import { CanonicalUrlCheck } from './CanonicalUrlCheck';
 import { LastUpdatedAtCheck } from './LastUpdatedAtCheck';
 import { KeywordDensityCheck } from './KeywordDensityCheck';
@@ -15,7 +15,7 @@ import { StructuredDataCheck } from './StructuredDataCheck';
 import { MetaDescriptionCheck } from './MetaDescriptionCheck';
 import { AlternativeTextCheck } from './AlternativeTextCheck';
 
-import { getRichTextCheck } from '../../utils';
+import { getRichTextData } from '../../utils/getRichTextData';
 
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../../utils/getTrad';
@@ -23,7 +23,7 @@ import { getTrad } from '../../../../utils/getTrad';
 export const SeoChecks = ({ updatedAt, modifiedData, components, contentType, checks }) => {
   const { formatMessage } = useIntl();
 
-  const { wordCount, keywordsDensity, emptyAltCount } = getRichTextCheck(
+  const { wordCount, keywordsDensity, emptyAltCount } = getRichTextData(
     modifiedData,
     components,
     contentType
@@ -58,8 +58,8 @@ export const SeoChecks = ({ updatedAt, modifiedData, components, contentType, ch
             {checks?.keywordsDensity && (
               <KeywordDensityCheck keywordsDensity={keywordsDensity} checks={checks} />
             )}
-            {checks?.metaSocial && (
-              <MetaSocialCheck metaSocial={seo?.metaSocial ?? null} checks={checks} />
+            {checks?.openGraph && (
+              <OpenGraphCheck openGraph={seo?.openGraph ?? null} checks={checks} />
             )}
             {checks?.canonicalUrl && (
               <CanonicalUrlCheck canonicalUrl={seo?.canonicalURL ?? null} checks={checks} />

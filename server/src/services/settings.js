@@ -22,7 +22,7 @@ export const settingsService = ({ strapi }) => {
           metaTitle: true,
           metaDescription: true,
           metaRobots: true,
-          metaSocial: true,
+          openGraph: true,
           wordCount: true,
           canonicalUrl: true,
           keywordDensity: true,

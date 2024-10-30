@@ -194,36 +194,24 @@ export const metaRobotPreview = (modifiedData) => {
   return status;
 };
 
-export const metaSocialPreview = (modifiedData) => {
-  const metaSocial = get(modifiedData, 'seo.metaSocial');
+export const openGraphPreview = (modifiedData) => {
+  const openGraph = get(modifiedData, 'seo.openGraph');
 
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.good,
   };
 
-  if (isNull(metaSocial) || metaSocial === undefined) {
-    status = {
-      message: '',
-      qualityVerdict: qualityVerdict.improvements,
-    };
-    return status;
-  }
-  const count = metaSocial.filter((meta) => !isNull(meta.id)).length;
-  if (count === 0) {
-    status = {
-      message: '',
-      qualityVerdict: qualityVerdict.improvements,
-    };
-  } else if (count == 1) {
+  if (isNull(openGraph) || openGraph === undefined) {
     status = {
       message: '',
       qualityVerdict: qualityVerdict.bad,
     };
-  } else {
+    return status;
+  } else if (!openGraph['og:title'] || !openGraph['og:description'] || !openGraph['og:image']) {
     status = {
       message: '',
-      qualityVerdict: qualityVerdict.good,
+      qualityVerdict: qualityVerdict.improvements,
     };
   }
   return status;

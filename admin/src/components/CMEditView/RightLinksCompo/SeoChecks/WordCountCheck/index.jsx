@@ -66,8 +66,8 @@ export const WordCountCheck = ({ wordCount, checks }) => {
       })}
       component={
         isNumber(wordCount) && (
-          <Box padding={4}>
-            <Typography variant="omega" fontWeight="semiBold">
+          <Box padding={4} background="neutral100">
+            <Typography variant="omega" fontWeight="bold">
               {formatMessage({
                 id: getTrad('SEOChecks.wordCountCheck.words'),
                 defaultMessage: 'Words:',

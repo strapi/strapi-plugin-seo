@@ -3,18 +3,9 @@ import { useIntl } from 'react-intl';
 
 import get from 'lodash/get';
 
-import {
-  Box,
-  Flex,
-  Switch,
-  Divider,
-  Typography,
-  EmptyStateLayout,
-  Modal,
-} from '@strapi/design-system';
+import { Box, Flex, Divider, Typography, EmptyStateLayout, Modal } from '@strapi/design-system';
 
 import { Serp } from './Serp';
-import { SerpMobile } from './SerpMobile';
 import { MetaChecks } from './MetaChecks';
 import { KeywordCheck } from './KeywordCheck';
 
@@ -24,7 +15,6 @@ import { getTrad } from '../../../../../utils/getTrad';
 
 export const BrowserPreview = ({ modifiedData }) => {
   const { formatMessage } = useIntl();
-  const [checked, setChecked] = React.useState(false);
 
   const seo = get(modifiedData, 'seo', null);
   const metaTitle = get(seo, 'metaTitle', null);
@@ -44,24 +34,11 @@ export const BrowserPreview = ({ modifiedData }) => {
       <Modal.Body>
         {seo ? (
           <Flex direction="column" gap={2} alignItems="flex-start">
-            <Box paddingBottom={6}>
-              <Box paddingBottom={4}>
-                <Switch
-                  label="Preview"
-                  offLabel="Web"
-                  onLabel="Mobile"
-                  selected={checked}
-                  onCheckedChange={() => setChecked((s) => !s)}
-                  visibleLabels={true}
-                />
-              </Box>
-
-              {checked ? (
-                <SerpMobile metaTitle={metaTitle} metaDescription={metaDescription} />
-              ) : (
+            {metaTitle && metaDescription && (
+              <Box paddingBottom={6}>
                 <Serp metaTitle={metaTitle} metaDescription={metaDescription} />
-              )}
-            </Box>
+              </Box>
+            )}
 
             <Divider marginBottom={4} width="100%" />
 

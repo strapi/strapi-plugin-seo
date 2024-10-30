@@ -32,7 +32,6 @@
     "@strapi/design-system": "^2.0.0-rc.10",
     "@strapi/icons": "^2.0.0-rc.10",
     "date-fns": "^4.1.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
     "lodash": "^4.17.21",
     "prettier": "^3.3.3",
     "react": "^18.0.0",

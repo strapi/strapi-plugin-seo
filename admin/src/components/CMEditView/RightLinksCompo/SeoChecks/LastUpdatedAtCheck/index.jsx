@@ -69,7 +69,7 @@ export const LastUpdatedAtCheck = ({ updatedAt, checks }) => {
       status={checks.lastUpdatedAt}
       component={
         updatedAt && (
-          <Box padding={4}>
+          <Box padding={4} background="neutral100">
             <Typography variant="omega">
               {formatMessage({
                 id: getTrad('SEOChecks.lastUpdatedAtCheck.last"'),

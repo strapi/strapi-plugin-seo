@@ -7,7 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
 
 import { Box, Status, Flex, Typography } from '@strapi/design-system';
-import { More } from '@strapi/icons';
+import { CheckCircle, WarningCircle } from '@strapi/icons';
 
 import { SEOAccordion } from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
@@ -81,21 +81,16 @@ export const MetaRobotCheck = ({ metaRobots, checks }) => {
           'The robots meta tag informs search engines which pages on your site should be indexed and more.',
       })}
       component={
-        <Box padding={2}>
+        <Box padding={2} background="neutral100">
           {robotTags.map((tag, index) => (
-            <Flex spacing={2} key={index} horizontal background="neutral0" padding={2}>
-              <More
-                aria-hidden={true}
-                colors={(theme) => ({
-                  rect: {
-                    fill: get(
-                      theme,
-                      `colors.${tags.find((x) => x.trim() === tag.name) ? `warning` : `success`}600`
-                    ),
-                  },
-                })}
-              />
-              <Typography>
+            <Flex spacing={2} key={index} horizontal padding={2}>
+              {tags.find((x) => x.trim() === tag.name) ? (
+                <CheckCircle aria-hidden={true} fill={`success600`} />
+              ) : (
+                <WarningCircle aria-hidden={true} fill={`warning600`} />
+              )}
+
+              <Typography paddingLeft={1}>
                 {tags.find((x) => x.trim() === tag.name)
                   ? `${tag.name} is activated:
           ${tag.message.replace('will', 'will not')}`

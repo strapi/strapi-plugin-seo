@@ -22,15 +22,13 @@
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "images"
       ]
     },
-    "metaSocial": {
+    "openGraph": {
       "type": "component",
-      "repeatable": true,
-      "component": "shared.meta-social"
+      "repeatable": false,
+      "component": "shared.open-graph"
     },
     "keywords": {
       "type": "text",
@@ -40,14 +38,14 @@
       "type": "string",
       "regex": "[^,]+"
     },
-    "structuredData": {
-      "type": "json"
-    },
     "metaViewport": {
       "type": "string"
     },
     "canonicalURL": {
       "type": "string"
+    },
+    "structuredData": {
+      "type": "json"
     }
   }
 }

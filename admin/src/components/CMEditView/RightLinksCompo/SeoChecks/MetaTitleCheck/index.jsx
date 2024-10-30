@@ -32,7 +32,7 @@ export const MetaTitleCheck = ({ metaTitle, checks }) => {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.metaTitleCheck.not-found'),
-          defaultMessage: 'No Meta Description has been found.',
+          defaultMessage: 'No Meta Title has been found.',
         }),
         qualityVerdict: qualityVerdict.improvements,
       };
@@ -66,7 +66,7 @@ export const MetaTitleCheck = ({ metaTitle, checks }) => {
       })}
       component={
         metaTitle && (
-          <Box padding={4} background="neutral100" marginTop={4}>
+          <Box padding={4} background="neutral100">
             <Typography variant="omega" fontWeight="semiBold">
               {metaTitle}
             </Typography>
@@ -74,6 +74,7 @@ export const MetaTitleCheck = ({ metaTitle, checks }) => {
             <Box paddingTop={2}>
               <Flex horizontal spacing={2}>
                 <ProgressBar
+                  size="M"
                   value={
                     (metaTitle.length * 100) / maxLength > 100
                       ? 100
