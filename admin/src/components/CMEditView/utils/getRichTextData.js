@@ -36,27 +36,41 @@ const extractTextFromBlocks = (blocks) => {
  * @param {string} field - The field name being analyzed.
  * @returns {Object} - The count of images without alt text.
  */
-const getEmptyAltCount = (richtext, field, name) => {
+const getEmptyAltCount = (richtext, field, name, isBlock = false) => {
+  let htmlOccurrences = 0;
+  let markdownOccurrences = 0;
+  let blockOccurences = 0;
 
-  if (richtext) {
+  if (isBlock) {
+    richtext.forEach((element) => {
+      // Check if the current element is an image and has the 'image' field
+
+      if (element.type === 'image' && element.image) {
+        if (!element.image.alternativeText) {
+          blockOccurences += 1; // Increment if alternativeText is missing or empty
+        }
+      }
+    });
+  } else if (richtext) {
     // Count markdown-style empty alt texts
-    const markdownOccurrences = richtext
-      .split('\n')
-      .filter((entry) => entry.includes('![](')).length;
+    markdownOccurrences = richtext.split('\n').filter((entry) => entry.includes('![](')).length;
 
     // Count HTML-style empty alt texts
     const htmlImages = richtext.match(/<img[^>]*\/?>/g) || [];
-    const htmlOccurrences = htmlImages.filter((image) => !image.includes('alt=')).length;
+    htmlOccurrences = htmlImages.filter((image) => !image.includes('alt=')).length;
+  }
 
-    if (name) {
-      if (name.includes('.')) {
-        return {
-          field: `[dynamic-zone].${name.split('.').pop()}.${field}`,
-          occurences: markdownOccurrences + htmlOccurrences,
-        };
-      }
-      return { field: `${name}.${field}`, occurences: markdownOccurrences + htmlOccurrences };
+  if (name) {
+    if (name.includes('.')) {
+      return {
+        field: `[dynamic-zone].${name.split('.').pop()}.${field}`,
+        occurences: markdownOccurrences + htmlOccurrences + blockOccurences,
+      };
     }
+    return {
+      field: `${name}.${field}`,
+      occurences: markdownOccurrences + htmlOccurrences + blockOccurences,
+    };
   }
   return { field, occurences: 0 };
 };
@@ -70,17 +84,19 @@ const getEmptyAltCount = (richtext, field, name) => {
  */
 const increaseCounter = (base, field, isBlock = false, name = null) => {
   let richtext = '';
+  let emptyAlts = {};
 
   if (isBlock) {
     // Extract text from blocks if it's a block field
     richtext = extractTextFromBlocks(base?.[field] ?? []);
+    emptyAlts = getEmptyAltCount(base?.[field], field, name, true);
   } else {
     // Handle regular richtext/Markdown fields
     richtext = base?.[field] ?? '';
+    emptyAlts = getEmptyAltCount(richtext, field, name);
   }
 
   // Check for empty alt text occurrences in the richtext
-  const emptyAlts = getEmptyAltCount(richtext, field, name);
 
   if (richtext) {
     // Convert markdown to HTML (only for non-block fields)
@@ -126,6 +142,30 @@ const buildKeywordDensityObject = (keywords, words, keywordsDensity) => {
   });
 
   return tempKeywordsDensity;
+};
+
+const adjustIntersections = (data) => {
+  // Destructure the emptyAltCount from the input object
+  const { emptyAltCount } = data;
+
+  // Initialize a counter for the total number of occurrences
+  let occurrences = 0;
+
+  // Count the total occurrences from richTextAlts
+  emptyAltCount.richTextAlts.forEach((alt) => {
+    occurrences += alt.occurences;
+  });
+
+  // Count the total occurrences from blockTextAlts
+  emptyAltCount.blockTextAlts.forEach((alt) => {
+    occurrences += alt.occurences;
+  });
+
+  // Decrease the intersections value by the total number of occurrences
+  emptyAltCount.intersections -= occurrences;
+
+  // Return the modified data object
+  return data;
 };
 
 /**
@@ -308,12 +348,11 @@ const getRichTextData = (modifiedData, components, contentType) => {
       }
     }
   });
-
-  return {
+  return adjustIntersections({
     wordCount,
     keywordsDensity,
     emptyAltCount,
-  };
+  });
 };
 
 export { getRichTextData };

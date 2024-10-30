@@ -54,6 +54,7 @@
     "SEOChecks.alternativeTextCheck.richtext-missing-one": "Il manque un attribut alt à au moins une image dans n'importe quel éditeur de texte enrichi de 1er niveau.",
     "SEOChecks.alternativeTextCheck.label": "Cela vérifiera s'il vous manque du texte alternatif pour vos images (champ média) et dans vos éditeurs de texte enrichi de 1er niveau.",
     "SEOChecks.alternativeTextCheck.missing-text": "alt manquant dans le champ de texte enrichi suivant :",
+    "SEOChecks.alternativeTextCheck.missing-image": "images sont manquants au premier niveau ou bien dans un composant.",
     "SEOChecks.canonicalUrlCheck.default": "Aucune URL canonique n'a été trouvée.",
     "SEOChecks.canonicalUrlCheck.found": "Une URL canonique a été trouvée !",
     "SEOChecks.canonicalUrlCheck.label": "Cela vérifiera si vous avez une URL canonique.",

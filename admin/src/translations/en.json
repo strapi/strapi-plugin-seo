@@ -53,6 +53,7 @@
     "SEOChecks.alternativeTextCheck.richtext-missing-one": "At least one image in any 1st level richtext editor is missing an alt attribute.",
     "SEOChecks.alternativeTextCheck.label": "This will check if you have any missing alternative text for your images (media field) and in your 1st level richtext editors.",
     "SEOChecks.alternativeTextCheck.missing-text": "missing alt in the following richtext field:",
+    "SEOChecks.alternativeTextCheck.missing-image": "missing on first level image fields or inside a component.",
     "SEOChecks.canonicalUrlCheck.default": "No canonical URL has been found.",
     "SEOChecks.canonicalUrlCheck.found": "A Canonical URL has been found!",
     "SEOChecks.canonicalUrlCheck.label": "This will check if you have a canonical URL.",
