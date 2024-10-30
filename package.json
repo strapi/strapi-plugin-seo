@@ -1,6 +1,6 @@
 {
   "name": "@strapi/plugin-seo",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Make your Strapi content SEO friendly.",
   "keywords": [],
   "type": "commonjs",
@@ -43,10 +43,10 @@
   },
   "devDependencies": {
     "@strapi/sdk-plugin": "5.2.6",
-    "@strapi/strapi": "workspace:*"
+    "@strapi/strapi": "^5.0.6"
   },
   "peerDependencies": {
-    "@strapi/strapi": "workspace:*"
+    "@strapi/strapi": "^5.0.6"
   },
   "repository": {
     "type": "git",
