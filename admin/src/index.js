@@ -8,12 +8,12 @@ import { pluginPermissions } from './permissions';
 import { pluginId } from './pluginId';
 import { prefixPluginTranslations } from './utils/prefixPluginTranslations';
 
-const name = pluginPkg.stapi.name;
+const name = pluginPkg.strapi.name;
 
 export default {
   register(app) {
     app.addMenuLink({
-      to: `${pluginId}`,,
+      to: `${pluginId}`,
       icon: Search,
       permissions: pluginPermissions.main,
       intlLabel: {
