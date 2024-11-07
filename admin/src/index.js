@@ -8,23 +8,19 @@ import { pluginPermissions } from './permissions';
 import { pluginId } from './pluginId';
 import { prefixPluginTranslations } from './utils/prefixPluginTranslations';
 
-const name = pluginPkg.strapi.name;
+const name = pluginPkg.stapi.name;
 
 export default {
   register(app) {
     app.addMenuLink({
-      to: `/plugins/${pluginId}`,
+      to: `${pluginId}`,,
       icon: Search,
       permissions: pluginPermissions.main,
       intlLabel: {
         id: `${pluginId}.plugin.name`,
         defaultMessage: 'SEO',
       },
-      Component: async () => {
-        const { App } = await import('./pages/App');
-
-        return App;
-      },
+      Component: () => import('./pages/App'),
     });
     app.registerPlugin({
       id: pluginId,
