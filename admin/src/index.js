@@ -13,18 +13,14 @@ const name = pluginPkg.strapi.name;
 export default {
   register(app) {
     app.addMenuLink({
-      to: `/plugins/${pluginId}`,
+      to: `${pluginId}`,
       icon: Search,
       permissions: pluginPermissions.main,
       intlLabel: {
         id: `${pluginId}.plugin.name`,
         defaultMessage: 'SEO',
       },
-      Component: async () => {
-        const { App } = await import('./pages/App');
-
-        return App;
-      },
+      Component: () => import('./pages/App'),
     });
     app.registerPlugin({
       id: pluginId,

@@ -15,7 +15,7 @@ import {
 import { HomePage } from '../HomePage';
 import { pluginPermissions } from '../../permissions';
 
-export const App = () => {
+const App = () => {
   return (
     <AutoReloadOverlayBlockerProvider>
       <Page.Protect permissions={pluginPermissions.main}>
@@ -27,3 +27,5 @@ export const App = () => {
     </AutoReloadOverlayBlockerProvider>
   );
 };
+
+export default App
