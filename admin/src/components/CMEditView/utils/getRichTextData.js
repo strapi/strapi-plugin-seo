@@ -41,7 +41,7 @@ const getEmptyAltCount = (richtext, field, name, isBlock = false) => {
   let markdownOccurrences = 0;
   let blockOccurences = 0;
 
-  if (isBlock) {
+  if (isBlock && richtext) {
     richtext.forEach((element) => {
       // Check if the current element is an image and has the 'image' field
 
