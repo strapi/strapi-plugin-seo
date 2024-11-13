@@ -10,7 +10,7 @@ export const SeoChecker = () => {
     form: { values },
   } = useContentManagerContext();
 
-  if (values.hasOwnProperty('seo')) {
+  if (values?.seo) {
     return <Summary />;
   }
 
