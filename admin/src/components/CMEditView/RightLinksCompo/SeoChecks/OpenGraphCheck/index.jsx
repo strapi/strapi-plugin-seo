@@ -3,9 +3,6 @@ import { useIntl } from 'react-intl';
 
 import isEqual from 'lodash/isEqual';
 import isNull from 'lodash/isNull';
-import isEmpty from 'lodash/isEmpty';
-
-import { Box, Badge, Flex } from '@strapi/design-system';
 
 import { SEOAccordion } from '../SEOAccordion';
 import { SeoCheckerContext } from '../../Summary';
@@ -31,7 +28,7 @@ export const OpenGraphCheck = ({ openGraph, checks }) => {
         }),
         qualityVerdict: qualityVerdict.bad,
       };
-    } else if (!openGraph['og:title'] || !openGraph['og:description'] || !openGraph['og:image']) {
+    } else if (!openGraph['ogTitle'] || !openGraph['ogDescription'] || !openGraph['ogImage']) {
       status = {
         message: formatMessage({
           id: getTrad('SEOChecks.openGraphCheck.not-configured'),

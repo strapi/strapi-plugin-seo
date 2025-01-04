@@ -208,7 +208,7 @@ export const openGraphPreview = (modifiedData) => {
       qualityVerdict: qualityVerdict.bad,
     };
     return status;
-  } else if (!openGraph['og:title'] || !openGraph['og:description'] || !openGraph['og:image']) {
+  } else if (!openGraph['ogTitle'] || !openGraph['ogDescription'] || !openGraph['ogImage']) {
     status = {
       message: '',
       qualityVerdict: qualityVerdict.improvements,

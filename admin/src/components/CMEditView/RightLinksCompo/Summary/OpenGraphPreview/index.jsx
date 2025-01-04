@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 
-import { Box, Flex, Typography, EmptyStateLayout, Badge, Modal } from '@strapi/design-system';
+import { Badge, Box, EmptyStateLayout, Flex, Modal, Typography } from '@strapi/design-system';
 
 import { Illo } from '../../../../HomePage/Main/EmptyComponentLayout/illo';
 
@@ -26,7 +26,7 @@ export const OpenGraphPreview = ({ modifiedData }) => {
         </Typography>
       </Modal.Header>
       <Modal.Body>
-        {openGraph['og:title'] && openGraph['og:description'] && openGraph['og:image'] ? (
+        {openGraph['ogTitle'] && openGraph['ogDescription'] && openGraph['ogImage'] ? (
           <>
             <Flex alignItems="left" direction="column" gap={2}>
               <Flex gap={1}>
@@ -36,9 +36,9 @@ export const OpenGraphPreview = ({ modifiedData }) => {
               </Flex>
             </Flex>
             <FacebookOGPreview
-              title={openGraph['og:title']}
-              description={openGraph['og:description']}
-              image={openGraph['og:image']}
+              title={openGraph['ogTitle']}
+              description={openGraph['ogDescription']}
+              image={openGraph['ogImage']}
             />
             <Flex alignItems="left" direction="column" gap={2}>
               <Flex gap={1}>
@@ -48,9 +48,9 @@ export const OpenGraphPreview = ({ modifiedData }) => {
               </Flex>
             </Flex>
             <TwitterOGPreview
-              title={openGraph['og:title']}
-              description={openGraph['og:description']}
-              image={openGraph['og:image']}
+              title={openGraph['ogTitle']}
+              description={openGraph['ogDescription']}
+              image={openGraph['ogImage']}
             />
             <Flex alignItems="left" direction="column" gap={2}>
               <Flex gap={1}>
@@ -60,9 +60,9 @@ export const OpenGraphPreview = ({ modifiedData }) => {
               </Flex>
             </Flex>
             <LinkedInOGPreview
-              title={openGraph['og:title']}
-              description={openGraph['og:description']}
-              image={openGraph['og:image']}
+              title={openGraph['ogTitle']}
+              description={openGraph['ogDescription']}
+              image={openGraph['ogImage']}
             />
           </>
         ) : (
