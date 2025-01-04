@@ -6,28 +6,28 @@
   },
   "options": {},
   "attributes": {
-    "og:title": {
+    "ogTitle": {
       "type": "string",
       "required": true,
       "maxLength": 70
     },
-    "og:description": {
+    "ogDescription": {
       "type": "string",
       "maxLength": 200,
       "required": true
     },
-    "og:image": {
+    "ogImage": {
       "allowedTypes": [
         "images"
       ],
       "type": "media",
       "multiple": false
     },
-    "og:url": {
+    "ogUrl": {
       "type": "string",
       "required": false
     },
-    "og:type": {
+    "ogType": {
       "type": "string",
       "required": false
     }
