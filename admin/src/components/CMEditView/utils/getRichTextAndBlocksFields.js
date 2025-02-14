@@ -1,5 +1,5 @@
 import isArray from 'lodash/isArray';
-import last from 'lodash/last';
+import isObject from 'lodash/isObject';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import pull from 'lodash/pull';
@@ -42,7 +42,7 @@ export const getRichTextAndBlocksFields = (contentType, components, modifiedData
   // Collect dynamic zones from the content-type
   Object.entries(modifiedData).forEach(([fieldName, fieldValue]) => {
     if (isArray(fieldValue)) {
-      const isComponentField = fieldValue.some((subField) => '__component' in subField);
+      const isComponentField = fieldValue.some((subField) => isObject(subField) && '__component' in subField);
       if (isComponentField) dynamicZones.push(fieldName);
     }
   });
