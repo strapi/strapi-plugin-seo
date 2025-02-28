@@ -7,22 +7,22 @@ import { qualityVerdict } from '../../../utils/checks';
 export const SEOAccordion = ({ title, status, component, label }) => {
   const [iconConfig, setIconConfig] = React.useState({
     icon: WarningCircle,
-    color: 'warning500',
+    color: 'warning600',
   });
 
   React.useEffect(() => {
     switch (status?.qualityVerdict) {
       case qualityVerdict.good:
-        setIconConfig({ icon: CheckCircle, color: 'success500' });
+        setIconConfig({ icon: CheckCircle, color: 'success600' });
         break;
       case qualityVerdict.improvements:
-        setIconConfig({ icon: WarningCircle, color: 'warning500' });
+        setIconConfig({ icon: WarningCircle, color: 'warning600' });
         break;
       case qualityVerdict.bad:
-        setIconConfig({ icon: CrossCircle, color: 'danger500' });
+        setIconConfig({ icon: CrossCircle, color: 'danger600' });
         break;
       default:
-        setIconConfig({ icon: WarningCircle, color: 'warning500' });
+        setIconConfig({ icon: WarningCircle, color: 'warning600' });
         break;
     }
   }, [status?.qualityVerdict]);
