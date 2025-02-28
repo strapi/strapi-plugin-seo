@@ -17,6 +17,9 @@ To install this plugin, you need to add an NPM dependency to your Strapi applica
 # Using Yarn
 yarn add @strapi/plugin-seo
 
+# Or using PNPM
+pnpm add @strapi/plugin-seo
+
 # Or using NPM
 npm install @strapi/plugin-seo
 ```
@@ -42,10 +45,10 @@ From any content manager view for a content-type that contains the SEO component
 
 ## Configuration
 
-`./config/plugins.js`
+`./config/plugins.ts`
 
-```js
-module.exports = ({ env }) => ({
+```ts
+export default () => ({
   // ...
   seo: {
     enabled: true,
@@ -59,6 +62,9 @@ Then, you'll need to build your admin panel:
 ```sh
 # Using Yarn
 yarn build
+
+# Or using PNPM
+pnpm build
 
 # Or using NPM
 npm run build
